@@ -18,5 +18,10 @@ Tested with :
 - Rename the ``.env.example `` file, to `` .env ``
 - Configure your `` .env `` file with your own tokens
 
+# Notes about .env file
+- ``MY_CLIENT_ID`` => is your bot client id, you can get one from discord developers
+- ``MY_BOT_TOKEN`` => is your token bot, you can get one from discord developers
+- ``MY_CHANNEL_TEXT`` => is the channel where you wanna call the commands, you can get the id of the text channel doing right click in the text channel
+
 # How to run the bot
 - `node index.js`

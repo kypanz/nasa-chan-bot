@@ -32,17 +32,17 @@ client.on('interactionCreate', async interaction => {
 
   // Next
   if (interaction.commandName === 'next') {
-    await interaction.reply('Preparing next music !');
+    await interaction.reply('i cant do this for now, i gonna have this in the next version !');
   }
 
   // Prev
   if (interaction.commandName === 'prev') {
-    await interaction.reply('Preparing previous music !');
+    await interaction.reply('i cant do this for now, i gonna have this in the next version !');
   }
 
   // Stop
   if (interaction.commandName === 'stop') {
-    await interaction.reply('Stoping music !');
+    await interaction.reply('i cant do this for now, i gonna have this in the next version !');
   }
 
 });
