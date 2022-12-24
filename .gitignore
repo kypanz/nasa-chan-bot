@@ -1,0 +1,11 @@
+# Modules
+node_modules
+
+# Package
+package-lock.json
+
+# Env
+.env
+
+# Songs
+music
