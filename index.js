@@ -1,6 +1,6 @@
 /**========================================================================
  *                           Created by => kypanz
- *                           Github => 
+ *                           Github => https://github.com/kypanz
  *========================================================================**/
 import './slashCommands.js';
 import { join } from './musicActions.js';
@@ -30,7 +30,6 @@ client.on('interactionCreate', async interaction => {
     console.log('Song Link => ',songLink);
     const channel = interaction.member?.voice.channel;
     const channelText = client.channels.cache.get(process.env.MY_CHANNEL_TEXT);
-    //await downloadSong({ channel, channelText, songLink });
     await join({ channel, channelText, songLink });
   }
 
