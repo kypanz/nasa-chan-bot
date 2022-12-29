@@ -2,8 +2,7 @@
 
 # Description
 - This is a simple discord bot for youtube music
-- The bot take a link from a youtube and downloads the song
-- Then play the song in the voice channel
+- The bot take a link from a youtube and play the song in voice channel
 
 # Requirements
 Tested with :
