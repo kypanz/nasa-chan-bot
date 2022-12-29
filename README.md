@@ -1,3 +1,5 @@
+![alt text](https://i.postimg.cc/dtq4mNJr/Discord-bot-youtube-music-personal-use.jpg)
+
 # Description
 - This is a simple discord bot for youtube music
 - The bot take a link from a youtube and downloads the song
