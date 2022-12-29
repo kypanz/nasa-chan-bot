@@ -1,5 +1,9 @@
+/**========================================================================
+ *                           Created by => kypanz
+ *                           Github => 
+ *========================================================================**/
 import './slashCommands.js';
-import { downloadSong } from './musicActions.js';
+import { join } from './musicActions.js';
 
 import { Client, GatewayIntentBits } from 'discord.js';
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
@@ -26,8 +30,8 @@ client.on('interactionCreate', async interaction => {
     console.log('Song Link => ',songLink);
     const channel = interaction.member?.voice.channel;
     const channelText = client.channels.cache.get(process.env.MY_CHANNEL_TEXT);
-    await downloadSong({ channel, channelText, songLink });
-    await interaction.reply('Preparing your music !');
+    //await downloadSong({ channel, channelText, songLink });
+    await join({ channel, channelText, songLink });
   }
 
   // Next
