@@ -36,6 +36,19 @@ const commands = [
     name: 'stop',
     description : 'This command stop the actual music'
   },
+  {
+    name: 'question',
+    description : 'Let me answer you',
+    options: [
+      {
+        name : 'yourquestion',
+        description : 'You can do any type of question, i do my best',
+        type : 3,
+        required : true
+      }
+    ]
+  },
+  
 ];
 
 const rest = new REST({ version: '10' }).setToken(process.env.MY_BOT_TOKEN);

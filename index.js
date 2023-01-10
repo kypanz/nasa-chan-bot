@@ -3,7 +3,10 @@
  *                           Github => https://github.com/kypanz
  *========================================================================**/
 import './slashCommands.js';
+
+// Actions
 import { join } from './musicActions.js';
+import { question } from './openaiActions.js';
 
 import { Client, GatewayIntentBits } from 'discord.js';
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
@@ -46,6 +49,18 @@ client.on('interactionCreate', async interaction => {
   // Stop
   if (interaction.commandName === 'stop') {
     await interaction.reply('i cant do this for now, i gonna have this in the next version !');
+  }
+
+  // Your Question AI
+  if (interaction.commandName === 'question') {
+    const isRightChannel = interaction?.channelId != process.env.MY_CHANNEL_GENERAL;
+    if(isRightChannel) return await interaction.reply('You only can use this command in the General channel text !');
+    await interaction.reply('Pensando ...');
+    const channelText = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL);
+    const _question = interaction.options.getString('yourquestion');
+    channelText.send(` \`\`\`fix\n Tu pregunta => ${_question} \n\`\`\` `);
+    const answer = await question({_question});
+    channelText.send(answer);
   }
 
 });
