@@ -5,11 +5,12 @@ import {
     NoSubscriberBehavior,
 } from '@discordjs/voice';
 import ytdl from 'ytdl-core';
+import winston from 'winston';
 
 export const join = async ({ channel, channelText, songLink : link }) => {
 
     try {
-        
+         
         if(!ytdl.validateURL(link)) throw "Wrong URL";
 
         // Preparing Song
@@ -29,9 +30,17 @@ export const join = async ({ channel, channelText, songLink : link }) => {
         const info = await ytdl.getInfo(link);
 
         // Playing song
-        const song = ytdl(link,{filter: "audioonly"});
-        player.play(createAudioResource(song));
+        const song = await ytdl(link,{filter : 'audio', quality : 'lowestaudio'});
+        player.play(createAudioResource(song), { type : 'opus' });
         conection.subscribe(player);
+
+        song.on('data',(data)=>{
+            console.log('datos nuevos => ',data);
+        })
+        song.on('error',(error)=>{
+            console.log('paso un error => ',error);
+        })
+        song.on('end', (end) => console.log('finalizado => ',end));
 
         // Messages
         channelText.send(` \`\`\`fix\n Now => ${info.videoDetails.title} \n\`\`\` `);
@@ -39,6 +48,7 @@ export const join = async ({ channel, channelText, songLink : link }) => {
     } catch (error) {
 
         channelText.send(` \`\`\`diff\n-Error please try another link or again in few seconds \n\`\`\` `);
+        console.log(error);
         
     }
 

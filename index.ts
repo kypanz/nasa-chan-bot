@@ -15,7 +15,7 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('interactionCreate', async interaction => {
+client.on('interactionCreate', async (interaction : Interaction<CacheType>) => Promise<void> {
   
   if (!interaction.isChatInputCommand()) return;
 
@@ -54,7 +54,7 @@ client.on('interactionCreate', async interaction => {
   // Your Question AI
   if (interaction.commandName === 'question') {
     const isRightChannel = interaction?.channelId != process.env.MY_CHANNEL_GENERAL;
-    if(isRightChannel) return await interaction.reply('You only can use this command in the General channel text !');
+    if(isRightChannel) return await interaction.reply('You only can use this command in the channel text defined !');
     await interaction.reply('Pensando ...');
     const channelText = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL);
     const _question = interaction.options.getString('yourquestion');
