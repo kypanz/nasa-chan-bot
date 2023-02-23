@@ -8,14 +8,14 @@ import './slashCommands.js';
 import { join } from './musicActions.js';
 import { question } from './openaiActions.js';
 
-import { Client, GatewayIntentBits } from 'discord.js';
+import { Client, GatewayIntentBits, TextChannel } from 'discord.js';
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('interactionCreate', async (interaction : Interaction<CacheType>) => Promise<void> {
+client.on('interactionCreate', async (interaction : any) => {
   
   if (!interaction.isChatInputCommand()) return;
 
@@ -56,7 +56,7 @@ client.on('interactionCreate', async (interaction : Interaction<CacheType>) => P
     const isRightChannel = interaction?.channelId != process.env.MY_CHANNEL_GENERAL;
     if(isRightChannel) return await interaction.reply('You only can use this command in the channel text defined !');
     await interaction.reply('Pensando ...');
-    const channelText = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL);
+    const channelText = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL) as TextChannel;
     const _question = interaction.options.getString('yourquestion');
     channelText.send(` \`\`\`fix\n Tu pregunta => ${_question} \n\`\`\` `);
     const answer = await question({_question});
