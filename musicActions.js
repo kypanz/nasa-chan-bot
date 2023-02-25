@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.join = void 0;
 const voice_1 = require("@discordjs/voice");
 const ytdl_core_1 = __importDefault(require("ytdl-core"));
+const configWinston_1 = __importDefault(require("./configWinston"));
+const stream_1 = require("stream");
 const join = ({ channel, channelText, songLink: link }) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (!ytdl_core_1.default.validateURL(link))
@@ -33,23 +35,33 @@ const join = ({ channel, channelText, songLink: link }) => __awaiter(void 0, voi
         // Info music
         const info = yield ytdl_core_1.default.getInfo(link);
         // Playing song
-        const song = yield (0, ytdl_core_1.default)(link, { filter: 'audio', quality: 'lowestaudio' });
-        //player.play(createAudioResource(song), { type : 'opus' });
-        player.play((0, voice_1.createAudioResource)(song));
-        conection.subscribe(player);
+        const song = yield (0, ytdl_core_1.default)(link, { filter: 'audio', quality: 'highestaudio' });
+        const buffer = [];
         song.on('data', (data) => {
             console.log('datos nuevos => ', data);
+            buffer.push(data);
         });
         song.on('error', (error) => {
             console.log('paso un error => ', error);
+            configWinston_1.default.error(error);
         });
-        song.on('end', (end) => console.log('finalizado => ', end));
+        song.on('end', (end) => {
+            const fullBuffer = Buffer.concat(buffer);
+            const bufferStream = new stream_1.Readable();
+            bufferStream.push(fullBuffer);
+            bufferStream.push(null);
+            //player.play(createAudioResource(song));
+            player.play((0, voice_1.createAudioResource)(bufferStream));
+            conection.subscribe(player);
+        });
         // Messages
         channelText.send(` \`\`\`fix\n Now => ${info.videoDetails.title} \n\`\`\` `);
+        configWinston_1.default.info(`Playing music ${info.videoDetails.title}`);
     }
     catch (error) {
         channelText.send(` \`\`\`diff\n-Error please try another link or again in few seconds \n\`\`\` `);
         console.log(error);
+        configWinston_1.default.info(error);
     }
 });
 exports.join = join;

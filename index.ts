@@ -3,6 +3,7 @@
  *                           Github => https://github.com/kypanz
  *========================================================================**/
 import './slashCommands.js';
+import logger from './configWinston';
 
 // Actions
 import { join } from './musicActions.js';
@@ -26,14 +27,19 @@ client.on('interactionCreate', async (interaction : any) => {
 
   // Play
   if (interaction.commandName === 'play') {
-    const isRightChannel = interaction?.channelId != process.env.MY_CHANNEL_TEXT;
-    if(isRightChannel) return await interaction.reply('You only can use this command in the channel configurated !');
-    const songLink = interaction.options.getString('link');
-    if(songLink == null || songLink?.length == 0) return await interaction.reply('Please enter a valid link !');
-    console.log('Song Link => ',songLink);
-    const channel = interaction.member?.voice.channel;
-    const channelText = client.channels.cache.get(process.env.MY_CHANNEL_TEXT);
-    await join({ channel, channelText, songLink });
+    try {
+        const isRightChannel = interaction?.channelId != process.env.MY_CHANNEL_TEXT;
+        if(isRightChannel) return await interaction.reply('You only can use this command in the channel configurated !');
+        const songLink = interaction.options.getString('link');
+        if(songLink == null || songLink?.length == 0) return await interaction.reply('Please enter a valid link !');
+        console.log('Song Link => ',songLink);
+        const channel = interaction.member?.voice.channel;
+        const channelText = client.channels.cache.get(process.env.MY_CHANNEL_TEXT);
+        await join({ channel, channelText, songLink });
+    } catch(error){
+        console.log('Error on Play music');
+        logger.error(error);
+    }
   }
 
   // Next
@@ -53,14 +59,19 @@ client.on('interactionCreate', async (interaction : any) => {
 
   // Your Question AI
   if (interaction.commandName === 'question') {
-    const isRightChannel = interaction?.channelId != process.env.MY_CHANNEL_GENERAL;
-    if(isRightChannel) return await interaction.reply('You only can use this command in the channel text defined !');
-    await interaction.reply('Pensando ...');
-    const channelText = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL) as TextChannel;
-    const _question = interaction.options.getString('yourquestion');
-    channelText.send(` \`\`\`fix\n Tu pregunta => ${_question} \n\`\`\` `);
-    const answer = await question({_question});
-    channelText.send(answer);
+    try {
+        const isRightChannel = interaction?.channelId != process.env.MY_CHANNEL_GENERAL;
+        if(isRightChannel) return await interaction.reply('You only can use this command in the channel text defined !');
+        await interaction.reply('Pensando ...');
+        const channelText = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL) as TextChannel;
+        const _question = interaction.options.getString('yourquestion');
+        channelText.send(` \`\`\`fix\n Tu pregunta => ${_question} \n\`\`\` `);
+        const answer = await question({_question});
+        channelText.send(answer);
+    } catch (error) {
+        console.log('Error on AI question');
+        logger.error(error);
+    }
   }
 
 });

@@ -5,12 +5,13 @@ import {
     NoSubscriberBehavior,
 } from '@discordjs/voice';
 import ytdl from 'ytdl-core';
-import winston from 'winston';
+import logger from './configWinston';
+import { Readable } from 'stream';
 
 export const join = async ({ channel, channelText, songLink : link }) => {
 
     try {
-         
+
         if(!ytdl.validateURL(link)) throw "Wrong URL";
 
         // Preparing Song
@@ -30,27 +31,42 @@ export const join = async ({ channel, channelText, songLink : link }) => {
         const info = await ytdl.getInfo(link);
 
         // Playing song
-        const song = await ytdl(link,{filter : 'audio', quality : 'lowestaudio'});
-        //player.play(createAudioResource(song), { type : 'opus' });
-        player.play(createAudioResource(song));
-        conection.subscribe(player);
+        const song = await ytdl(link,{filter : 'audio', quality : 'highestaudio'});
+
+        const buffer = [];
 
         song.on('data',(data)=>{
             console.log('datos nuevos => ',data);
+            buffer.push(data);
         })
+
         song.on('error',(error)=>{
             console.log('paso un error => ',error);
+            logger.error(error);
         })
-        song.on('end', (end) => console.log('finalizado => ',end));
+
+        song.on('end', (end) => {
+
+            const fullBuffer = Buffer.concat(buffer);
+            const bufferStream = new Readable();
+            bufferStream.push(fullBuffer);
+            bufferStream.push(null); 
+            //player.play(createAudioResource(song));
+            player.play(createAudioResource(bufferStream));
+            conection.subscribe(player);
+        });
 
         // Messages
         channelText.send(` \`\`\`fix\n Now => ${info.videoDetails.title} \n\`\`\` `);
+
+        logger.info(`Playing music ${info.videoDetails.title}`);
 
     } catch (error) {
 
         channelText.send(` \`\`\`diff\n-Error please try another link or again in few seconds \n\`\`\` `);
         console.log(error);
-        
+        logger.info(error);
+
     }
 
 }
