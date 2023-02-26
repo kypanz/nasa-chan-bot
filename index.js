@@ -24,6 +24,7 @@ const gtts_1 = __importDefault(require("gtts"));
 const musicActions_js_1 = require("./musicActions.js");
 const openaiActions_js_1 = require("./openaiActions.js");
 const discord_js_1 = require("discord.js");
+const express_1 = __importDefault(require("express"));
 // ---------- texto a voz
 const voice_1 = require("@discordjs/voice");
 // .......... fin texto a voz
@@ -141,4 +142,12 @@ client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0
     }
 }));
 client.login(process.env.MY_BOT_TOKEN);
+const app = (0, express_1.default)();
+const port = process.env.PORT || 3000;
+app.get('/', (req, res) => {
+    res.send('Nasa-chan ...');
+});
+app.listen(port, () => {
+    console.log(`Servidor web escuchando en el puerto ${port}`);
+});
 //# sourceMappingURL=index.js.map

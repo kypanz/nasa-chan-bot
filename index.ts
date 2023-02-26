@@ -12,6 +12,7 @@ import { join } from './musicActions.js';
 import { question } from './openaiActions.js';
 
 import { Client, GatewayIntentBits, TextChannel } from 'discord.js';
+import express from 'express';
 
 
 // ---------- texto a voz
@@ -152,3 +153,14 @@ client.on('interactionCreate', async (interaction : any) => {
 });
 
 client.login(process.env.MY_BOT_TOKEN);
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+  res.send('Nasa-chan ...');
+});
+
+app.listen(port, () => {
+  console.log(`Servidor web escuchando en el puerto ${port}`);
+});
