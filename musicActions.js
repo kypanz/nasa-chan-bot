@@ -38,7 +38,6 @@ const join = ({ channel, channelText, songLink: link }) => __awaiter(void 0, voi
         const song = yield (0, ytdl_core_1.default)(link, { filter: 'audio', quality: 'highestaudio' });
         const buffer = [];
         song.on('data', (data) => {
-            console.log('datos nuevos => ', data);
             buffer.push(data);
         });
         song.on('error', (error) => {

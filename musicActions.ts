@@ -36,7 +36,6 @@ export const join = async ({ channel, channelText, songLink : link }) => {
         const buffer = [];
 
         song.on('data',(data)=>{
-            console.log('datos nuevos => ',data);
             buffer.push(data);
         })
 
