@@ -13,3 +13,33 @@
 {"level":"info","message":"Playing music Music For Work — Night Productive Mix","service":"user-service"}
 {"level":"info","message":"Playing music Music For Work — Night Productive Mix","service":"user-service"}
 {"level":"info","message":"Playing music Cyberpunk: Edgerunners | “I Really Want to Stay At Your House” by Rosa Walton | Music Video","service":"user-service"}
+{"level":"info","message":"Playing music 19990115","service":"user-service"}
+{"level":"info","message":"Playing music Space Wonderer (Chillwave / Retrowave / Synthwave  Mix)","service":"user-service"}
+{"level":"info","message":"Playing music Nazuna Nanakusa Phonk Music for your fake scenarios \ud83d\udd25 Best Aggressive Drift/House/Walk Phonk ※ Фонк","service":"user-service"}
+{"level":"info","message":"Playing music [외힙] 목걸이는 무겁게, 방아쇠는 가볍게","service":"user-service"}
+{"code":50006,"level":"error","method":"POST","rawError":{"code":50006,"message":"Cannot send an empty message"},"requestBody":{"files":[],"json":{"data":{"content":"","tts":false},"type":4}},"service":"user-service","status":400,"url":"https://discord.com/api/v10/interactions/1079330435861073963/aW50ZXJhY3Rpb246MTA3OTMzMDQzNTg2MTA3Mzk2MzpmYWs4bVgwa2ZlbkdHMmNnT2NvU0M4dWh0WkJWc01ZWlMySFFOMGQ3Q2FiUE4ycTBwUGJiRzEwSUFXVjRXdkgwTUR6cVlmTVREaEVGT0lUeUlqTEFIQTJQUWd0b1kyRkFoYWI4MzdSRWZ4STE3VGhndWZZNkJEbzhZTGxiSURteA/callback"}
+{"level":"info","message":"testeando uno dos tres","service":"user-service"}
+{"level":"info","message":"hola hola uno dos tres","service":"user-service"}
+{"level":"info","message":"hola hola uno dos tres","service":"user-service"}
+{"level":"info","message":"listo ahora el botsito tiene tts activado, no es la mejor voz pero funciona y es mejor que la de la otra guea xd","service":"user-service"}
+{"level":"info","message":"voy a leer un par de cosas para testear, La votación final sobre el tan esperado conjunto de normas sobre criptomonedas de la Unión Europea, conocido como el Reglamento sobre Mercados de Criptoactivos (MiCA, por sus siglas en inglés), recientemente se aplazó hasta abril de 2023. No fue el primer retraso: anteriormente, los legisladores europeos reprogramaron el procedimiento de noviembre de 2022 a febrero de 2023.","service":"user-service"}
+{"level":"info","message":"soy un puto crack, la semana que viene le voy a configurar un par de cosas para que tome el texto directamente del canal sin encesidad de ponerle el comando","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"level":"info","message":"\"Active Processor Cores\" en la BIOS se refiere al número de núcleos del procesador que están habilitados y disponibles para su uso por el sistema operativo y las aplicaciones en ejecución. Algunas placas base permiten que se desactiven núcleos de procesador específicos en la configuración de la BIOS, lo que puede ser útil para el diagnóstico de problemas o para mejorar la estabilidad del sistema.","service":"user-service"}
+{"level":"info","message":"\"Active Processor Cores\" en la BIOS se refiere al número de núcleos del procesador que están habilitados y disponibles para su uso por el sistema operativo y las aplicaciones en ejecución. Algunas placas base permiten que se desactiven núcleos de procesador específicos en la configuración de la BIOS, lo que puede ser útil para el diagnóstico de problemas o para mejorar la estabilidad del sistema.","service":"user-service"}
+{"level":"info","message":"Ahora si, uno dos tres","service":"user-service"}
+{"level":"info","message":"Árbol transversal Un recorrido de algún árbol binario, es un algoritmo que itera a través de cada nodo en el tiempo exacto.  Recorrido en orden Un recorrido en orden del árbol es un algoritmo recursivo que sigue el subárbol izquierdo; una vez que no quedan más subárboles para procesar, procesamos el subárbol derecho. Los elementos se procesan en orden izquierda-raíz-derecha. El algoritmo básico es el siguiente:","service":"user-service"}
+{"level":"info","message":"Árbol transversal Un recorrido de algún árbol binario, es un algoritmo que itera a través de cada nodo en el tiempo exacto.  Recorrido en orden Un recorrido en orden del árbol es un algoritmo recursivo que sigue el subárbol izquierdo; una vez que no quedan más subárboles para procesar, procesamos el subárbol derecho. Los elementos se procesan en orden izquierda-raíz-derecha. El algoritmo básico es el siguiente:","service":"user-service"}
+{"level":"info","message":"hol hola","service":"user-service"}
+{"level":"info","message":"holaaa","service":"user-service"}
+{"level":"info","message":"hola","service":"user-service"}
+{"level":"info","message":"testeando la salida de voz","service":"user-service"}
+{"level":"info","message":"Playing music Cyberpunk 2077 Radio 24/7 by NightmareOwl (Cyberpunk Music/Midtempo/Electro)","service":"user-service"}
+{"level":"info","message":"Playing music Cyberpunk 2077 Radio 24/7 by NightmareOwl (Cyberpunk Music/Midtempo/Electro)","service":"user-service"}
+{"level":"info","message":"Playing music Cyberpunk 2077 Radio 24/7 by NightmareOwl (Cyberpunk Music/Midtempo/Electro)","service":"user-service"}
+{"level":"info","message":"Playing music Cyberpunk 2077 Radio 24/7 by NightmareOwl (Cyberpunk Music/Midtempo/Electro)","service":"user-service"}
+{"code":"ECONNRESET","level":"error","service":"user-service"}
+{"level":"info","message":"Playing music Cyberpunk 2077 Radio 24/7 by NightmareOwl (Cyberpunk Music/Midtempo/Electro)","service":"user-service"}
+{"level":"info","message":"Playing music Slowed Sad Songs  | (\ud835\ude68\ud835\ude61\ud835\ude64\ud835\ude6c\ud835\ude5a\ud835\ude59 + \ud835\ude67\ud835\ude5a\ud835\ude6b\ud835\ude5a\ud835\ude67\ud835\ude57) songs playlist | sad songs for broken hearts","service":"user-service"}
+{"code":"ECONNRESET","level":"error","service":"user-service"}

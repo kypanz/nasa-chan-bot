@@ -1,2 +1,7 @@
 {"code":"ECONNRESET","level":"error","service":"user-service"}
 {"code":"ECONNRESET","level":"error","service":"user-service"}
+{"code":50006,"level":"error","method":"POST","rawError":{"code":50006,"message":"Cannot send an empty message"},"requestBody":{"files":[],"json":{"data":{"content":"","tts":false},"type":4}},"service":"user-service","status":400,"url":"https://discord.com/api/v10/interactions/1079330435861073963/aW50ZXJhY3Rpb246MTA3OTMzMDQzNTg2MTA3Mzk2MzpmYWs4bVgwa2ZlbkdHMmNnT2NvU0M4dWh0WkJWc01ZWlMySFFOMGQ3Q2FiUE4ycTBwUGJiRzEwSUFXVjRXdkgwTUR6cVlmTVREaEVGT0lUeUlqTEFIQTJQUWd0b1kyRkFoYWI4MzdSRWZ4STE3VGhndWZZNkJEbzhZTGxiSURteA/callback"}
+{"level":"error","service":"user-service"}
+{"level":"error","service":"user-service"}
+{"code":"ECONNRESET","level":"error","service":"user-service"}
+{"code":"ECONNRESET","level":"error","service":"user-service"}

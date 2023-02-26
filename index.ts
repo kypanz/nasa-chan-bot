@@ -4,12 +4,27 @@
  *========================================================================**/
 import './slashCommands.js';
 import logger from './configWinston';
+import animeImages from  './animeImages';
+import Gtts from 'gtts';
 
 // Actions
 import { join } from './musicActions.js';
 import { question } from './openaiActions.js';
 
 import { Client, GatewayIntentBits, TextChannel } from 'discord.js';
+
+
+// ---------- texto a voz
+import {
+createAudioPlayer,
+createAudioResource,
+joinVoiceChannel,
+NoSubscriberBehavior
+} from '@discordjs/voice';
+// .......... fin texto a voz
+
+
+
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
 
 client.on('ready', () => {
@@ -72,6 +87,66 @@ client.on('interactionCreate', async (interaction : any) => {
         console.log('Error on AI question');
         logger.error(error);
     }
+  }
+
+
+  // -------------- ANIME ACTIONS ---------------
+  if (interaction.commandName === 'hug') {
+    const img = await animeImages.hug();
+    await interaction.reply(img);
+  }
+
+  if (interaction.commandName === 'kiss') {
+    const img = await animeImages.kiss();
+    await interaction.reply(img);
+  }
+
+  if (interaction.commandName === 'slap') {
+    const img = await animeImages.slap();
+    await interaction.reply(img);
+  }
+
+  if (interaction.commandName === 'punch') {
+    const img = await animeImages.punch();
+    await interaction.reply(img);
+  }
+
+  if (interaction.commandName === 'waifu') {
+    const img = await animeImages.waifu();
+    await interaction.reply(img);
+  }
+
+  if (interaction.commandName === 'say') {
+
+    try {
+        const isRightChannel = interaction?.channelId != process.env.MY_CHANNEL_SAY;
+        if(isRightChannel) return await interaction.reply('You only can use this command in the channel configurated !');
+        const message = interaction.options.getString('text');
+        const channel = interaction.member?.voice.channel;
+        const channelText = client.channels.cache.get(process.env.MY_CHANNEL_TEXT);
+        const gtts = new Gtts(message, 'es-us'); // es | es-es | es-us
+        const connection = joinVoiceChannel({
+            channelId: channel.id,
+            guildId: channel.guild.id,
+            adapterCreator: channel.guild.voiceAdapterCreator,
+        });
+        const player = createAudioPlayer({
+            behaviors: {
+                noSubscriber: NoSubscriberBehavior.Play,
+            }
+        });
+        player.play(createAudioResource( await gtts.stream() ));
+        connection.subscribe(player);
+
+        await interaction.reply(message ?? 'por favor ingresa un texto valido');
+        logger.info(message);
+
+    } catch (error) {
+        logger.error(error);
+        console.log('error al mencionar algo ...');
+        console.log(error);
+    }
+
   }
 
 });
