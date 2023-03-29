@@ -150,4 +150,3 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Servidor web escuchando en el puerto ${port}`);
 });
-//# sourceMappingURL=index.js.map

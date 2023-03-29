@@ -5,7 +5,9 @@
   "description": "This is a discord bot to take the links from youtube and download the music for a personal use to use in discord",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsc && build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",

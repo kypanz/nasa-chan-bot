@@ -64,4 +64,3 @@ const join = ({ channel, channelText, songLink: link }) => __awaiter(void 0, voi
     }
 });
 exports.join = join;
-//# sourceMappingURL=musicActions.js.map

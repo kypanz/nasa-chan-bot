@@ -45,4 +45,3 @@ function waifu() {
     });
 }
 exports.default = { hug, kiss, slap, punch, waifu };
-//# sourceMappingURL=animeImages.js.map

@@ -123,4 +123,3 @@ const rest = new discord_js_1.REST({ version: '10' }).setToken(process.env.MY_BO
         console.error(error);
     }
 }))();
-//# sourceMappingURL=slashCommands.js.map
