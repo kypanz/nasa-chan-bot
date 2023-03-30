@@ -1,4 +1,4 @@
-import { 
+import {
     createAudioPlayer,
     createAudioResource,
     joinVoiceChannel,
@@ -33,7 +33,8 @@ export const join = async ({ channel, channelText, songLink : link } : { channel
         // Playing song
         const song = await ytdl(link,{filter : 'audio', quality : 'highestaudio'});
 
-        const buffer = [];
+        // Chunks music
+        const buffer: Buffer[] = [];
 
         song.on('data',(data)=>{
             buffer.push(data);
@@ -45,13 +46,11 @@ export const join = async ({ channel, channelText, songLink : link } : { channel
         })
 
         song.on('end', () => {
-
-            const buffer: Buffer[] = [];
             const fullBuffer = Buffer.concat(buffer);
             const bufferStream = new Readable();
             bufferStream.push(fullBuffer);
             bufferStream.push(null); 
-            //player.play(createAudioResource(song));
+            player.play(createAudioResource(song));
             player.play(createAudioResource(bufferStream));
             conection.subscribe(player);
             console.log('reproduciendo !');

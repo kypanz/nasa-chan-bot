@@ -3,6 +3,7 @@ node_modules
 
 # Others
 build
+logs
 
 # Package
 package-lock.json

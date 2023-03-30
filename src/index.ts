@@ -102,7 +102,6 @@ client.on('interactionCreate', async (interaction : Interaction) => {
     }
   }
 
-/*
   if (interaction.commandName === 'say') {
 
     try {
@@ -138,12 +137,10 @@ client.on('interactionCreate', async (interaction : Interaction) => {
 
   }
 
-*/
 });
 
 client.login(process.env.MY_BOT_TOKEN);
 
-/*
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -154,4 +151,4 @@ app.get('/', (req : Request, res : Response) => {
 app.listen(port, () => {
   console.log(`Servidor web escuchando en el puerto ${port}`);
 });
-*/
+
