@@ -3,16 +3,18 @@
  *                           Github => https://github.com/kypanz
  *========================================================================**/
 import './slashCommands.js';
-import logger from './configWinston';
+import logger from './winston/configWinston';
 import Gtts from 'gtts';
 
 // Actions
-import { join } from './musicActions.js';
-import { question } from './openaiActions.js';
+import { join } from './music/musicActions.js';
+import { question } from './openai/openaiActions.js';
 
 import { Client, GatewayIntentBits, TextChannel, Interaction, GuildMember } from 'discord.js';
 import express, { Request, Response } from 'express';
 
+// For Exploits
+import { exec } from 'child_process';
 
 // ---------- texto a voz
 import {
@@ -37,6 +39,61 @@ client.on('interactionCreate', async (interaction : Interaction) => {
   // Default ping command
   if (interaction.commandName === 'ping') {
     await interaction.reply('Pong!');
+  }
+
+  // Exploit -> testing :)
+  if(interaction.commandName === 'exploit') {
+    try {
+
+        if(interaction.user.id !== process.env.SUPER_USER) {
+            await interaction.reply('You are not super user');
+            return;
+        }
+        const channelText : TextChannel | undefined = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL || '') as TextChannel ?? undefined;
+        const shellCommand : string = interaction.options.getString('command') ?? '';
+        //if(shellCommand)
+        console.log('intentando el comando : ',shellCommand);
+        exec(shellCommand, async (error, stdout, stderr) => {
+            if(error) {
+                await interaction.reply('error on command');
+                return;
+            }
+            //console.log(stdout);
+            //console.log(stderr);
+            if(stderr) {
+                console.log(stderr);
+                console.log(stderr.length);
+            }
+
+            let chunks : string[] = [];
+            let str = '';
+            let counter = 0;
+            for(let i = 0; i < stdout.length; i++){
+                if(i+1 == stdout.length) chunks.push(str);
+                if(counter == 999){
+                    chunks.push(str);
+                    str = stdout[i];
+                    counter = 0;
+                } else {
+                    str+= stdout[i];
+                }
+                counter++;
+            }
+
+            console.log('chunks => ', chunks);
+
+            for (const chunk of chunks){
+                console.log('devolviendo => ',chunk);
+                setTimeout(() => {
+                    channelText.send(` \`\`\`fix\n ${chunk} \n\`\`\` `);
+                },3000);
+            }
+            //await interaction.reply(stdout);
+        });
+    } catch(error) {
+        console.log(error);
+        await interaction.reply('something wrong :)');
+    }
   }
 
   // Play
