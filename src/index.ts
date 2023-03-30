@@ -4,15 +4,14 @@
  *========================================================================**/
 import './slashCommands.js';
 import logger from './configWinston';
-import animeImages from  './animeImages';
 import Gtts from 'gtts';
 
 // Actions
 import { join } from './musicActions.js';
 import { question } from './openaiActions.js';
 
-import { Client, GatewayIntentBits, TextChannel } from 'discord.js';
-import express from 'express';
+import { Client, GatewayIntentBits, TextChannel, Interaction, GuildMember } from 'discord.js';
+import express, { Request, Response } from 'express';
 
 
 // ---------- texto a voz
@@ -20,20 +19,19 @@ import {
 createAudioPlayer,
 createAudioResource,
 joinVoiceChannel,
-NoSubscriberBehavior
+NoSubscriberBehavior,
+DiscordGatewayAdapterCreator
 } from '@discordjs/voice';
 // .......... fin texto a voz
-
-
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
 
 client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+  console.log(`Logged in as ${client?.user?.tag}!`);
 });
 
-client.on('interactionCreate', async (interaction : any) => {
-  
+client.on('interactionCreate', async (interaction : Interaction) => {
+
   if (!interaction.isChatInputCommand()) return;
 
   // Default ping command
@@ -44,14 +42,25 @@ client.on('interactionCreate', async (interaction : any) => {
   // Play
   if (interaction.commandName === 'play') {
     try {
-        const isRightChannel = interaction?.channelId != process.env.MY_CHANNEL_TEXT;
-        if(isRightChannel) return await interaction.reply('You only can use this command in the channel configurated !');
+
+        const notRightChannel = interaction?.channelId != process.env.MY_CHANNEL_TEXT;
+        if(notRightChannel) {
+            await interaction.reply('You only can use this command in the channel configurated !');
+            return;
+        }
         const songLink = interaction.options.getString('link');
-        if(songLink == null || songLink?.length == 0) return await interaction.reply('Please enter a valid link !');
-        console.log('Song Link => ',songLink);
-        const channel = interaction.member?.voice.channel;
-        const channelText = client.channels.cache.get(process.env.MY_CHANNEL_TEXT);
-        await join({ channel, channelText, songLink });
+        if(songLink == null || songLink?.length == 0) {
+            await interaction.reply('Please enter a valid link !');
+            return;
+        }
+        const channel = (interaction.member as GuildMember )?.voice.channel;
+        const channelText : TextChannel | undefined = client.channels.cache.get(process.env.MY_CHANNEL_TEXT || '') as TextChannel ?? undefined;
+        if(!channelText) {
+            await interaction.reply('Channel not found ...');
+        } else {
+            await join({ channel, channelText, songLink });
+            //await interaction.reply('works fine, playing music !')
+        }
     } catch(error){
         console.log('Error on Play music');
         logger.error(error);
@@ -76,13 +85,16 @@ client.on('interactionCreate', async (interaction : any) => {
   // Your Question AI
   if (interaction.commandName === 'question') {
     try {
-        const isRightChannel = interaction?.channelId != process.env.MY_CHANNEL_GENERAL;
-        if(isRightChannel) return await interaction.reply('You only can use this command in the channel text defined !');
+        const notRightChannel = interaction?.channelId != process.env.MY_CHANNEL_GENERAL;
+        if(notRightChannel) {
+            await interaction.reply('You only can use this command in the channel text defined !');
+            return;
+        }
         await interaction.reply('Pensando ...');
-        const channelText = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL) as TextChannel;
+        const channelText : TextChannel | undefined = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL || '') as TextChannel ?? undefined;
         const _question = interaction.options.getString('yourquestion');
         channelText.send(` \`\`\`fix\n Tu pregunta => ${_question} \n\`\`\` `);
-        const answer = await question({_question});
+        const answer : string = await question({_question}) ?? '';
         channelText.send(answer);
     } catch (error) {
         console.log('Error on AI question');
@@ -90,46 +102,22 @@ client.on('interactionCreate', async (interaction : any) => {
     }
   }
 
-
-  // -------------- ANIME ACTIONS ---------------
-  if (interaction.commandName === 'hug') {
-    const img = await animeImages.hug();
-    await interaction.reply(img);
-  }
-
-  if (interaction.commandName === 'kiss') {
-    const img = await animeImages.kiss();
-    await interaction.reply(img);
-  }
-
-  if (interaction.commandName === 'slap') {
-    const img = await animeImages.slap();
-    await interaction.reply(img);
-  }
-
-  if (interaction.commandName === 'punch') {
-    const img = await animeImages.punch();
-    await interaction.reply(img);
-  }
-
-  if (interaction.commandName === 'waifu') {
-    const img = await animeImages.waifu();
-    await interaction.reply(img);
-  }
-
+/*
   if (interaction.commandName === 'say') {
 
     try {
-        const isRightChannel = interaction?.channelId != process.env.MY_CHANNEL_SAY;
-        if(isRightChannel) return await interaction.reply('You only can use this command in the channel configurated !');
+        const notRightChannel = interaction?.channelId != process.env.MY_CHANNEL_SAY;
+        if(notRightChannel) {
+            await interaction.reply('You only can use this command in the channel configurated !');
+            return;
+        }
         const message = interaction.options.getString('text');
-        const channel = interaction.member?.voice.channel;
-        const channelText = client.channels.cache.get(process.env.MY_CHANNEL_TEXT);
+        const channel = (interaction.member as GuildMember )?.voice.channel;
         const gtts = new Gtts(message, 'es-us'); // es | es-es | es-us
         const connection = joinVoiceChannel({
-            channelId: channel.id,
-            guildId: channel.guild.id,
-            adapterCreator: channel.guild.voiceAdapterCreator,
+            channelId: channel?.id ?? '',
+            guildId: channel?.guild?.id ?? '',
+            adapterCreator: channel?.guild?.voiceAdapterCreator as DiscordGatewayAdapterCreator,
         });
         const player = createAudioPlayer({
             behaviors: {
@@ -150,17 +138,20 @@ client.on('interactionCreate', async (interaction : any) => {
 
   }
 
+*/
 });
 
 client.login(process.env.MY_BOT_TOKEN);
 
+/*
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
+app.get('/', (req : Request, res : Response) => {
   res.send('Nasa-chan ...');
 });
 
 app.listen(port, () => {
   console.log(`Servidor web escuchando en el puerto ${port}`);
 });
+*/

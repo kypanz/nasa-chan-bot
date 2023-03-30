@@ -51,3 +51,26 @@
 {"level":"info","message":"dile al alparkom que desmute al bot","service":"user-service"}
 {"level":"info","message":"Playing music 眠れない時、落ち着きたい時に聴く曲。coverメドレー","service":"user-service"}
 {"level":"info","message":"Playing music 眠れない時、落ち着きたい時に聴く曲。coverメドレー","service":"user-service"}
+{"level":"info","message":"Playing music ПЕСНИ ОТ КОТОРЫХ НАХЛЫНУТ ВОСПОМИНАНИЯ | Песни Нашей Юности  | Подростковые Песни | Песни на вечер","service":"user-service"}
+{"code":10062,"level":"error","method":"POST","rawError":{"code":10062,"message":"Unknown interaction"},"requestBody":{"files":[],"json":{"data":{"content":"works fine, playing music !","tts":false},"type":4}},"service":"user-service","status":404,"url":"https://discord.com/api/v10/interactions/1090808502525624382/aW50ZXJhY3Rpb246MTA5MDgwODUwMjUyNTYyNDM4MjpmWGJNTVI2VUxZZ0Nxc2xqVzBYUWFldXB1Mzg3YkJFYXJHUVU4MWNoTXU0THJlVHRxN0p0T2dEV0l0c0lHSlh2YncxaVF2bGxQbGtOc0NUaWd5c2NHR1EwZ2ZWNkFTT2p3QzFPMHpFcG9YWktSc2tKNUF3clNZU0RMT0lqZEkzMg/callback"}
+{"level":"info","message":"Playing music ПЕСНИ ОТ КОТОРЫХ НАХЛЫНУТ ВОСПОМИНАНИЯ | Песни Нашей Юности  | Подростковые Песни | Песни на вечер","service":"user-service"}
+{"level":"info","message":"Playing music плейлист для тусовок","service":"user-service"}
+{"level":"info","message":"Playing music плейлист для тусовок","service":"user-service"}
+{"level":"info","message":"Playing music плейлист для тусовок","service":"user-service"}
+{"level":"info","message":"Playing music LOUIEJAYXX - EDGE","service":"user-service"}
+{"level":"info","message":"Playing music LOUIEJAYXX - EDGE","service":"user-service"}
+{"level":"info","message":"testing","service":"user-service"}
+{"code":10062,"level":"error","method":"POST","rawError":{"code":10062,"message":"Unknown interaction"},"requestBody":{"files":[],"json":{"data":{"content":"asdasd","tts":false},"type":4}},"service":"user-service","status":404,"url":"https://discord.com/api/v10/interactions/1090813978466328586/aW50ZXJhY3Rpb246MTA5MDgxMzk3ODQ2NjMyODU4NjpRajJkTjZEZk5BNnQzcUNMbnVIcXhYRGN5bE1MUlNveE13S25wV3BRSlc5N1Y4UDBJNVR0Z0h5aWp2WVBCS3lmdnZEV3NhREdLMms1TVFSWmsycFlVbkVqV2JPbmp6SjhmUlZhMFlkUUw1ODRiRENzVlB5OWJENVhxdzRBQ0tnVA/callback"}
+{"level":"info","message":"testinggg","service":"user-service"}
+{"level":"info","message":"Playing music LOUIEJAYXX - EDGE","service":"user-service"}
+{"level":"info","message":"Playing music LOUIEJAYXX - EDGE","service":"user-service"}
+{"level":"info","message":"testing","service":"user-service"}
+{"level":"info","message":"Playing music LOUIEJAYXX - EDGE","service":"user-service"}
+{"level":"info","message":"Playing music LOUIEJAYXX - EDGE","service":"user-service"}
+{"level":"info","message":"Playing music LOUIEJAYXX - EDGE","service":"user-service"}
+{"level":"info","message":"Playing music LOUIEJAYXX - EDGE","service":"user-service"}
+{"level":"info","message":"Playing music LOUIEJAYXX - EDGE","service":"user-service"}
+{"level":"info","message":"Playing music LOUIEJAYXX - EDGE","service":"user-service"}
+{"level":"info","message":"Playing music LOUIEJAYXX - EDGE","service":"user-service"}
+{"level":"info","message":"Playing music LOUIEJAYXX - EDGE","service":"user-service"}
+{"level":"info","message":"Playing music LOUIEJAYXX - EDGE","service":"user-service"}

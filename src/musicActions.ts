@@ -8,7 +8,7 @@ import ytdl from 'ytdl-core';
 import logger from './configWinston';
 import { Readable } from 'stream';
 
-export const join = async ({ channel, channelText, songLink : link }) => {
+export const join = async ({ channel, channelText, songLink : link } : { channel : any, channelText : any, songLink : string }) => {
 
     try {
 
@@ -44,8 +44,9 @@ export const join = async ({ channel, channelText, songLink : link }) => {
             logger.error(error);
         })
 
-        song.on('end', (end) => {
+        song.on('end', () => {
 
+            const buffer: Buffer[] = [];
             const fullBuffer = Buffer.concat(buffer);
             const bufferStream = new Readable();
             bufferStream.push(fullBuffer);
@@ -53,6 +54,7 @@ export const join = async ({ channel, channelText, songLink : link }) => {
             //player.play(createAudioResource(song));
             player.play(createAudioResource(bufferStream));
             conection.subscribe(player);
+            console.log('reproduciendo !');
         });
 
         // Messages

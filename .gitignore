@@ -1,6 +1,9 @@
 # Modules
 node_modules
 
+# Others
+build
+
 # Package
 package-lock.json
 
