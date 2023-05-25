@@ -10,11 +10,14 @@ import Gtts from 'gtts';
 import { join } from './music/musicActions.js';
 import { question } from './openai/openaiActions.js';
 
-import { Client, GatewayIntentBits, TextChannel, Interaction, GuildMember, EmbedBuilder } from 'discord.js';
+import { Client, GatewayIntentBits, TextChannel, Interaction, GuildMember, EmbedBuilder, Message } from 'discord.js';
 import express, { Request, Response } from 'express';
 
 // For Exploits
 import { exec } from 'child_process';
+
+// Guardado en mp3
+import fs from 'fs';
 
 // ---------- texto a voz
 import {
@@ -175,7 +178,7 @@ client.on('interactionCreate', async (interaction : Interaction) => {
         const message = interaction.options.getString('text');
         const channel = (interaction.member as GuildMember )?.voice.channel;
         const gtts = new Gtts(message, 'es-us'); // es | es-es | es-us
-        const connection = joinVoiceChannel({
+        const connection = await joinVoiceChannel({
             channelId: channel?.id ?? '',
             guildId: channel?.guild?.id ?? '',
             adapterCreator: channel?.guild?.voiceAdapterCreator as DiscordGatewayAdapterCreator,
@@ -185,11 +188,18 @@ client.on('interactionCreate', async (interaction : Interaction) => {
                 noSubscriber: NoSubscriberBehavior.Play,
             }
         });
-        player.play(createAudioResource( await gtts.stream() ));
-        connection.subscribe(player);
+        const MessageToSpeak = await gtts.stream();
+
+        // Guardado en mp3
+        const filePath = './texto_hablado.mp3'; // Ruta y nombre de archivo deseado
+        const writeStream = fs.createWriteStream(filePath);
+        await MessageToSpeak.pipe(writeStream);
+
+        //await player.play(createAudioResource( MessageToSpeak ));
+        //await connection.subscribe(player);
 
         await interaction.reply(message ?? 'por favor ingresa un texto valido');
-        logger.info(message);
+        //logger.info(message);
 
     } catch (error) {
         logger.error(error);
