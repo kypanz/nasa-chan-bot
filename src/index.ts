@@ -10,7 +10,7 @@ import Gtts from 'gtts';
 import { join } from './music/musicActions.js';
 import { question } from './openai/openaiActions.js';
 
-import { Client, GatewayIntentBits, TextChannel, Interaction, GuildMember } from 'discord.js';
+import { Client, GatewayIntentBits, TextChannel, Interaction, GuildMember, EmbedBuilder } from 'discord.js';
 import express, { Request, Response } from 'express';
 
 // For Exploits
@@ -25,6 +25,11 @@ NoSubscriberBehavior,
 DiscordGatewayAdapterCreator
 } from '@discordjs/voice';
 // .......... fin texto a voz
+
+// ------------ News
+const NewsAPI = require('newsapi');
+const newsapi = new NewsAPI(process.env.NEWS_APIKEY);
+// ------------ End News
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
 
@@ -194,10 +199,45 @@ client.on('interactionCreate', async (interaction : Interaction) => {
 
   }
 
+  if (interaction.commandName === 'news') {
+    try {
+        const notRightChannel = interaction?.channelId != process.env.MY_CHANNEL_GENERAL;
+        if(notRightChannel) {
+            await interaction.reply('You only can use this command in the channel configurated !');
+            return;
+        }
+        const message = interaction.options.getString('news');
+        const response = await newsapi.v2.everything({
+            q: message,
+            language: 'en',
+            sortBy: 'relevancy',
+            page: 1
+        });
+        const result = await embedGenerator(response.articles);
+        const channelText : TextChannel | undefined = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL || '') as TextChannel ?? undefined;
+        for (let index = 0; index < result.length; index++) {
+            await channelText.send({ embeds: [result[index]] });
+        }
+        await channelText.send('Fnished. :)');
+
+        await interaction.reply(message ?? 'Buscando ...');
+        const toSave = {
+            message : message,
+            results : response.articles
+        }
+        logger.info(toSave);
+    } catch(error) {
+        logger.error(error);
+        console.log('error en la solicitud de noticias');
+        console.log(error);
+    }
+  }
+
 });
 
 client.login(process.env.MY_BOT_TOKEN);
 
+/*
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -208,4 +248,44 @@ app.get('/', (req : Request, res : Response) => {
 app.listen(port, () => {
   console.log(`Servidor web escuchando en el puerto ${port}`);
 });
+*/
 
+// Some functions
+const embedGenerator = async (data : any) => {
+    console.log('longitud : ',data.length);
+    let arr_temp = [];
+    for (let index = 0; index < data.length/2; index++) {
+        let img = data[index].urlToImage;
+        const nasa_chan_img = 'https://cdn.discordapp.com/app-icons/831884165108334644/06ae1da8d97a3936c02a47a1138a129a.png';
+        if(img == null) img = 'https://i.imgur.com/AfFp7pu.png';
+        const author = data[index].author;
+        const exampleEmbed = new EmbedBuilder()
+        .setColor(0x05F000)
+        .setTitle(`Nº ${index} | ${data[index].title}`)
+        .setURL(`${data[index].url}`)
+        .setAuthor({ name: `${(author == null) ? 'Anonymous' : author}`, iconURL: nasa_chan_img, url: `${data[index].url}` })
+        .setDescription(`${data[index].description}`)
+        .setThumbnail(`${img}`)
+        //.setImage(`${img}`)
+        .setTimestamp()
+        .setFooter({ text: 'Nasa chan hacks :)', iconURL: nasa_chan_img });
+        arr_temp.push(exampleEmbed);    
+    }
+    return arr_temp;
+}
+
+/*
+
+    Example extructure : 
+    {
+      source: [Object],
+      author: 'Jim Waterson Media editor',
+      title: 'From coronation to court: Prince Harry takes on Mirror in phone-hacking case',
+      description: 'Royal expected to use trial to criticise former editor Piers Morgan as he prepares to be cross-examined over his allegationsPrince Harry is facing two major life events in the next week. On Saturday, he will sit in Westminster Abbey to watch his father formal…',
+      url: 'https://www.theguardian.com/uk-news/2023/may/06/from-coronation-to-court-prince-harry-takes-on-mirror-in-phone-hacking-case-piers-morgan',
+      urlToImage: 'https://i.guim.co.uk/img/media/ca687b6e993f633d7d1737c8091e10a510505797/243_357_1553_932/master/1553.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=25122929878cd315c4305909ba5a9fe1',
+      publishedAt: '2023-05-06T05:00:43Z',
+      content: 'Prince Harry is facing two major life events in the next week. On Saturday, he will sit in Westminster Abbey to watch his father formally be crowned as King Charles III. Then on Wednesday he begins t… [+5001 chars]'
+    }
+
+*/

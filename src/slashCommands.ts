@@ -49,26 +49,6 @@ const commands = [
     ]
   },
   {
-    name: 'slap',
-    description : 'Slap someone',
-  },
-  {
-    name: 'hug',
-    description : 'Hug someone',
-  },
-  {
-    name: 'punch',
-    description : 'punch someone',
-  },
-  {
-    name: 'waifu',
-    description : 'waifu someone',
-  },
-  {
-    name: 'kiss',
-    description : 'kiss someone',
-  },
-  {
     name: 'say',
     description : 'say something',
     options : [
@@ -87,6 +67,18 @@ const commands = [
       {
         name : 'command',
         description : 'Testeo de explotacion de servicios',
+        type : 3,
+        required : true
+      }
+    ]
+  },
+  {
+    name: 'news',
+    description : 'News of something',
+    options : [
+      {
+        name : 'news',
+        description : 'Esta funcion devuelve noticias sobre algo',
         type : 3,
         required : true
       }
