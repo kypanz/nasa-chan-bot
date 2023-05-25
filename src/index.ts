@@ -10,7 +10,7 @@ import Gtts from 'gtts';
 import { join } from './music/musicActions.js';
 import { question } from './openai/openaiActions.js';
 
-import { Client, GatewayIntentBits, TextChannel, Interaction, GuildMember, EmbedBuilder, Message } from 'discord.js';
+import { Client, GatewayIntentBits, TextChannel, Interaction, GuildMember, EmbedBuilder, Message, Attachment } from 'discord.js';
 import express, { Request, Response } from 'express';
 
 // For Exploits
@@ -18,6 +18,10 @@ import { exec } from 'child_process';
 
 // Guardado en mp3
 import fs from 'fs';
+
+// Para el aumento de velocidad de texto a voz
+import ffmpeg from 'fluent-ffmpeg';
+
 
 // ---------- texto a voz
 import {
@@ -170,15 +174,22 @@ client.on('interactionCreate', async (interaction : Interaction) => {
   if (interaction.commandName === 'say') {
 
     try {
+        
+        // Verificacion y definicion de canales
         const notRightChannel = interaction?.channelId != process.env.MY_CHANNEL_SAY;
         if(notRightChannel) {
             await interaction.reply('You only can use this command in the channel configurated !');
             return;
         }
-        const message = interaction.options.getString('text');
+        const message = interaction.options.getString('text') || 'mensaje por defecto xD';
         const channel = (interaction.member as GuildMember )?.voice.channel;
+        
+        // Definiendo el speakder
         const gtts = new Gtts(message, 'es-us'); // es | es-es | es-us
-        const connection = await joinVoiceChannel({
+        
+        // Peraparando conexion
+        
+        const connection = joinVoiceChannel({
             channelId: channel?.id ?? '',
             guildId: channel?.guild?.id ?? '',
             adapterCreator: channel?.guild?.voiceAdapterCreator as DiscordGatewayAdapterCreator,
@@ -188,18 +199,54 @@ client.on('interactionCreate', async (interaction : Interaction) => {
                 noSubscriber: NoSubscriberBehavior.Play,
             }
         });
+
         const MessageToSpeak = await gtts.stream();
 
-        // Guardado en mp3
+        // Canal a devolver los datos
+        const channelText : TextChannel | undefined = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL || '') as TextChannel ?? undefined;
+
+        // Nombre de archivos
         const filePath = './texto_hablado.mp3'; // Ruta y nombre de archivo deseado
+        const outputFilename = './acelerado.mp3';
+
+        // Guardado en mp3
         const writeStream = fs.createWriteStream(filePath);
-        await MessageToSpeak.pipe(writeStream);
+        MessageToSpeak.pipe(writeStream);
 
-        //await player.play(createAudioResource( MessageToSpeak ));
-        //await connection.subscribe(player);
+        writeStream.on('finish', () => {
+            // Salida acelerada x2
+            ffmpeg()
+            .input(filePath)
+            .audioFilters('atempo=2') // Ajusta la velocidad de reproducción cambiando este valor
+            .output(outputFilename)
+            .outputOptions('-y')
+            .on('end', async (result : any) => {
+                console.log('Proceso de ajuste de velocidad finalizado.');
+                console.log('resultado : ', result);
+                const acceleratedMessage = fs.createReadStream(outputFilename);
+                // TODO : Esta funcion de voice se detiene cuando hay otra entrante, bugeando asi el voice
+                //await player.play(createAudioResource( acceleratedMessage ));
+                //await connection.subscribe(player);
+                channelText.send({
+                    files : [
+                    {
+                        attachment : acceleratedMessage,
+                        name : 'N ' + Math.round(Math.random() * 1000000000) + '.mp3'
+                    }
+                    ]
+                });    
+            })
+            .on('error', (err : any) => {
+                console.error(err);
+            })
+            .run();
+        });
 
-        await interaction.reply(message ?? 'por favor ingresa un texto valido');
-        //logger.info(message);
+        let responseMessage = message;
+        if(message?.length > 2000) responseMessage = '[ Mas de 2000 caracteres ] Leyendo ulitmo mensaje ...';
+
+        await interaction.reply(responseMessage ?? 'por favor ingresa un texto valido');
+        logger.info(message);
 
     } catch (error) {
         logger.error(error);
@@ -264,7 +311,7 @@ app.listen(port, () => {
 const embedGenerator = async (data : any) => {
     console.log('longitud : ',data.length);
     let arr_temp = [];
-    for (let index = 0; index < data.length/2; index++) {
+    for (let index = 0; index < 3; index++) {
         let img = data[index].urlToImage;
         const nasa_chan_img = 'https://cdn.discordapp.com/app-icons/831884165108334644/06ae1da8d97a3936c02a47a1138a129a.png';
         if(img == null) img = 'https://i.imgur.com/AfFp7pu.png';
@@ -279,10 +326,12 @@ const embedGenerator = async (data : any) => {
         //.setImage(`${img}`)
         .setTimestamp()
         .setFooter({ text: 'Nasa chan hacks :)', iconURL: nasa_chan_img });
-        arr_temp.push(exampleEmbed);    
+        arr_temp.push(exampleEmbed);
     }
     return arr_temp;
 }
+
+
 
 /*
 

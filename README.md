@@ -10,6 +10,7 @@ Tested with :
 - npm 8.19.2
 - token bot from a developers app
 - the client id from the developers app
+- ffmpeg installed in linux ( this is for text to speach generation )
 
 # How to install
 - npm install
