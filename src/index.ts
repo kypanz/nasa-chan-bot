@@ -34,8 +34,8 @@ DiscordGatewayAdapterCreator
 // .......... fin texto a voz
 
 // ------------ News
-const NewsAPI = require('newsapi');
-const newsapi = new NewsAPI(process.env.NEWS_APIKEY);
+//const NewsAPI = require('newsapi');
+//const newsapi = new NewsAPI(process.env.NEWS_APIKEY);
 // ------------ End News
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
@@ -177,10 +177,12 @@ client.on('interactionCreate', async (interaction : Interaction) => {
         
         // Verificacion y definicion de canales
         const notRightChannel = interaction?.channelId != process.env.MY_CHANNEL_SAY;
+/*
         if(notRightChannel) {
             await interaction.reply('You only can use this command in the channel configurated !');
             return;
         }
+*/
         const message = interaction.options.getString('text') || 'mensaje por defecto xD';
         const channel = (interaction.member as GuildMember )?.voice.channel;
         
@@ -204,6 +206,8 @@ client.on('interactionCreate', async (interaction : Interaction) => {
 
         // Canal a devolver los datos
         const channelText : TextChannel | undefined = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL || '') as TextChannel ?? undefined;
+        const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
+        //console.log(interaction.channelId);
 
         // Nombre de archivos
         const filePath = './texto_hablado.mp3'; // Ruta y nombre de archivo deseado
@@ -227,7 +231,10 @@ client.on('interactionCreate', async (interaction : Interaction) => {
                 // TODO : Esta funcion de voice se detiene cuando hay otra entrante, bugeando asi el voice
                 //await player.play(createAudioResource( acceleratedMessage ));
                 //await connection.subscribe(player);
-                channelText.send({
+                if(actualChannel === undefined) { 
+                    throw new Error('El canal a enviar el resultado no existe');
+                }
+                actualChannel.send({
                     files : [
                     {
                         attachment : acceleratedMessage,
@@ -255,7 +262,7 @@ client.on('interactionCreate', async (interaction : Interaction) => {
     }
 
   }
-
+/*
   if (interaction.commandName === 'news') {
     try {
         const notRightChannel = interaction?.channelId != process.env.MY_CHANNEL_GENERAL;
@@ -289,6 +296,7 @@ client.on('interactionCreate', async (interaction : Interaction) => {
         console.log(error);
     }
   }
+*/
 
 });
 
