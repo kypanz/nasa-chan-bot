@@ -23,15 +23,14 @@ import fs from 'fs';
 import ffmpeg from 'fluent-ffmpeg';
 
 
-// ---------- texto a voz
+// Texto a voz
 import {
-createAudioPlayer,
-createAudioResource,
-joinVoiceChannel,
-NoSubscriberBehavior,
-DiscordGatewayAdapterCreator
+    createAudioPlayer,
+    createAudioResource,
+    joinVoiceChannel,
+    NoSubscriberBehavior,
+    DiscordGatewayAdapterCreator
 } from '@discordjs/voice';
-// .......... fin texto a voz
 
 // ------------ News
 //const NewsAPI = require('newsapi');
@@ -63,15 +62,12 @@ client.on('interactionCreate', async (interaction : Interaction) => {
         }
         const channelText : TextChannel | undefined = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL || '') as TextChannel ?? undefined;
         const shellCommand : string = interaction.options.getString('command') ?? '';
-        //if(shellCommand)
         console.log('intentando el comando : ',shellCommand);
         exec(shellCommand, async (error, stdout, stderr) => {
             if(error) {
                 await interaction.reply('error on command');
                 return;
             }
-            //console.log(stdout);
-            //console.log(stderr);
             if(stderr) {
                 console.log(stderr);
                 console.log(stderr.length);
@@ -100,7 +96,6 @@ client.on('interactionCreate', async (interaction : Interaction) => {
                     channelText.send(` \`\`\`fix\n ${chunk} \n\`\`\` `);
                 },3000);
             }
-            //await interaction.reply(stdout);
         });
     } catch(error) {
         console.log(error);
@@ -128,7 +123,6 @@ client.on('interactionCreate', async (interaction : Interaction) => {
             await interaction.reply('Channel not found ...');
         } else {
             await join({ channel, channelText, songLink });
-            //await interaction.reply('works fine, playing music !')
         }
     } catch(error){
         console.log('Error on Play music');
@@ -186,8 +180,8 @@ client.on('interactionCreate', async (interaction : Interaction) => {
         const message = interaction.options.getString('text') || 'mensaje por defecto xD';
         const channel = (interaction.member as GuildMember )?.voice.channel;
         
-        // Definiendo el speakder
-        const gtts = new Gtts(message, 'es-us'); // es | es-es | es-us
+        // Definiendo el speaker | es | es-es | es-us
+        const gtts = new Gtts(message, 'es-us');
         
         // Peraparando conexion
         
@@ -221,16 +215,12 @@ client.on('interactionCreate', async (interaction : Interaction) => {
             // Salida acelerada x2
             ffmpeg()
             .input(filePath)
-            .audioFilters('atempo=2') // Ajusta la velocidad de reproducción cambiando este valor
+            .audioFilters('atempo=3') // Ajusta la velocidad de reproducción cambiando este valor
             .output(outputFilename)
             .outputOptions('-y')
             .on('end', async (result : any) => {
                 console.log('Proceso de ajuste de velocidad finalizado.');
-                console.log('resultado : ', result);
                 const acceleratedMessage = fs.createReadStream(outputFilename);
-                // TODO : Esta funcion de voice se detiene cuando hay otra entrante, bugeando asi el voice
-                //await player.play(createAudioResource( acceleratedMessage ));
-                //await connection.subscribe(player);
                 if(actualChannel === undefined) { 
                     throw new Error('El canal a enviar el resultado no existe');
                 }
@@ -250,7 +240,7 @@ client.on('interactionCreate', async (interaction : Interaction) => {
         });
 
         let responseMessage = message;
-        if(message?.length > 2000) responseMessage = '[ Mas de 2000 caracteres ] Leyendo ulitmo mensaje ...';
+        responseMessage = 'message';
 
         await interaction.reply(responseMessage ?? 'por favor ingresa un texto valido');
         logger.info(message);
@@ -315,7 +305,7 @@ app.listen(port, () => {
 });
 */
 
-// Some functions
+// Genera el embed
 const embedGenerator = async (data : any) => {
     console.log('longitud : ',data.length);
     let arr_temp = [];
@@ -331,7 +321,6 @@ const embedGenerator = async (data : any) => {
         .setAuthor({ name: `${(author == null) ? 'Anonymous' : author}`, iconURL: nasa_chan_img, url: `${data[index].url}` })
         .setDescription(`${data[index].description}`)
         .setThumbnail(`${img}`)
-        //.setImage(`${img}`)
         .setTimestamp()
         .setFooter({ text: 'Nasa chan hacks :)', iconURL: nasa_chan_img });
         arr_temp.push(exampleEmbed);
