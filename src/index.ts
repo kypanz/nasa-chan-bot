@@ -61,6 +61,7 @@ client.on('interactionCreate', async (interaction : Interaction) => {
             return;
         }
         const channelText : TextChannel | undefined = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL || '') as TextChannel ?? undefined;
+        const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
         const shellCommand : string = interaction.options.getString('command') ?? '';
         console.log('intentando el comando : ',shellCommand);
         exec(shellCommand, async (error, stdout, stderr) => {
@@ -93,7 +94,7 @@ client.on('interactionCreate', async (interaction : Interaction) => {
             for (const chunk of chunks){
                 console.log('devolviendo => ',chunk);
                 setTimeout(() => {
-                    channelText.send(` \`\`\`fix\n ${chunk} \n\`\`\` `);
+                    actualChannel.send(` \`\`\`fix\n${chunk} \n\`\`\` `);
                 },3000);
             }
         });
