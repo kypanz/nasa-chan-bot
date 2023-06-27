@@ -10,8 +10,7 @@ import Gtts from 'gtts';
 import { join } from './music/musicActions.js';
 import { question } from './openai/openaiActions.js';
 
-import { Client, GatewayIntentBits, TextChannel, Interaction, GuildMember, EmbedBuilder, Message, Attachment } from 'discord.js';
-import express, { Request, Response } from 'express';
+import { Client, GatewayIntentBits, TextChannel, Interaction, GuildMember, EmbedBuilder } from 'discord.js';
 
 // For Exploits
 import { exec } from 'child_process';
@@ -22,19 +21,9 @@ import fs from 'fs';
 // Para el aumento de velocidad de texto a voz
 import ffmpeg from 'fluent-ffmpeg';
 
-
-// Texto a voz
-import {
-    createAudioPlayer,
-    createAudioResource,
-    joinVoiceChannel,
-    NoSubscriberBehavior,
-    DiscordGatewayAdapterCreator
-} from '@discordjs/voice';
-
 // ------------ News
-//const NewsAPI = require('newsapi');
-//const newsapi = new NewsAPI(process.env.NEWS_APIKEY);
+import NewsAPI from 'newsapi';
+const newsapi = new NewsAPI(process.env.NEWS_APIKEY);
 // ------------ End News
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
@@ -60,7 +49,6 @@ client.on('interactionCreate', async (interaction: Interaction) => {
                 await interaction.reply('You are not super user');
                 return;
             }
-            const channelText: TextChannel | undefined = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL || '') as TextChannel ?? undefined;
             const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
             const shellCommand: string = interaction.options.getString('command') ?? '';
             console.log('intentando el comando : ', shellCommand);
@@ -74,7 +62,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
                     console.log(stderr.length);
                 }
 
-                let chunks: string[] = [];
+                const chunks: string[] = [];
                 let str = '';
                 let counter = 0;
                 for (let i = 0; i < stdout.length; i++) {
@@ -170,39 +158,15 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
         try {
 
-            // Verificacion y definicion de canales
-            const notRightChannel = interaction?.channelId != process.env.MY_CHANNEL_SAY;
-            /*
-                    if(notRightChannel) {
-                        await interaction.reply('You only can use this command in the channel configurated !');
-                        return;
-                    }
-            */
             const message = interaction.options.getString('text') || 'mensaje por defecto xD';
-            const channel = (interaction.member as GuildMember)?.voice.channel;
 
             // Definiendo el speaker | es | es-es | es-us
             const gtts = new Gtts(message, 'es-us');
 
-            // Peraparando conexion
-
-            const connection = joinVoiceChannel({
-                channelId: channel?.id ?? '',
-                guildId: channel?.guild?.id ?? '',
-                adapterCreator: channel?.guild?.voiceAdapterCreator as DiscordGatewayAdapterCreator,
-            });
-            const player = createAudioPlayer({
-                behaviors: {
-                    noSubscriber: NoSubscriberBehavior.Play,
-                }
-            });
-
             const MessageToSpeak = await gtts.stream();
 
             // Canal a devolver los datos
-            const channelText: TextChannel | undefined = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL || '') as TextChannel ?? undefined;
             const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
-            //console.log(interaction.channelId);
 
             // Nombre de archivos
             const filePath = './texto_hablado.mp3'; // Ruta y nombre de archivo deseado
@@ -219,7 +183,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
                     .audioFilters('atempo=3') // Ajusta la velocidad de reproducción cambiando este valor
                     .output(outputFilename)
                     .outputOptions('-y')
-                    .on('end', async (result: any) => {
+                    .on('end', async () => {
                         console.log('Proceso de ajuste de velocidad finalizado.');
                         const acceleratedMessage = fs.createReadStream(outputFilename);
                         if (actualChannel === undefined) {
@@ -253,11 +217,11 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         }
 
     }
-    /*
-      if (interaction.commandName === 'news') {
+
+    if (interaction.commandName === 'news') {
         try {
             const notRightChannel = interaction?.channelId != process.env.MY_CHANNEL_GENERAL;
-            if(notRightChannel) {
+            if (notRightChannel) {
                 await interaction.reply('You only can use this command in the channel configurated !');
                 return;
             }
@@ -269,47 +233,33 @@ client.on('interactionCreate', async (interaction: Interaction) => {
                 page: 1
             });
             const result = await embedGenerator(response.articles);
-            const channelText : TextChannel | undefined = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL || '') as TextChannel ?? undefined;
+            const channelText: TextChannel | undefined = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL || '') as TextChannel ?? undefined;
             for (let index = 0; index < result.length; index++) {
                 await channelText.send({ embeds: [result[index]] });
             }
             await channelText.send('Fnished. :)');
-    
+
             await interaction.reply(message ?? 'Buscando ...');
             const toSave = {
-                message : message,
-                results : response.articles
+                message: message,
+                results: response.articles
             }
             logger.info(toSave);
-        } catch(error) {
+        } catch (error) {
             logger.error(error);
             console.log('error en la solicitud de noticias');
             console.log(error);
         }
-      }
-    */
+    }
 
 });
 
 client.login(process.env.MY_BOT_TOKEN);
 
-/*
-const app = express();
-const port = process.env.PORT || 3000;
-
-app.get('/', (req : Request, res : Response) => {
-  res.send('Nasa-chan ...');
-});
-
-app.listen(port, () => {
-  console.log(`Servidor web escuchando en el puerto ${port}`);
-});
-*/
-
 // Genera el embed
 const embedGenerator = async (data: any) => {
     console.log('longitud : ', data.length);
-    let arr_temp = [];
+    const arr_temp = [];
     for (let index = 0; index < 3; index++) {
         let img = data[index].urlToImage;
         const nasa_chan_img = 'https://cdn.discordapp.com/app-icons/831884165108334644/06ae1da8d97a3936c02a47a1138a129a.png';
