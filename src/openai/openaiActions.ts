@@ -8,9 +8,6 @@ const openai = new OpenAIApi(configuration);
 
 export async function question({ _question } : { _question : any }) {
 
-    console.log('paso por aqui ...');
-    console.log('tu pregunta => ',_question);
-
     try {
 
         const completion = await openai.createCompletion({

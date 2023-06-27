@@ -7,7 +7,7 @@ ffmpeg(inputFilename)
   .audioFilters('atempo=2') // Ajusta la velocidad de reproducción cambiando este valor
   .output(outputFilename)
   .on('end', () => {
-    console.log('Proceso de ajuste de velocidad finalizado.');
+    console.log('mensaje a audio finalizado.');
   })
   .on('error', (err) => {
     console.error(err);
