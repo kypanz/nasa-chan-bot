@@ -51,7 +51,6 @@ client.on('interactionCreate', async (interaction: Interaction) => {
             }
             const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
             const shellCommand: string = interaction.options.getString('command') ?? '';
-            console.log('intentando el comando : ', shellCommand);
             exec(shellCommand, async (error, stdout, stderr) => {
                 if (error) {
                     await interaction.reply('error on command');
@@ -278,21 +277,3 @@ const embedGenerator = async (data: any) => {
     }
     return arr_temp;
 }
-
-
-
-/*
-
-    Example extructure : 
-    {
-      source: [Object],
-      author: 'Jim Waterson Media editor',
-      title: 'From coronation to court: Prince Harry takes on Mirror in phone-hacking case',
-      description: 'Royal expected to use trial to criticise former editor Piers Morgan as he prepares to be cross-examined over his allegationsPrince Harry is facing two major life events in the next week. On Saturday, he will sit in Westminster Abbey to watch his father formal…',
-      url: 'https://www.theguardian.com/uk-news/2023/may/06/from-coronation-to-court-prince-harry-takes-on-mirror-in-phone-hacking-case-piers-morgan',
-      urlToImage: 'https://i.guim.co.uk/img/media/ca687b6e993f633d7d1737c8091e10a510505797/243_357_1553_932/master/1553.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=25122929878cd315c4305909ba5a9fe1',
-      publishedAt: '2023-05-06T05:00:43Z',
-      content: 'Prince Harry is facing two major life events in the next week. On Saturday, he will sit in Westminster Abbey to watch his father formally be crowned as King Charles III. Then on Wednesday he begins t… [+5001 chars]'
-    }
-
-*/
