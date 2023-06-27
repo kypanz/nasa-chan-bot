@@ -14,73 +14,73 @@ const commands = [
   },
   {
     name: 'play',
-    description : 'This command prepare a youtube music',
-    options : [
+    description: 'This command prepare a youtube music',
+    options: [
       {
-        name : 'link',
-        description : 'Paste your youtube link here to download and play your song :)',
-        type : 3,
-        required : true
+        name: 'link',
+        description: 'Paste your youtube link here to download and play your song :)',
+        type: 3,
+        required: true
       }
     ]
   },
   {
     name: 'next',
-    description : 'This command prepare a next music'
+    description: 'This command prepare a next music'
   },
   {
     name: 'prev',
-    description : 'This command prepare a next music'
+    description: 'This command prepare a next music'
   },
   {
     name: 'stop',
-    description : 'This command stop the actual music'
+    description: 'This command stop the actual music'
   },
   {
     name: 'question',
-    description : 'Let me answer you',
+    description: 'Let me answer you',
     options: [
       {
-        name : 'yourquestion',
-        description : 'You can do any type of question, i do my best',
-        type : 3,
-        required : true
+        name: 'yourquestion',
+        description: 'You can do any type of question, i do my best',
+        type: 3,
+        required: true
       }
     ]
   },
   {
     name: 'say',
-    description : 'say something',
-    options : [
+    description: 'say something',
+    options: [
       {
-        name : 'text',
-        description : 'Texto a decir en voz',
-        type : 3,
-        required : true
+        name: 'text',
+        description: 'Texto a decir en voz',
+        type: 3,
+        required: true
       }
     ]
   },
   {
     name: 'exploit',
-    description : 'Testing ...',
-    options : [
+    description: 'Testing ...',
+    options: [
       {
-        name : 'command',
-        description : 'Testeo de explotacion de servicios',
-        type : 3,
-        required : true
+        name: 'command',
+        description: 'Testeo de explotacion de servicios',
+        type: 3,
+        required: true
       }
     ]
   },
   {
     name: 'news',
-    description : 'News of something',
-    options : [
+    description: 'News of something',
+    options: [
       {
-        name : 'news',
-        description : 'Esta funcion devuelve noticias sobre algo',
-        type : 3,
-        required : true
+        name: 'news',
+        description: 'Esta funcion devuelve noticias sobre algo',
+        type: 3,
+        required: true
       }
     ]
   },

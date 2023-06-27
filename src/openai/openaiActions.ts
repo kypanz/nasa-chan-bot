@@ -1,19 +1,19 @@
 import { Configuration, OpenAIApi } from 'openai';
 
 const configuration = new Configuration({
-    apiKey : process.env.AI_KEY
+    apiKey: process.env.AI_KEY
 });
 
 const openai = new OpenAIApi(configuration);
 
-export async function question({ _question } : { _question : any }) {
+export async function question({ _question }: { _question: any }) {
 
     try {
 
         const completion = await openai.createCompletion({
             model: 'text-davinci-003',
             prompt: _question,
-            temperature : 0,
+            temperature: 0,
             max_tokens: 1000
         });
 
@@ -25,7 +25,6 @@ export async function question({ _question } : { _question : any }) {
 
         console.log('se genero un error ...');
         console.log(error);
-        //console.log(error.response.data);
         return 'i answered a lot of questions today :c';
 
     }

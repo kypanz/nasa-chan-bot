@@ -8,11 +8,11 @@ import ytdl from 'ytdl-core';
 import logger from '../winston/configWinston';
 import { Readable } from 'stream';
 
-export const join = async ({ channel, channelText, songLink : link } : { channel : any, channelText : any, songLink : string }) => {
+export const join = async ({ channel, channelText, songLink: link }: { channel: any, channelText: any, songLink: string }) => {
 
     try {
 
-        if(!ytdl.validateURL(link)) throw "Wrong URL";
+        if (!ytdl.validateURL(link)) throw "Wrong URL";
 
         // Preparing Song
         const conection = joinVoiceChannel({
@@ -31,17 +31,17 @@ export const join = async ({ channel, channelText, songLink : link } : { channel
         const info = await ytdl.getInfo(link);
 
         // Playing song
-        const song = await ytdl(link,{filter : 'audio', quality : 'highestaudio'});
+        const song = await ytdl(link, { filter: 'audio', quality: 'highestaudio' });
 
         // Chunks music
         const buffer: Buffer[] = [];
 
-        song.on('data',(data)=>{
+        song.on('data', (data) => {
             buffer.push(data);
         })
 
-        song.on('error',(error)=>{
-            console.log('paso un error => ',error);
+        song.on('error', (error) => {
+            console.log('paso un error => ', error);
             logger.error(error);
         })
 
@@ -49,7 +49,7 @@ export const join = async ({ channel, channelText, songLink : link } : { channel
             const fullBuffer = Buffer.concat(buffer);
             const bufferStream = new Readable();
             bufferStream.push(fullBuffer);
-            bufferStream.push(null); 
+            bufferStream.push(null);
             player.play(createAudioResource(song));
             player.play(createAudioResource(bufferStream));
             conection.subscribe(player);
