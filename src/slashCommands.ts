@@ -84,6 +84,10 @@ const commands = [
       }
     ]
   },
+  {
+    name: 'get-proxy-list',
+    description: 'get 10 random proxies [ socks4 ]',
+  },
 ];
 
 const rest = new REST({ version: '10' }).setToken(process.env.MY_BOT_TOKEN || '');

@@ -29,6 +29,7 @@
   "homepage": "https://github.com/kypanz/discord-bot-youtube-music-personal-use#readme",
   "dependencies": {
     "@discordjs/voice": "^0.14.0",
+    "axios": "^1.4.0",
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3",
     "ffmpeg-static": "^5.1.0",

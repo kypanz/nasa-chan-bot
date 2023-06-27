@@ -5,27 +5,18 @@
 import './slashCommands.js';
 import logger from './winston/configWinston';
 import Gtts from 'gtts';
-
-// Actions
 import { join } from './music/musicActions.js';
 import { question } from './openai/openaiActions.js';
-
 import { Client, GatewayIntentBits, TextChannel, Interaction, GuildMember, EmbedBuilder } from 'discord.js';
-
-// For Exploits
 import { exec } from 'child_process';
-
-// Guardado en mp3
 import fs from 'fs';
-
-// Para el aumento de velocidad de texto a voz
 import ffmpeg from 'fluent-ffmpeg';
-
-// ------------ News
 import NewsAPI from 'newsapi';
-const newsapi = new NewsAPI(process.env.NEWS_APIKEY);
-// ------------ End News
+import axios from 'axios';
 
+
+// Definiendo datos
+const newsapi = new NewsAPI(process.env.NEWS_APIKEY);
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
 
 client.on('ready', () => {
@@ -250,6 +241,25 @@ client.on('interactionCreate', async (interaction: Interaction) => {
             console.log(error);
         }
     }
+
+    if (interaction.commandName === 'get-proxy-list') {
+        try {
+
+            const response = await axios.get('https://proxylist.geonode.com/api/proxy-list?limit=10&page=1&sort_by=lastChecked&sort_type=desc&protocols=socks4');
+            const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
+            const proxies = response.data.data;
+            actualChannel.send(` \`\`\`fix\nObteniendo resultados ...\n\`\`\` `);
+            proxies.forEach((proxy : any)=>{
+                actualChannel.send(` \`\`\`fix\n${proxy.ip}:${proxy.port} | ISP : ${proxy.isp} | ${proxy.country}\n\`\`\` `);
+            });
+            actualChannel.send(` \`\`\`fix\nHappy Hacking ;) ...\n\`\`\` `);
+            
+        } catch (error) {
+            logger.error(error);
+            console.log(error);
+        }
+    }
+
 
 });
 
