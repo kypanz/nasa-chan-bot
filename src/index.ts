@@ -7,7 +7,7 @@ import logger from './winston/configWinston';
 import Gtts from 'gtts';
 import { join } from './music/musicActions.js';
 import { question } from './openai/openaiActions.js';
-import { Client, GatewayIntentBits, TextChannel, Interaction, GuildMember, EmbedBuilder } from 'discord.js';
+import { Client, GatewayIntentBits, TextChannel, Interaction, GuildMember, EmbedBuilder, ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } from 'discord.js';
 import { exec } from 'child_process';
 import fs from 'fs';
 import ffmpeg from 'fluent-ffmpeg';
@@ -249,11 +249,32 @@ client.on('interactionCreate', async (interaction: Interaction) => {
             const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
             const proxies = response.data.data;
             actualChannel.send(` \`\`\`fix\nObteniendo resultados ...\n\`\`\` `);
-            proxies.forEach((proxy : any)=>{
+            proxies.forEach((proxy: any) => {
                 actualChannel.send(` \`\`\`fix\n${proxy.ip}:${proxy.port} | ISP : ${proxy.isp} | ${proxy.country}\n\`\`\` `);
             });
             actualChannel.send(` \`\`\`fix\nHappy Hacking ;) ...\n\`\`\` `);
-            
+
+        } catch (error) {
+            logger.error(error);
+            console.log(error);
+        }
+    }
+
+    if (interaction.commandName === 'whois') {
+        try {
+
+            const content = new TextInputBuilder()
+                .setLabel('IP/Domain')
+                .setCustomId('h-ip')
+                .setStyle(TextInputStyle.Short)
+            const arrow = new ActionRowBuilder<TextInputBuilder>().addComponents(content)
+            const modal = new ModalBuilder()
+                .setTitle('Whois')
+                .setCustomId('h-whois')
+                .addComponents(arrow)
+
+            interaction.showModal(modal);
+
         } catch (error) {
             logger.error(error);
             console.log(error);

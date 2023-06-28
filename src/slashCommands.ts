@@ -88,6 +88,10 @@ const commands = [
     name: 'get-proxy-list',
     description: 'get 10 random proxies [ socks4 ]',
   },
+  {
+    name: 'whois',
+    description: 'Obtiene informacion sobre un dominio u ip',
+  },
 ];
 
 const rest = new REST({ version: '10' }).setToken(process.env.MY_BOT_TOKEN || '');
