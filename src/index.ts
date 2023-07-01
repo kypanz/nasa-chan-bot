@@ -35,7 +35,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
     }
 
     // Default ping command
-    if (interaction.commandName === 'ping') {
+    if (interaction.commandName === 'help') {
         const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
         commands.forEach(element => {
             actualChannel.send(` \`\`\`fix\n[ Comando ] /${element.name}  | Descripcion : ${element.description} \n\`\`\` `);

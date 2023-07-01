@@ -9,6 +9,10 @@ import { REST, Routes } from 'discord.js';
 
 export const commands = [
   {
+    name: 'help',
+    description: 'Obtiene todos los comandos del bot.',
+  },
+  {
     name: 'ping',
     description: 'Replies with Pong!',
   },
