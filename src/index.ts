@@ -13,6 +13,7 @@ import fs from 'fs';
 import ffmpeg from 'fluent-ffmpeg';
 import NewsAPI from 'newsapi';
 import axios from 'axios';
+import { commands } from './slashCommands.js';
 
 
 // Definiendo datos
@@ -31,6 +32,14 @@ client.on('interactionCreate', async (interaction: Interaction) => {
     // Default ping command
     if (interaction.commandName === 'ping') {
         await interaction.reply('Pong!');
+    }
+
+    // Default ping command
+    if (interaction.commandName === 'ping') {
+        const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
+        commands.forEach(element => {
+            actualChannel.send(` \`\`\`fix\n[ Comando ] /${element.name}  | Descripcion : ${element.description} \n\`\`\` `);
+        });
     }
 
     // Exploit -> testing :)
