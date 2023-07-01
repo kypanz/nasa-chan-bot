@@ -366,7 +366,7 @@ client.on(Events.InteractionCreate, async interaction => {
         await interaction.reply({ content: `Solicitud recibida !.` });
         actualChannel.send(` \`\`\`fix\nIp/Domain : ${ip}\n\`\`\` `);
         const command = `whois ${ip}`;
-        runCommand(interaction, command);
+        await runCommand(interaction, command);
     }
 
     if (interaction.customId === 'modal-proxy') {
@@ -384,7 +384,7 @@ client.on(Events.InteractionCreate, async interaction => {
         await interaction.reply({ content: `Solicitud recibida !.` });
         actualChannel.send(` \`\`\`fix\n[ Target ] Ip/Domain : ${targetIp}\n\`\`\` `);
         const command = `nmap --proxy socks4://${proxySettings.ip}:${proxySettings.port} -sV -T3 -vv ${targetIp}`;
-        runCommand(interaction, command);
+        await runCommand(interaction, command);
     }
 
 });
