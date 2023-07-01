@@ -104,6 +104,10 @@ export const commands = [
     name: 'actualproxy',
     description: 'Obtiene el proxy configurado actualmente',
   },
+  {
+    name: 'scan',
+    description: 'Escaneo de puertos de una direccion ip especifica',
+  },
 ];
 
 const rest = new REST({ version: '10' }).setToken(process.env.MY_BOT_TOKEN || '');

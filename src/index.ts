@@ -43,7 +43,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
             actualChannel.send(` \`\`\`fix\n[ Comando ] /${element.name}  | Descripcion : ${element.description} \n\`\`\` `);
         });
         actualChannel.send(` \`\`\`fix\nEsos son todos.\n\`\`\` `);
-        
+
     }
 
     // Exploit -> testing :)
@@ -315,15 +315,36 @@ client.on('interactionCreate', async (interaction: Interaction) => {
             console.log(error);
         }
     }
-    
+
     if (interaction.commandName === 'actualproxy') {
         try {
 
-            if(proxySettings.ip === '') {
+            if (proxySettings.ip === '') {
                 interaction.reply(` \`\`\`fix\n[ Proxy configurado ] => Ninguno\n\`\`\` `)
             } else {
                 interaction.reply(` \`\`\`fix\n[ Proxy configurado ] => ${proxySettings.ip}:${proxySettings.port}\n\`\`\` `)
             }
+
+        } catch (error) {
+            logger.error(error);
+            console.log(error);
+        }
+    }
+    
+    if (interaction.commandName === 'scan') {
+        try {
+
+            const content = new TextInputBuilder()
+                .setLabel('Target IP')
+                .setCustomId('input-target-ip')
+                .setStyle(TextInputStyle.Short)
+            const arrow = new ActionRowBuilder<TextInputBuilder>().addComponents(content)
+            const modal = new ModalBuilder()
+                .setTitle('Scanning Mode')
+                .setCustomId('modal-scan')
+                .addComponents(arrow)
+
+            await interaction.showModal(modal);
 
         } catch (error) {
             logger.error(error);
@@ -349,13 +370,19 @@ client.on(Events.InteractionCreate, async interaction => {
     }
 
     if (interaction.customId === 'modal-proxy') {
-        const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
         const proxy = interaction.fields.getTextInputValue('input-proxy').split(':');
         const ip = proxy[0];
         const port = proxy[1];
         proxySettings.ip = ip;
         proxySettings.port = port;
         await interaction.reply({ content: `Proxy configurado correctamente !.` });
+    }
+
+    if (interaction.customId === 'modal-scan') {
+        const targetIp = interaction.fields.getTextInputValue('input-target-ip');
+        await interaction.reply({ content: `Solicitud recibida !.` });
+        const command = `nmap --proxy ${proxySettings.ip}:${proxySettings.port} -sV -T3 -vv ${targetIp}`;
+        runCommand(interaction, command);
     }
 
 });
