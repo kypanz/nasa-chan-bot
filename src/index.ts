@@ -18,6 +18,7 @@ import axios from 'axios';
 // Definiendo datos
 const newsapi = new NewsAPI(process.env.NEWS_APIKEY);
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
+const proxySettings = { ip: '', port: '' }
 
 client.on('ready', () => {
     console.log(`Logged in as ${client?.user?.tag}!`);
@@ -270,10 +271,46 @@ client.on('interactionCreate', async (interaction: Interaction) => {
             const arrow = new ActionRowBuilder<TextInputBuilder>().addComponents(content)
             const modal = new ModalBuilder()
                 .setTitle('Whois')
-                .setCustomId('m-whois')
+                .setCustomId('modal-whois')
                 .addComponents(arrow)
 
             await interaction.showModal(modal);
+
+        } catch (error) {
+            logger.error(error);
+            console.log(error);
+        }
+    }
+
+    if (interaction.commandName === 'setproxy') {
+        try {
+
+            const content = new TextInputBuilder()
+                .setLabel('Proxy IP and Port, example : 0.0.0.0:1234')
+                .setCustomId('input-proxy')
+                .setStyle(TextInputStyle.Short)
+            const arrow = new ActionRowBuilder<TextInputBuilder>().addComponents(content)
+            const modal = new ModalBuilder()
+                .setTitle('Proxy Settings')
+                .setCustomId('modal-proxy')
+                .addComponents(arrow)
+
+            await interaction.showModal(modal);
+
+        } catch (error) {
+            logger.error(error);
+            console.log(error);
+        }
+    }
+    
+    if (interaction.commandName === 'actualproxy') {
+        try {
+
+            if(proxySettings.ip === '') {
+                interaction.reply(` \`\`\`fix\n[ Proxy configurado ] => Ninguno\n\`\`\` `)
+            } else {
+                interaction.reply(` \`\`\`fix\n[ Proxy configurado ] => ${proxySettings.ip}:${proxySettings.port}\n\`\`\` `)
+            }
 
         } catch (error) {
             logger.error(error);
@@ -287,8 +324,9 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
 // Captura de Modals
 client.on(Events.InteractionCreate, async interaction => {
+
     if (!interaction.isModalSubmit()) return;
-    if (interaction.customId === 'm-whois') {
+    if (interaction.customId === 'modal-whois') {
         const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
         const ip = interaction.fields.getTextInputValue('input-ip');
         await interaction.reply({ content: `Solicitud recibida !.` });
@@ -296,6 +334,17 @@ client.on(Events.InteractionCreate, async interaction => {
         const command = `whois ${ip}`;
         runCommand(interaction, command);
     }
+
+    if (interaction.customId === 'modal-proxy') {
+        const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
+        const proxy = interaction.fields.getTextInputValue('input-proxy').split(':');
+        const ip = proxy[0];
+        const port = proxy[1];
+        proxySettings.ip = ip;
+        proxySettings.port = port;
+        await interaction.reply({ content: `Proxy configurado correctamente !.` });
+    }
+
 });
 
 client.login(process.env.MY_BOT_TOKEN);
@@ -323,8 +372,8 @@ const embedGenerator = async (data: any) => {
     return arr_temp;
 }
 
-
-async function runCommand(interaction : any, command : string )  {
+// Funciones extra
+async function runCommand(interaction: any, command: string) {
     try {
 
         if (interaction.user.id !== process.env.SUPER_USER) {

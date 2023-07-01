@@ -7,7 +7,7 @@ dotenv.config();
 
 import { REST, Routes } from 'discord.js';
 
-const commands = [
+export const commands = [
   {
     name: 'ping',
     description: 'Replies with Pong!',
@@ -91,6 +91,14 @@ const commands = [
   {
     name: 'whois',
     description: 'Obtiene informacion sobre un dominio u ip',
+  },
+  {
+    name: 'setproxy',
+    description: 'Se ocupa para configurar el proxy actual',
+  },
+  {
+    name: 'actualproxy',
+    description: 'Obtiene el proxy configurado actualmente',
   },
 ];
 
