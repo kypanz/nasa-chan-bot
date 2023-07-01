@@ -7,7 +7,7 @@ import logger from './winston/configWinston';
 import Gtts from 'gtts';
 import { join } from './music/musicActions.js';
 import { question } from './openai/openaiActions.js';
-import { Client, GatewayIntentBits, TextChannel, Interaction, GuildMember, EmbedBuilder, ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } from 'discord.js';
+import { Client, GatewayIntentBits, TextChannel, Interaction, GuildMember, EmbedBuilder, ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle, Events } from 'discord.js';
 import { exec } from 'child_process';
 import fs from 'fs';
 import ffmpeg from 'fluent-ffmpeg';
@@ -265,15 +265,15 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
             const content = new TextInputBuilder()
                 .setLabel('IP/Domain')
-                .setCustomId('h-ip')
+                .setCustomId('input-ip')
                 .setStyle(TextInputStyle.Short)
             const arrow = new ActionRowBuilder<TextInputBuilder>().addComponents(content)
             const modal = new ModalBuilder()
                 .setTitle('Whois')
-                .setCustomId('h-whois')
+                .setCustomId('m-whois')
                 .addComponents(arrow)
 
-            interaction.showModal(modal);
+            await interaction.showModal(modal);
 
         } catch (error) {
             logger.error(error);
@@ -282,6 +282,20 @@ client.on('interactionCreate', async (interaction: Interaction) => {
     }
 
 
+});
+
+
+// Captura de Modals
+client.on(Events.InteractionCreate, async interaction => {
+    if (!interaction.isModalSubmit()) return;
+    if (interaction.customId === 'm-whois') {
+        const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
+        const ip = interaction.fields.getTextInputValue('input-ip');
+        await interaction.reply({ content: `Solicitud recibida !.` });
+        actualChannel.send(` \`\`\`fix\nIp/Domain : ${ip}\n\`\`\` `);
+        const command = `whois ${ip}`;
+        runCommand(interaction, command);
+    }
 });
 
 client.login(process.env.MY_BOT_TOKEN);
@@ -307,4 +321,56 @@ const embedGenerator = async (data: any) => {
         arr_temp.push(exampleEmbed);
     }
     return arr_temp;
+}
+
+
+async function runCommand(interaction : any, command : string )  {
+    try {
+
+        if (interaction.user.id !== process.env.SUPER_USER) {
+            await interaction.reply('You are not super user');
+            return;
+        }
+        const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
+        //const shellCommand: string = interaction.options.getString('command') ?? '';
+        exec(command, async (error, stdout, stderr) => {
+            if (error) {
+                await interaction.reply('error on command');
+                return;
+            }
+            if (stderr) {
+                console.log(stderr);
+                console.log(stderr.length);
+            }
+
+            const chunks: string[] = [];
+            let str = '';
+            let counter = 0;
+            for (let i = 0; i < stdout.length; i++) {
+                if (i + 1 == stdout.length) chunks.push(str);
+                if (counter == 999) {
+                    chunks.push(str);
+                    str = stdout[i];
+                    counter = 0;
+                } else {
+                    str += stdout[i];
+                }
+                counter++;
+            }
+
+            console.log('chunks => ', chunks);
+
+            for (const chunk of chunks) {
+                console.log('devolviendo => ', chunk);
+                setTimeout(() => {
+                    actualChannel.send(` \`\`\`fix\n${chunk} \n\`\`\` `);
+                }, 3000);
+            }
+        });
+
+    } catch (error) {
+
+        throw new Error('Error al solicitar el comando');
+
+    }
 }
