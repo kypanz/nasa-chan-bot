@@ -382,7 +382,7 @@ client.on(Events.InteractionCreate, async interaction => {
         const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
         const targetIp = interaction.fields.getTextInputValue('input-target-ip');
         actualChannel.send(` \`\`\`fix\n[ Target ] Ip/Domain : ${targetIp}\n\`\`\` `);
-        const command = `nmap --proxy ${proxySettings.ip}:${proxySettings.port} -sV -T3 -vv ${targetIp}`;
+        const command = `nmap --proxy socks4://${proxySettings.ip}:${proxySettings.port} -sV -T3 -vv ${targetIp}`;
         runCommand(interaction, command);
     }
 
