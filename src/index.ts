@@ -37,9 +37,13 @@ client.on('interactionCreate', async (interaction: Interaction) => {
     // Default ping command
     if (interaction.commandName === 'help') {
         const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
+        actualChannel.send(` \`\`\`fix\n/help\n\`\`\` `);
+        actualChannel.send(` \`\`\`fix\nListando comandos\n\`\`\` `);
         commands.forEach(element => {
             actualChannel.send(` \`\`\`fix\n[ Comando ] /${element.name}  | Descripcion : ${element.description} \n\`\`\` `);
         });
+        actualChannel.send(` \`\`\`fix\nEsos son todos.\n\`\`\` `);
+        
     }
 
     // Exploit -> testing :)
