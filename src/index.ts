@@ -352,6 +352,27 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         }
     }
 
+    if (interaction.commandName === 'wig') {
+        try {
+
+            const content = new TextInputBuilder()
+                .setLabel('Target IP')
+                .setCustomId('input-target-ip')
+                .setStyle(TextInputStyle.Short)
+            const arrow = new ActionRowBuilder<TextInputBuilder>().addComponents(content)
+            const modal = new ModalBuilder()
+                .setTitle('Wig Mode')
+                .setCustomId('modal-wig')
+                .addComponents(arrow)
+
+            await interaction.showModal(modal);
+
+        } catch (error) {
+            logger.error(error);
+            console.log(error);
+        }
+    }
+
 
 });
 
@@ -384,6 +405,15 @@ client.on(Events.InteractionCreate, async interaction => {
         await interaction.reply({ content: `Solicitud recibida !.` });
         actualChannel.send(` \`\`\`fix\n[ Target ] Ip/Domain : ${targetIp}\n\`\`\` `);
         const command = `nmap --proxy socks4://${proxySettings.ip}:${proxySettings.port} -sV -T3 -vv ${targetIp}`;
+        await runCommand(interaction, command);
+    }
+    
+    if (interaction.customId === 'modal-wig') {
+        const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
+        const targetIp = interaction.fields.getTextInputValue('input-target-ip');
+        await interaction.reply({ content: `Solicitud recibida !.` });
+        actualChannel.send(` \`\`\`fix\n[ Target ] Ip/Domain : ${targetIp}\n\`\`\` `);
+        const command = `wig --proxy socks4://${proxySettings.ip}:${proxySettings.port} ${targetIp}`;
         await runCommand(interaction, command);
     }
 
