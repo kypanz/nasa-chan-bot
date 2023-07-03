@@ -232,11 +232,11 @@ client.on('interactionCreate', async (interaction: Interaction) => {
                 page: 1
             });
             const result = await embedGenerator(response.articles);
-            const channelText: TextChannel | undefined = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL || '') as TextChannel ?? undefined;
+            const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
             for (let index = 0; index < result.length; index++) {
-                await channelText.send({ embeds: [result[index]] });
+                await actualChannel.send({ embeds: [result[index]] });
             }
-            await channelText.send('Fnished. :)');
+            await actualChannel.send('Fnished. :)');
 
             await interaction.reply(message ?? 'Buscando ...');
             const toSave = {
