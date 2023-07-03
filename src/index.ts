@@ -413,7 +413,7 @@ client.on(Events.InteractionCreate, async interaction => {
         const targetIp = interaction.fields.getTextInputValue('input-target-ip');
         await interaction.reply({ content: `Solicitud recibida !.` });
         actualChannel.send(` \`\`\`fix\n[ Target ] Ip/Domain : ${targetIp}\n\`\`\` `);
-        const command = `echo "Y" | wig --proxy socks4://${proxySettings.ip}:${proxySettings.port} ${targetIp}`;
+        const command = `echo "Y" | proxychains4 wig ${targetIp}`;
         await runCommand(interaction, command);
     }
 
