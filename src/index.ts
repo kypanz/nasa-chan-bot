@@ -224,11 +224,6 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
     if (interaction.commandName === 'news') {
         try {
-            const notRightChannel = interaction?.channelId != process.env.MY_CHANNEL_GENERAL;
-            if (notRightChannel) {
-                await interaction.reply('You only can use this command in the channel configurated !');
-                return;
-            }
             const message = interaction.options.getString('news');
             const response = await newsapi.v2.everything({
                 q: message,
