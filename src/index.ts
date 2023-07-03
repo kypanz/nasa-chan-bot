@@ -361,7 +361,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
                 .setStyle(TextInputStyle.Short)
             const arrow = new ActionRowBuilder<TextInputBuilder>().addComponents(content)
             const modal = new ModalBuilder()
-                .setTitle('Wig Mode')
+                .setTitle('Wig Mode | ALERT NO PROXY MODE FOR WIG')
                 .setCustomId('modal-wig')
                 .addComponents(arrow)
 
@@ -413,7 +413,7 @@ client.on(Events.InteractionCreate, async interaction => {
         const targetIp = interaction.fields.getTextInputValue('input-target-ip');
         await interaction.reply({ content: `Solicitud recibida !.` });
         actualChannel.send(` \`\`\`fix\n[ Target ] Ip/Domain : ${targetIp}\n\`\`\` `);
-        const command = `echo "Y" | proxychains4 wig ${targetIp}`;
+        const command = `echo "Y" | wig ${targetIp}`;
         await runCommand(interaction, command);
     }
 
