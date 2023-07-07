@@ -450,7 +450,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
         //const resultDelete = await actualChannel.bulkDelete(parseInt(amountToDelete), true);
 
-        await interaction.reply({ content: `${amountToDelete} messages deleted.` });
+        await interaction.reply({ content: `Deleting ${amountToDelete} messages ...` });
 
     }
 
