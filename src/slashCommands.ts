@@ -112,6 +112,10 @@ export const commands = [
     name: 'wig',
     description: 'Escaneo de puertos de una direccion ip especifica',
   },
+  {
+    name: 'test',
+    description: 'comando para testear',
+  },
 ];
 
 const rest = new REST({ version: '10' }).setToken(process.env.MY_BOT_TOKEN || '');

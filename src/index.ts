@@ -367,6 +367,18 @@ client.on('interactionCreate', async (interaction: Interaction) => {
             console.log(error);
         }
     }
+    
+    if (interaction.commandName === 'test') {
+        try {
+
+            console.log(interaction);
+            interaction.reply('done');
+
+        } catch (error) {
+            logger.error(error);
+            console.log(error);
+        }
+    }
 
 
 });
