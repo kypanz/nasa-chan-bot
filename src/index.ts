@@ -443,9 +443,9 @@ client.on(Events.InteractionCreate, async interaction => {
         const amountToDelete = parseInt(interaction.fields.getTextInputValue('input-clean-amount'));
         const messages = await actualChannel.messages.fetch({ limit: amountToDelete }); // ocupar => before | para poder iterar despues de 100
         const deletions = messages.map(message => message.delete());
-        await interaction.reply({ content: `Deleting ${amountToDelete} messages ...` });
+        await interaction.reply({ content: ` \`\`\`fix\nDeleting ${amountToDelete} messages ...\n\`\`\` ` });
         await Promise.all(deletions);
-        actualChannel.send(` \`\`\`fix\nEliminacion de datos finalizada.\n\`\`\` `);
+        actualChannel.send(` \`\`\`fix\nFinished.\n\`\`\` `);
         //const resultDelete = await actualChannel.bulkDelete(parseInt(amountToDelete), true);
 
     }
