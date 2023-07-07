@@ -325,7 +325,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
             console.log(error);
         }
     }
-    
+
     if (interaction.commandName === 'scan') {
         try {
 
@@ -367,18 +367,25 @@ client.on('interactionCreate', async (interaction: Interaction) => {
             console.log(error);
         }
     }
-    
+
     if (interaction.commandName === 'test') {
         try {
 
-            const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
-            console.log(actualChannel);
-            console.log(' ---- messages ----');
+            if (interaction.user.id !== process.env.SUPER_USER) {
+                await interaction.reply('You are not super user');
+                return;
+            }
             
-            const resultDelete = await actualChannel.bulkDelete(100, true);
-            console.log('resultado del delete => ', resultDelete.size);
-
-            interaction.reply('done');
+            const content = new TextInputBuilder()
+                .setLabel('Messages amount to clean')
+                .setCustomId('input-clean-amount')
+                .setStyle(TextInputStyle.Short)
+            const arrow = new ActionRowBuilder<TextInputBuilder>().addComponents(content)
+            const modal = new ModalBuilder()
+                .setTitle('Clean Messages')
+                .setCustomId('modal-clean')
+                .addComponents(arrow)
+            await interaction.showModal(modal);
 
         } catch (error) {
             logger.error(error);
@@ -420,7 +427,7 @@ client.on(Events.InteractionCreate, async interaction => {
         const command = `nmap --proxy socks4://${proxySettings.ip}:${proxySettings.port} -sV -T3 -vv ${targetIp}`;
         await runCommand(interaction, command);
     }
-    
+
     if (interaction.customId === 'modal-wig') {
         const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
         const targetIp = interaction.fields.getTextInputValue('input-target-ip');
@@ -428,6 +435,15 @@ client.on(Events.InteractionCreate, async interaction => {
         actualChannel.send(` \`\`\`fix\n[ Target ] Ip/Domain : ${targetIp}\n\`\`\` `);
         const command = `echo "Y" | wig ${targetIp}`;
         await runCommand(interaction, command);
+    }
+
+    if (interaction.customId === 'modal-clean') {
+
+        const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
+        const amountToDelete = interaction.fields.getTextInputValue('input-clean-amount');
+        const resultDelete = await actualChannel.bulkDelete(parseInt(amountToDelete), true);
+        await interaction.reply({ content: `${resultDelete.size} messages deleted.` });
+
     }
 
 });
