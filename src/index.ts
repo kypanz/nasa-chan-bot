@@ -376,7 +376,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
             console.log(' ---- messages ----');
             
             const resultDelete = await actualChannel.bulkDelete(100, true);
-            console.log('resultado del delete => ', resultDelete);
+            console.log('resultado del delete => ', resultDelete.size);
 
             interaction.reply('done');
 
