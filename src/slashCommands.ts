@@ -114,7 +114,7 @@ export const commands = [
   },
   {
     name: 'clean',
-    description: 'comando para testear',
+    description: 'este comando elimina los mensajes del servidor, para dejarlo mas limpio',
   },
 ];
 
