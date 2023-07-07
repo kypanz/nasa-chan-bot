@@ -371,7 +371,8 @@ client.on('interactionCreate', async (interaction: Interaction) => {
     if (interaction.commandName === 'test') {
         try {
 
-            console.log(interaction);
+            const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
+            console.log(actualChannel);
             interaction.reply('done');
 
         } catch (error) {
