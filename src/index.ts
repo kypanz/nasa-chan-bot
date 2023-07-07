@@ -445,6 +445,7 @@ client.on(Events.InteractionCreate, async interaction => {
         const deletions = messages.map(message => message.delete());
         await interaction.reply({ content: `Deleting ${amountToDelete} messages ...` });
         await Promise.all(deletions);
+        actualChannel.send(` \`\`\`fix\nEliminacion de datos finalizada.\n\`\`\` `);
         //const resultDelete = await actualChannel.bulkDelete(parseInt(amountToDelete), true);
 
     }
