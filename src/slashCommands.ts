@@ -113,7 +113,7 @@ export const commands = [
     description: 'Escaneo de puertos de una direccion ip especifica',
   },
   {
-    name: 'test',
+    name: 'clean',
     description: 'comando para testear',
   },
 ];

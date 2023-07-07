@@ -368,14 +368,14 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         }
     }
 
-    if (interaction.commandName === 'test') {
+    if (interaction.commandName === 'clean') {
         try {
 
             if (interaction.user.id !== process.env.SUPER_USER) {
                 await interaction.reply('You are not super user');
                 return;
             }
-            
+
             const content = new TextInputBuilder()
                 .setLabel('Messages amount to clean')
                 .setCustomId('input-clean-amount')
