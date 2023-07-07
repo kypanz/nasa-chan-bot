@@ -440,9 +440,17 @@ client.on(Events.InteractionCreate, async interaction => {
     if (interaction.customId === 'modal-clean') {
 
         const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
-        const amountToDelete = interaction.fields.getTextInputValue('input-clean-amount');
-        const resultDelete = await actualChannel.bulkDelete(parseInt(amountToDelete), true);
-        await interaction.reply({ content: `${resultDelete.size} messages deleted.` });
+        const amountToDelete = parseInt(interaction.fields.getTextInputValue('input-clean-amount'));
+
+        const messages = await actualChannel.messages.fetch({ limit: amountToDelete }); // ocupar => before | para poder iterar despues de 100
+
+        messages.forEach(async (message) => {
+            await message.delete();
+        })
+
+        //const resultDelete = await actualChannel.bulkDelete(parseInt(amountToDelete), true);
+
+        await interaction.reply({ content: `${amountToDelete} messages deleted.` });
 
     }
 
