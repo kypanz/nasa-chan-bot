@@ -373,6 +373,8 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
             const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
             console.log(actualChannel);
+            console.log(' ---- messages ----');
+            console.log(actualChannel.messages);
             interaction.reply('done');
 
         } catch (error) {
