@@ -113,7 +113,7 @@ export const commands = [
     description: 'Escaneo de puertos de una direccion ip especifica',
   },
   {
-    name: 'clean',
+    name: 'clear',
     description: 'este comando elimina los mensajes del servidor, para dejarlo mas limpio',
   },
 ];

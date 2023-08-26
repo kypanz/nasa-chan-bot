@@ -368,7 +368,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         }
     }
 
-    if (interaction.commandName === 'clean') {
+    if (interaction.commandName === 'clear') {
         try {
 
             if (interaction.user.id !== process.env.SUPER_USER) {
@@ -377,7 +377,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
             }
 
             const content = new TextInputBuilder()
-                .setLabel('Messages amount to clean')
+                .setLabel('Messages amount to clear')
                 .setCustomId('input-clean-amount')
                 .setStyle(TextInputStyle.Short)
             const arrow = new ActionRowBuilder<TextInputBuilder>().addComponents(content)
