@@ -116,6 +116,18 @@ export const commands = [
     name: 'clear',
     description: 'este comando elimina los mensajes del servidor, para dejarlo mas limpio',
   },
+  {
+    name: 'instapost',
+    description: 'Este comando toma el texto y lo postea en instagram',
+    options: [
+      {
+        name: 'title-posts',
+        description: 'se toma el texto y los separa por guiones para agregar los titulos a los posteos',
+        type: 3,
+        required: true
+      }
+    ]
+  }
 ];
 
 const rest = new REST({ version: '10' }).setToken(process.env.MY_BOT_TOKEN || '');

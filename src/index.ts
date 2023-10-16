@@ -14,6 +14,7 @@ import ffmpeg from 'fluent-ffmpeg';
 import NewsAPI from 'newsapi';
 import axios from 'axios';
 import { commands } from './slashCommands.js';
+import { startRandomTimeInstagram } from './bot-instagram';
 
 
 // Definiendo datos
@@ -393,6 +394,28 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         }
     }
 
+    // Post in instagram
+    if (interaction.commandName === 'instapost') {
+
+        try {
+
+            const titlePosts = interaction.options.getString('title-posts');
+            const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
+
+            // logica para crear los titulos en un archivo
+            await fs.writeFileSync('./instagram/titulos_posteos.txt', titlePosts || '');
+
+            // logica para enviar posteo a instagram
+            startRandomTimeInstagram();
+
+            await interaction.reply('esperando respuesta ...');
+            actualChannel.send('Funciona :)');
+        } catch (error) {
+            console.log('Error on Play music');
+            logger.error(error);
+        }
+
+    }
 
 });
 
