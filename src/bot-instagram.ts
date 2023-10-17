@@ -2,6 +2,7 @@ import fs from 'fs';
 import dotenv from 'dotenv';
 import Instagram from 'instagram-web-api';
 dotenv.config();
+import logger from './winston/configWinston';
 
 const { username, password } = process.env;
 const client = new Instagram({ username, password })
@@ -11,7 +12,7 @@ let isLogged = false;
 export function startRandomTimeInstagram() {
 
     const minute = 60 * 1000;
-    const max_minutes = 60;
+    const max_minutes = 10;
     const tiempo = Math.round(Math.random() * (minute * max_minutes));
     console.log(tiempo / 1000 / 60);
 
@@ -66,26 +67,34 @@ async function getImages() {
 }
 
 async function postInInstragram(titulos: string[], images: string[]) {
-    if (notHaveContent(titulos)) return;
-    const resultRandomImage = images[Math.round(Math.random() * (images.length))];
-    if(!resultRandomImage) return;
-    const image = resultRandomImage;
-    const titulo = titulos[0];
-    console.log(`titulo actual : ${titulo} | iamgen actual ${image}`);
-    
-    if(!isLogged) {
-        const response = await client.login({ username, password }, { _sharedData: false });
-        //console.log('respuesta => ', response);
-        isLogged = true;
+
+    try {
+        
+        if (notHaveContent(titulos)) return;
+        const resultRandomImage = images[Math.round(Math.random() * (images.length))];
+        if(!resultRandomImage) return;
+        const image = resultRandomImage;
+        const titulo = titulos[0];
+        console.log(`titulo actual : ${titulo} | iamgen actual ${image}`);
+        
+        if(!isLogged) {
+            const response = await client.login({ username, password }, { _sharedData: false });
+            //console.log('respuesta => ', response);
+            isLogged = true;
+        }
+        const { media } = await client.uploadPhoto({
+            photo: image,
+            caption : titulo,
+            post: 'feed',
+        });
+        console.log(`tu imagen subida es => https://www.instagram.com/p/${media.code}/`)
+        titulos.shift()
+        fs.writeFileSync('./instagram/titulos_posteos.txt', titulos.join('-'));
+        
+    } catch (error) {
+        logger.error(error);
     }
-    const { media } = await client.uploadPhoto({
-        photo: image,
-        caption : titulo,
-        post: 'feed',
-    });
-    console.log(`tu imagen subida es => https://www.instagram.com/p/${media.code}/`)
-    titulos.shift()
-    fs.writeFileSync('./instagram/titulos_posteos.txt', titulos.join('-'));
+
 }
 
 function definirTitulos() {
