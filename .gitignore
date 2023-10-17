@@ -4,6 +4,7 @@ node_modules
 # Others
 build
 logs
+texto_hablado.mp3
 
 # Package
 package-lock.json
