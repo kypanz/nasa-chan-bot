@@ -12,7 +12,7 @@ let isLogged = false;
 export function startRandomTimeInstagram() {
 
     const minute = 60 * 1000;
-    const max_minutes = 30;
+    const max_minutes = 10;
     const tiempo = Math.round(Math.random() * (minute * max_minutes));
     console.log(tiempo / 1000 / 60);
 
@@ -27,6 +27,25 @@ export function startRandomTimeInstagram() {
 }
 
 async function getImages() {
+
+
+    const randomOffset = Math.round(Math.random() * 50);
+
+    const requestBody = {
+        queries: [
+            {
+                q: 'anime',
+                indexUid: "images_v2",
+                facets: ["tags.name", "user.username"],
+                attributesToHighlight: [],
+                highlightPreTag: "__ais-highlight__",
+                highlightPostTag: "__/ais-highlight__",
+                limit: 51,
+                offset: randomOffset,
+                sort: ["rank.collectedCountAllTimeRank:asc"],
+            },
+        ],
+    };
 
     const response = await fetch("https://meilisearch-new.civitai.com/multi-search", {
         "headers": {
@@ -45,7 +64,7 @@ async function getImages() {
             "Referer": "https://civitai.com/",
             "Referrer-Policy": "strict-origin-when-cross-origin"
         },
-        "body": "{\"queries\":[{\"q\":\"anime\",\"indexUid\":\"images_v2\",\"facets\":[\"tags.name\",\"user.username\"],\"attributesToHighlight\":[],\"highlightPreTag\":\"__ais-highlight__\",\"highlightPostTag\":\"__/ais-highlight__\",\"limit\":51,\"offset\":0,\"sort\":[\"rank.collectedCountAllTimeRank:asc\"]}]}",
+        "body": JSON.stringify(requestBody),
         "method": "POST"
     });
 
@@ -69,28 +88,28 @@ async function getImages() {
 async function postInInstragram(titulos: string[], images: string[]) {
 
     try {
-        
+
         if (notHaveContent(titulos)) return;
         const resultRandomImage = images[Math.round(Math.random() * (images.length))];
-        if(!resultRandomImage) return;
+        if (!resultRandomImage) return;
         const image = resultRandomImage;
         const titulo = titulos[0];
         console.log(`titulo actual : ${titulo} | iamgen actual ${image}`);
-        
-        if(!isLogged) {
+
+        if (!isLogged) {
             const response = await client.login({ username, password }, { _sharedData: false });
             //console.log('respuesta => ', response);
             isLogged = true;
         }
         const { media } = await client.uploadPhoto({
             photo: image,
-            caption : titulo,
+            caption: titulo,
             post: 'feed',
         });
         console.log(`tu imagen subida es => https://www.instagram.com/p/${media.code}/`)
         titulos.shift()
         fs.writeFileSync('./instagram/titulos_posteos.txt', titulos.join('-'));
-        
+
     } catch (error) {
         logger.error(error);
     }
