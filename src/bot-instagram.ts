@@ -71,6 +71,8 @@ async function postInInstragram(titulos: string[], images: string[]) {
     if(!resultRandomImage) return;
     const image = resultRandomImage;
     const titulo = titulos[0];
+    console.log(`titulo actual : ${titulo} | iamgen actual ${image}`);
+    
     if(!isLogged) {
         const response = await client.login({ username, password }, { _sharedData: false });
         //console.log('respuesta => ', response);
@@ -82,7 +84,7 @@ async function postInInstragram(titulos: string[], images: string[]) {
         post: 'feed',
     });
     console.log(`tu imagen subida es => https://www.instagram.com/p/${media.code}/`)
-    titulos.pop()
+    titulos.shift()
     fs.writeFileSync('./instagram/titulos_posteos.txt', titulos.join('-'));
 }
 
