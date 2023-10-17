@@ -24,6 +24,9 @@ Tested with :
 - ``MY_CLIENT_ID`` => is your bot client id, you can get one from discord developers
 - ``MY_BOT_TOKEN`` => is your token bot, you can get one from discord developers
 - ``MY_CHANNEL_TEXT`` => is the channel where you wanna call the commands, you can get the id of the text channel doing right click in the text channel
+- ``NEWS_APIKEY `` => to get news in discord, default 3 per call
+- ``username `` => insta user
+- ``password `` => insta password
 
 # How to run the bot
-- `node index.js`
+- `npm run start`
