@@ -12,7 +12,7 @@ let isLogged = false;
 export function startRandomTimeInstagram() {
 
     const minute = 60 * 1000;
-    const max_minutes = 10;
+    const max_minutes = 30;
     const tiempo = Math.round(Math.random() * (minute * max_minutes));
     console.log(tiempo / 1000 / 60);
 
