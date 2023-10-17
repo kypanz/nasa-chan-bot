@@ -415,9 +415,9 @@ client.on('interactionCreate', async (interaction: Interaction) => {
                 // logica para enviar posteo a instagram
                 startRandomTimeInstagram();
             }
-            
+
             await interaction.reply('esperando respuesta ...');
-            actualChannel.send('Funciona :)');
+            actualChannel.send('Se comenzaron los posteos en instagram :)');
         } catch (error) {
             console.log('Error on Play music');
             logger.error(error);
