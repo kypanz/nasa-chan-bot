@@ -21,6 +21,7 @@ import { startRandomTimeInstagram } from './bot-instagram';
 const newsapi = new NewsAPI(process.env.NEWS_APIKEY);
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
 const proxySettings = { ip: '', port: '' }
+let isInstagramBotWorking = false;
 
 client.on('ready', () => {
     console.log(`Logged in as ${client?.user?.tag}!`);
@@ -410,9 +411,11 @@ client.on('interactionCreate', async (interaction: Interaction) => {
             // logica para crear los titulos en un archivo
             await fs.writeFileSync('./instagram/titulos_posteos.txt', titlePosts || '');
 
-            // logica para enviar posteo a instagram
-            startRandomTimeInstagram();
-
+            if(!isInstagramBotWorking) {
+                // logica para enviar posteo a instagram
+                startRandomTimeInstagram();
+            }
+            
             await interaction.reply('esperando respuesta ...');
             actualChannel.send('Funciona :)');
         } catch (error) {
