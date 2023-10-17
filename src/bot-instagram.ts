@@ -53,7 +53,7 @@ async function getImages() {
     const result: string[] = [];
 
     for (let index = 0; index < images.length; index++) {
-        console.log(`The image is => https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/${images[index].url}/width=512/213.jpeg | NFSW : ${images[index].nsfw}`)
+        //console.log(`The image is => https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/${images[index].url}/width=512/213.jpeg | NFSW : ${images[index].nsfw}`)
         const isNotMatureContent = 'none';
         const isSoft = 'soft';
         const actualTypeImage = (images[index].nsfw).toLowerCase();
@@ -73,7 +73,7 @@ async function postInInstragram(titulos: string[], images: string[]) {
     const titulo = titulos[0];
     if(!isLogged) {
         const response = await client.login({ username, password }, { _sharedData: false });
-        console.log('respuesta => ', response);
+        //console.log('respuesta => ', response);
         isLogged = true;
     }
     const { media } = await client.uploadPhoto({

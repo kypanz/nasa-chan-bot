@@ -399,6 +399,11 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
         try {
 
+            if (interaction.user.id !== process.env.SUPER_USER) {
+                await interaction.reply('You are not super user');
+                return;
+            }
+
             const titlePosts = interaction.options.getString('title-posts');
             const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
 
