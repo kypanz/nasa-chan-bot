@@ -8,6 +8,7 @@ const { username, password } = process.env;
 const client = new Instagram({ username, password })
 
 let isLogged = false;
+let imagesProcessed : object;
 
 export function startRandomTimeInstagram() {
 
@@ -30,6 +31,7 @@ export function startRandomTimeInstagram() {
     } catch (error) {
         console.log('Error on instapost worker');
         logger.error(error);
+        logger.error(imagesProcessed);
     }
 
 
@@ -80,6 +82,7 @@ async function getImages() {
         });
 
         const images = (await response.json()).results[0].hits;
+        imagesProcessed = images;
 
         const result: string[] = [];
 
@@ -97,6 +100,7 @@ async function getImages() {
 
     } catch (error) {
         console.log('error on getting images');
+        console.log(error);
         logger.error(error);
     }
 }
