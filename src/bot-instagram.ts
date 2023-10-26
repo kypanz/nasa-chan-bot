@@ -11,78 +11,94 @@ let isLogged = false;
 
 export function startRandomTimeInstagram() {
 
-    const minute = 60 * 1000;
-    const max_minutes = 10;
-    const tiempo = Math.round(Math.random() * (minute * max_minutes));
-    console.log(tiempo / 1000 / 60);
+    try {
 
-    setTimeout(async () => {
-        console.log(`Saludos despues de ${tiempo} milisegundos`);
-        const titulos = definirTitulos();
-        console.log('los titulo son ahora => ', titulos);
-        const images = await getImages();
-        await postInInstragram(titulos, images);
-        startRandomTimeInstagram();
-    }, tiempo);
+        const minute = 60 * 1000;
+        const max_minutes = 10;
+        const tiempo = Math.round(Math.random() * (minute * max_minutes));
+        console.log(tiempo / 1000 / 60);
+
+        setTimeout(async () => {
+            console.log(`Saludos despues de ${tiempo} milisegundos`);
+            const titulos = definirTitulos();
+            console.log('los titulo son ahora => ', titulos);
+            const images = await getImages();
+            await postInInstragram(titulos, images);
+            startRandomTimeInstagram();
+        }, tiempo);
+
+    } catch (error) {
+        console.log('Error on instapost worker');
+        logger.error(error);
+    }
+
+
 }
 
 async function getImages() {
 
 
-    const randomOffset = Math.round(Math.random() * 50);
+    try {
 
-    const requestBody = {
-        queries: [
-            {
-                q: 'anime',
-                indexUid: "images_v2",
-                facets: ["tags.name", "user.username"],
-                attributesToHighlight: [],
-                highlightPreTag: "__ais-highlight__",
-                highlightPostTag: "__/ais-highlight__",
-                limit: 51,
-                offset: randomOffset,
-                sort: ["rank.collectedCountAllTimeRank:asc"],
+        const randomOffset = Math.round(Math.random() * 50);
+
+        const requestBody = {
+            queries: [
+                {
+                    q: 'anime',
+                    indexUid: "images_v2",
+                    facets: ["tags.name", "user.username"],
+                    attributesToHighlight: [],
+                    highlightPreTag: "__ais-highlight__",
+                    highlightPostTag: "__/ais-highlight__",
+                    limit: 51,
+                    offset: randomOffset,
+                    sort: ["rank.collectedCountAllTimeRank:asc"],
+                },
+            ],
+        };
+
+        const response = await fetch("https://meilisearch-new.civitai.com/multi-search", {
+            "headers": {
+                "accept": "*/*",
+                "accept-language": "es-419,es;q=0.7",
+                "authorization": "Bearer 5e329503849e1e1f1baa628f29fde34308606d511493d6b4b430947df8cd0b43",
+                "content-type": "application/json",
+                "sec-ch-ua": "\"Chromium\";v=\"118\", \"Brave\";v=\"118\", \"Not=A?Brand\";v=\"99\"",
+                "sec-ch-ua-mobile": "?0",
+                "sec-ch-ua-platform": "\"Linux\"",
+                "sec-fetch-dest": "empty",
+                "sec-fetch-mode": "cors",
+                "sec-fetch-site": "same-site",
+                "sec-gpc": "1",
+                "x-meilisearch-client": "Meilisearch instant-meilisearch (v0.13.5) ; Meilisearch JavaScript (v0.34.0)",
+                "Referer": "https://civitai.com/",
+                "Referrer-Policy": "strict-origin-when-cross-origin"
             },
-        ],
-    };
+            "body": JSON.stringify(requestBody),
+            "method": "POST"
+        });
 
-    const response = await fetch("https://meilisearch-new.civitai.com/multi-search", {
-        "headers": {
-            "accept": "*/*",
-            "accept-language": "es-419,es;q=0.7",
-            "authorization": "Bearer 5e329503849e1e1f1baa628f29fde34308606d511493d6b4b430947df8cd0b43",
-            "content-type": "application/json",
-            "sec-ch-ua": "\"Chromium\";v=\"118\", \"Brave\";v=\"118\", \"Not=A?Brand\";v=\"99\"",
-            "sec-ch-ua-mobile": "?0",
-            "sec-ch-ua-platform": "\"Linux\"",
-            "sec-fetch-dest": "empty",
-            "sec-fetch-mode": "cors",
-            "sec-fetch-site": "same-site",
-            "sec-gpc": "1",
-            "x-meilisearch-client": "Meilisearch instant-meilisearch (v0.13.5) ; Meilisearch JavaScript (v0.34.0)",
-            "Referer": "https://civitai.com/",
-            "Referrer-Policy": "strict-origin-when-cross-origin"
-        },
-        "body": JSON.stringify(requestBody),
-        "method": "POST"
-    });
+        const images = (await response.json()).results[0].hits;
 
-    const images = (await response.json()).results[0].hits;
+        const result: string[] = [];
 
-    const result: string[] = [];
-
-    for (let index = 0; index < images.length; index++) {
-        //console.log(`The image is => https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/${images[index].url}/width=512/213.jpeg | NFSW : ${images[index].nsfw}`)
-        const isNotMatureContent = 'none';
-        const isSoft = 'soft';
-        const actualTypeImage = (images[index].nsfw).toLowerCase();
-        if (actualTypeImage == isNotMatureContent || actualTypeImage == isSoft) {
-            result.push(`https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/${images[index].url}/width=512/213.jpeg`);
+        for (let index = 0; index < images.length; index++) {
+            //console.log(`The image is => https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/${images[index].url}/width=512/213.jpeg | NFSW : ${images[index].nsfw}`)
+            const isNotMatureContent = 'none';
+            const isSoft = 'soft';
+            const actualTypeImage = (images[index].nsfw).toLowerCase();
+            if (actualTypeImage == isNotMatureContent || actualTypeImage == isSoft) {
+                result.push(`https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/${images[index].url}/width=512/213.jpeg`);
+            }
         }
-    }
 
-    return result;
+        return result;
+
+    } catch (error) {
+        console.log('error on getting images');
+        logger.error(error);
+    }
 }
 
 async function postInInstragram(titulos: string[], images: string[]) {
@@ -117,9 +133,14 @@ async function postInInstragram(titulos: string[], images: string[]) {
 }
 
 function definirTitulos() {
-    const contenidoTiutlos = fs.readFileSync('./instagram/titulos_posteos.txt');
-    const titulos = contenidoTiutlos.toString().split('-');
-    return titulos;
+    try {
+        const contenidoTiutlos = fs.readFileSync('./instagram/titulos_posteos.txt');
+        const titulos = contenidoTiutlos.toString().split('-');
+        return titulos;
+    } catch (error) {
+        console.log('error defining titles');
+        logger.error(error);
+    }
 }
 
 function notHaveContent(titles: string[]) {
