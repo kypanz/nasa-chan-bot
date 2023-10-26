@@ -24,7 +24,9 @@ export function startRandomTimeInstagram() {
             const titulos = definirTitulos();
             console.log('los titulo son ahora => ', titulos);
             const images = await getImages();
-            await postInInstragram(titulos, images);
+            if(titulos && images){
+                await postInInstragram(titulos, images);
+            }
             startRandomTimeInstagram();
         }, tiempo);
 
