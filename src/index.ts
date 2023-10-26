@@ -414,6 +414,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
             if(!isInstagramBotWorking) {
                 // logica para enviar posteo a instagram
                 startRandomTimeInstagram();
+                isInstagramBotWorking = true;
             }
 
             await interaction.reply('esperando respuesta ...');
