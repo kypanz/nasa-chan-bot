@@ -6,7 +6,7 @@ build
 logs
 texto_hablado.mp3
 acelerado.mp3
-ky-bots
+ky-bots.json
 
 # Package
 package-lock.json
