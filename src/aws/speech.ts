@@ -2,10 +2,6 @@ import AWS, { AWSError } from 'aws-sdk';
 import fs from 'fs';
 import logger from '../winston/configWinston';
 
-interface IData {
-    AudioStream : Buffer;
-}
-
 export async function saySomething(msg: string | null) {
 
     const Polly = new AWS.Polly({
