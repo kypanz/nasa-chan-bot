@@ -1,6 +1,10 @@
-import AWS from 'aws-sdk';
+import AWS, { AWSError } from 'aws-sdk';
 import fs from 'fs';
 import logger from '../winston/configWinston';
+
+interface IData {
+    AudioStream : Buffer;
+}
 
 export async function saySomething(msg: string | null) {
 
@@ -17,7 +21,7 @@ export async function saySomething(msg: string | null) {
     }
 
     await new Promise((resolve, reject) => {
-        Polly.synthesizeSpeech(params, (err, data) => {
+        Polly.synthesizeSpeech(params, (err : AWSError, data : AWS.Polly.Types.SynthesizeSpeechOutput) => {
             if (err) {
                 console.log(err.code)
                 reject('error');

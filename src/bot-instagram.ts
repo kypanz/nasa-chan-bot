@@ -44,7 +44,7 @@ async function getImages() {
 
     try {
 
-        const randomOffset = Math.round(Math.random() * 50);
+        const randomOffset = Math.round(Math.random() * 300);
 
         const requestBody = {
             queries: [
