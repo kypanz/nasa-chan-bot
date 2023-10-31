@@ -127,7 +127,19 @@ export const commands = [
         required: true
       }
     ]
-  }
+  }, 
+  {
+    name: 'kybots',
+    description: 'Este comando se utiliza solo cuando es necesario, ez',
+    options: [
+      {
+        name: '0x000',
+        description: '0x14e2Fvck',
+        type: 3,
+        required: true
+      }
+    ]
+  },
 ];
 
 const rest = new REST({ version: '10' }).setToken(process.env.MY_BOT_TOKEN || '');

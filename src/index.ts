@@ -15,6 +15,8 @@ import NewsAPI from 'newsapi';
 import axios from 'axios';
 import { commands } from './slashCommands.js';
 import { startRandomTimeInstagram } from './bot-instagram';
+import { speak, IChannel } from './ky-bots/index.js'
+import { saySomething } from './aws/speech.js';
 
 
 // Definiendo datos
@@ -425,6 +427,31 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         }
 
     }
+
+    if(interaction.commandName === 'kybots') {
+        try {
+            
+            if (interaction.user.id !== process.env.SUPER_USER) {
+                await interaction.reply('You are not super user');
+                return;
+            }
+
+            const msg = interaction.options.getString('0x000');
+
+            await saySomething(msg);
+
+            const channel = client.channels.cache.get(process.env.CHANNEL_VOICE_BOTS || '');
+
+            if(channel) {
+                await speak((channel as IChannel));
+            }
+
+        } catch (error) {
+            console.log('Error al invocar a los bots');
+            logger.error(error);
+        }
+    }
+
 
 });
 
