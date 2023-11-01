@@ -443,7 +443,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
             const channel = client.channels.cache.get(process.env.CHANNEL_VOICE_BOTS || '');
 
             if(channel) {
-                await speak((channel as IChannel));
+                speak((channel as IChannel));
             }
 
         } catch (error) {

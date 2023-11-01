@@ -28,6 +28,7 @@ export async function saySomething(msg: string | null) {
                         if (err) {
                             return console.log(err)
                         }
+                        console.log('write done');
                         resolve('done');
                     });
                 }
