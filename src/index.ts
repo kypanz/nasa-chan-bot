@@ -15,7 +15,7 @@ import NewsAPI from 'newsapi';
 import axios from 'axios';
 import { commands } from './slashCommands.js';
 import { startRandomTimeInstagram } from './bot-instagram';
-import { speak, IChannel } from './ky-bots/index.js'
+import { speak, IChannel, meeetingBots } from './ky-bots/index.js'
 import { saySomething } from './aws/speech.js';
 
 
@@ -24,6 +24,7 @@ const newsapi = new NewsAPI(process.env.NEWS_APIKEY);
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
 const proxySettings = { ip: '', port: '' }
 let isInstagramBotWorking = false;
+let isMeeting = false;
 
 client.on('ready', () => {
     console.log(`Logged in as ${client?.user?.tag}!`);
@@ -85,10 +86,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
                     counter++;
                 }
 
-                console.log('chunks => ', chunks);
-
                 for (const chunk of chunks) {
-                    console.log('devolviendo => ', chunk);
                     setTimeout(() => {
                         actualChannel.send(` \`\`\`fix\n${chunk} \n\`\`\` `);
                     }, 3000);
@@ -444,6 +442,10 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
             if(channel) {
                 speak((channel as IChannel));
+                if(!isMeeting) {
+                    await meeetingBots();
+                    isMeeting = true;
+                }
             }
 
         } catch (error) {
@@ -570,8 +572,6 @@ async function runCommand(interaction: any, command: string) {
                 }
                 counter++;
             }
-
-            console.log('chunks => ', chunks);
 
             for (const chunk of chunks) {
                 console.log('devolviendo => ', chunk);

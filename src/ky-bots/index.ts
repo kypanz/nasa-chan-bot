@@ -9,6 +9,9 @@ import {
 import logger from '../winston/configWinston';
 import fs from 'fs';
 import { Readable } from 'stream';
+import bots from './ky-bots.json';
+import { Client, GatewayIntentBits } from 'discord.js';
+
 
 
 export type IChannel = {
@@ -38,7 +41,7 @@ export const speak = async (channel: IChannel) => {
             result.push(data);
         })
 
-        bufferStream.on('end',() => {
+        bufferStream.on('end', () => {
             console.log('a finalizado ...');
             //await splitChunks(); // check if this is solved firs
             processChunks(channel);
@@ -88,10 +91,10 @@ async function splitChunks() {
 */
 
 
-function processChunks(channel : IChannel) {
+function processChunks(channel: IChannel) {
     try {
 
-        if(result.length == 0) return console.log('[ processChunks ] : sin datos para procesar');
+        if (result.length == 0) return console.log('[ processChunks ] : sin datos para procesar');
 
         const bufferStream = new Readable();
         bufferStream.push(result[0]);
@@ -112,18 +115,6 @@ function processChunks(channel : IChannel) {
         player.play(createAudioResource(bufferStream));
         connection.subscribe(player);
 
-        /*
-        player.on('unsubscribe', () => {
-            console.log('unsubscribed ??');
-            //data.shift();
-            console.log('buffer antes => ', result);
-            result.shift();
-            console.log('nuevo buffer => ', result);
-            console.log('se elimino el elemento');
-            processChunks(channel);
-        });
-        */
-
         player.on(AudioPlayerStatus.Idle, () => {
             console.log('buffer antes => ', result);
             result.shift();
@@ -135,6 +126,111 @@ function processChunks(channel : IChannel) {
             console.log(error);
             logger.error(error);
         })
+
+    } catch (error) {
+        console.log(error);
+        logger.error(error);
+    }
+}
+
+
+export async function meeetingBots() {
+    try {
+
+
+        /*
+
+        await new Promise((resolve, reject) => {
+            const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
+            client.login(bots[0].MY_BOT_TOKEN);
+            client.on('ready', () => {
+                try {
+                    console.log(`Logged in as ${client?.user?.tag}!`);
+                    // Get a copy of the actual channel based in the channelId
+                    const channel = client.channels.cache.get(process.env.CHANNEL_VOICE_BOTS || '');
+
+                    if (channel) {
+
+                        const connection = joinVoiceChannel({
+                            channelId: channel.id,
+                            group: 'ky-bot-0',
+                            guildId: (channel as IChannel).guild.id,
+                            adapterCreator: (channel as IChannel).guild.voiceAdapterCreator,
+                        });
+                        resolve(true);
+                        console.log(`${client?.user?.tag} connected to the channel`);
+
+                    } else {
+                        console.log(`${client?.user?.tag} cant connect to the channel`);
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+
+            });
+        })
+
+        await new Promise((resolve, reject) => {
+            const client2 = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
+            client2.login(bots[1].MY_BOT_TOKEN);
+            client2.on('ready', () => {
+                try {
+                    console.log(`Logged in as ${client2?.user?.tag}!`);
+                    // Get a copy of the actual channel based in the channelId
+                    const channel = client2.channels.cache.get('1160744522888773643' || '');
+                    
+                    if (channel) {
+
+                        const connection = joinVoiceChannel({
+                            channelId: channel.id,
+                            group: 'ky-bot-1',
+                            guildId: (channel as IChannel).guild.id,
+                            adapterCreator: (channel as IChannel).guild.voiceAdapterCreator,
+                        });
+                        resolve(true);
+                        console.log(`${client2?.user?.tag} connected to the channel`);
+
+                    } else {
+                        console.log(`${client2?.user?.tag} cant connect to the channel`);
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+
+            });
+        })
+
+        */
+
+
+
+        
+        for (const bot of bots) {
+
+            const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
+            client.login(bot.MY_BOT_TOKEN);
+            client.on('ready', () => {
+                console.log(`Logged in as ${client?.user?.tag}!`);
+                // Get a copy of the actual channel based in the channelId
+                const channel = client.channels.cache.get(process.env.CHANNEL_VOICE_BOTS || '');
+
+                if (channel) {
+
+                    joinVoiceChannel({
+                        channelId: channel.id,
+                        group: (Math.random() * 99999999).toString(),
+                        guildId: (channel as IChannel).guild.id,
+                        adapterCreator: (channel as IChannel).guild.voiceAdapterCreator,
+                    });
+
+                    console.log(`${client?.user?.tag} connected to the channel`);
+
+                } else {
+                    console.log(`${client?.user?.tag} cant connect to the channel`);
+                }
+
+            });
+        }
 
     } catch (error) {
         console.log(error);
