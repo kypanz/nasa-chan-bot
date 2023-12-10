@@ -436,12 +436,12 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
             const msg = interaction.options.getString('0x000');
 
-            await saySomething(msg);
+            // await saySomething(msg); // nasa-chan voice
 
             const channel = client.channels.cache.get(process.env.CHANNEL_VOICE_BOTS || '');
 
             if(channel) {
-                speak((channel as IChannel));
+                //speak((channel as IChannel)); // nasa-chan voice
                 if(!isMeeting) {
                     await meeetingBots();
                     isMeeting = true;
