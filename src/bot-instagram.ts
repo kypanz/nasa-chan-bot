@@ -15,7 +15,7 @@ export function startRandomTimeInstagram() {
     try {
 
         const minute = 60 * 1000;
-        const max_minutes = 10;
+        const max_minutes = 5;
         const tiempo = Math.round(Math.random() * (minute * max_minutes));
         console.log(tiempo / 1000 / 60);
 
@@ -45,22 +45,29 @@ async function getImages() {
     try {
 
         const randomOffset = Math.round(Math.random() * 300);
-
         const requestBody = {
             queries: [
                 {
-                    q: 'anime',
-                    indexUid: "images_v2",
-                    facets: ["tags.name", "user.username"],
+                    q: "anime",
+                    indexUid: "images_v3",
+                    facets: [
+                        "aspectRatio",
+                        "baseModel",
+                        "createdAtUnix",
+                        "generationTool",
+                        "tags.name",
+                        "user.username"
+                    ],
                     attributesToHighlight: [],
                     highlightPreTag: "__ais-highlight__",
                     highlightPostTag: "__/ais-highlight__",
                     limit: 51,
                     offset: randomOffset,
-                    sort: ["rank.collectedCountAllTimeRank:asc"],
-                },
-            ],
+                    sort: ["stats.reactionCountAllTime:desc"]
+                }
+            ]
         };
+
 
         const response = await fetch("https://meilisearch-new.civitai.com/multi-search", {
             "headers": {

@@ -411,7 +411,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
             // logica para crear los titulos en un archivo
             await fs.writeFileSync('./instagram/titulos_posteos.txt', titlePosts || '');
 
-            if(!isInstagramBotWorking) {
+            if (!isInstagramBotWorking) {
                 // logica para enviar posteo a instagram
                 startRandomTimeInstagram();
                 isInstagramBotWorking = true;
@@ -426,9 +426,9 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
     }
 
-    if(interaction.commandName === 'kybots') {
+    if (interaction.commandName === 'kybots') {
         try {
-            
+
             if (interaction.user.id !== process.env.SUPER_USER) {
                 await interaction.reply('You are not super user');
                 return;
@@ -440,9 +440,9 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
             const channel = client.channels.cache.get(process.env.CHANNEL_VOICE_BOTS || '');
 
-            if(channel) {
+            if (channel) {
                 //speak((channel as IChannel)); // nasa-chan voice
-                if(!isMeeting) {
+                if (!isMeeting) {
                     await meeetingBots();
                     isMeeting = true;
                 }
