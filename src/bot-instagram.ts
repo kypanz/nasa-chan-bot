@@ -140,6 +140,7 @@ async function postInInstragram(titulos: string[], images: string[]) {
         fs.writeFileSync('./instagram/titulos_posteos.txt', titulos.join('-'));
 
     } catch (error) {
+    	console.log('error on upload post, please read the logs for more information ');
         logger.error(error);
     }
 
