@@ -163,11 +163,11 @@ function notHaveContent(titles: string[]) {
 
 // NOT REMOVE THIS CODE, THIS IS AN EXAMPLE OF WHAT MODIFY IN THE MODULE
 /*
-    // Get CSRFToken from cookie before login
+        // Get CSRFToken from cookie before login
     let value
     await this.request('/', { resolveWithFullResponse: true }).then(res => {
-        const pattern = new RegExp(/(csrf_token\"\:\")[\w]+/)
-        const matches = res.body.match(pattern)
-        value = matches[0].substring(13)
+      const pattern = new RegExp(/(csrf_token\"\:\")[\w]+/)
+      const matches = res.body.match(pattern)
+      value = matches[0].split(":")[1].slice(1);
     })
 */
