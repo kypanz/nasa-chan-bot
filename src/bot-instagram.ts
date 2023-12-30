@@ -15,7 +15,7 @@ export function startRandomTimeInstagram() {
     try {
 
         const minute = 60 * 1000;
-        const max_minutes = 5;
+        const max_minutes = 1;
         const tiempo = Math.round(Math.random() * (minute * max_minutes));
         console.log(tiempo / 1000 / 60);
 
@@ -127,7 +127,6 @@ async function postInInstragram(titulos: string[], images: string[]) {
 
         if (!isLogged) {
             const response = await client.login({ username, password }, { _sharedData: false });
-            //console.log('respuesta => ', response);
             isLogged = true;
         }
         const { media } = await client.uploadPhoto({
@@ -160,3 +159,15 @@ function definirTitulos() {
 function notHaveContent(titles: string[]) {
     if (titles[0] == '' || titles.length == 0) return true;
 }
+
+
+// NOT REMOVE THIS CODE, THIS IS AN EXAMPLE OF WHAT MODIFY IN THE MODULE
+/*
+    // Get CSRFToken from cookie before login
+    let value
+    await this.request('/', { resolveWithFullResponse: true }).then(res => {
+        const pattern = new RegExp(/(csrf_token\"\:\")[\w]+/)
+        const matches = res.body.match(pattern)
+        value = matches[0].substring(13)
+    })
+*/
