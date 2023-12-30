@@ -4,8 +4,10 @@ import Instagram from 'instagram-web-api';
 dotenv.config();
 import logger from './winston/configWinston';
 
-const { username, password } = process.env;
-const client = new Instagram({ username, password })
+const { INSTAGRAM_USERNAME, INSTAGRAM_PASSWORD } = process.env;
+const client = new Instagram({ username : INSTAGRAM_USERNAME, password : INSTAGRAM_PASSWORD })
+
+console.log(INSTAGRAM_USERNAME, ' | ', INSTAGRAM_PASSWORD);
 
 let isLogged = false;
 let imagesProcessed : object;
@@ -126,7 +128,7 @@ async function postInInstragram(titulos: string[], images: string[]) {
         console.log(`titulo actual : ${titulo} | iamgen actual ${image}`);
 
         if (!isLogged) {
-            const response = await client.login({ username, password }, { _sharedData: false });
+            const response = await client.login({ username : INSTAGRAM_USERNAME, password: INSTAGRAM_PASSWORD }, { _sharedData : false });
             isLogged = true;
         }
         const { media } = await client.uploadPhoto({
@@ -139,6 +141,9 @@ async function postInInstragram(titulos: string[], images: string[]) {
         fs.writeFileSync('./instagram/titulos_posteos.txt', titulos.join('-'));
 
     } catch (error) {
+    	isLogged = false;
+		titulos.shift();
+        fs.writeFileSync('./instagram/titulos_posteos.txt', titulos.join('-'));
     	console.log('error on upload post, please read the logs for more information ');
         logger.error(error);
     }
@@ -165,7 +170,8 @@ function notHaveContent(titles: string[]) {
 /*
         // Get CSRFToken from cookie before login
     let value
-    await this.request('/', { resolveWithFullResponse: true }).then(res => {
+    await this.request('/', { resolveWithFullRes
+    ponse: true }).then(res => {
       const pattern = new RegExp(/(csrf_token\"\:\")[\w]+/)
       const matches = res.body.match(pattern)
       value = matches[0].split(":")[1].slice(1);
