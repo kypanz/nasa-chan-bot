@@ -71,11 +71,11 @@ async function getImages() {
         };
 
 
-        const response = await fetch("https://meilisearch-new.civitai.com/multi-search", {
+        const response = await fetch("https://meilisearch-v1-6.civitai.com/multi-search", {
             "headers": {
                 "accept": "*/*",
                 "accept-language": "es-419,es;q=0.7",
-                "authorization": "Bearer 5e329503849e1e1f1baa628f29fde34308606d511493d6b4b430947df8cd0b43",
+                "authorization": "Bearer 102312c2b83ea0ef9ac32e7858f742721bbfd7319a957272e746f84fd1e974af",
                 "content-type": "application/json",
                 "sec-ch-ua": "\"Chromium\";v=\"118\", \"Brave\";v=\"118\", \"Not=A?Brand\";v=\"99\"",
                 "sec-ch-ua-mobile": "?0",
@@ -91,8 +91,8 @@ async function getImages() {
             "body": JSON.stringify(requestBody),
             "method": "POST"
         });
-
-        const images = (await response.json()).results[0].hits;
+        		
+		const images = (await response.json()).results[0].hits;
         imagesProcessed = images;
 
         const result: string[] = [];
