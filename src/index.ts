@@ -17,6 +17,7 @@ import { commands } from './slashCommands.js';
 import { startRandomTimeInstagram } from './bot-instagram';
 import { speak, IChannel, meeetingBots } from './ky-bots/index.js'
 import { saySomething } from './aws/speech.js';
+import { createTranslation } from './utils/google-translation.js';
 
 
 // Definiendo datos
@@ -166,10 +167,12 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
             const message = interaction.options.getString('text') || 'mensaje por defecto xD';
 
-            // Definiendo el speaker | es | es-es | es-us
-            const gtts = new Gtts(message, 'es-us');
+            // Translate from English to Spanish
+            const translate_message = await createTranslation(message); 
 
-            const MessageToSpeak = await gtts.stream();
+            // Definiendo el speaker | es | es-es | es-us
+            const gtts = new Gtts(translate_message, 'es-us');
+            const MessageToSpeak  = await gtts.stream();
 
             // Canal a devolver los datos
             const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
