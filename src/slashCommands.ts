@@ -127,7 +127,7 @@ export const commands = [
         required: true
       }
     ]
-  }, 
+  },
   {
     name: 'kybots',
     description: 'Este comando se utiliza solo cuando es necesario, ez',
@@ -139,6 +139,10 @@ export const commands = [
         required: true
       }
     ]
+  },
+  {
+    name: 'pdf',
+    description: 'Just for testing now',
   },
 ];
 
