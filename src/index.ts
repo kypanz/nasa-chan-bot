@@ -18,7 +18,7 @@ import { startRandomTimeInstagram } from './bot-instagram';
 import { speak, IChannel, meeetingBots } from './ky-bots/index.js'
 import { saySomething } from './aws/speech.js';
 import { createTranslation } from './utils/google-translation.js';
-import { canYouRead } from './utils/pdf-reader/pdf-reader.js';
+import example_book from './utils/books/example.json';
 
 
 // Definiendo datos
@@ -439,19 +439,73 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         return;
       }
 
-      const msg = interaction.options.getString('0x000');
+      // const msg = interaction.options.getString('0x000');
+
+      // Parte del libro
+      const msg = example_book.pages[30]; 
+
+      // Definiendo el speaker | es | es-es | es-us
+      const gtts = new Gtts(msg, 'es-us');
+      const MessageToSpeak = await gtts.stream();
+
+      // Canal a devolver los datos
+      const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
+
+      // Nombre de archivos
+      const filePath = './texto_hablado.mp3'; // Ruta y nombre de archivo deseado
+      const outputFilename = './acelerado.mp3';
+
+      // Guardado en mp3
+      const writeStream = fs.createWriteStream(filePath);
+      MessageToSpeak.pipe(writeStream);
+
+      writeStream.on('finish', () => {
+        // Salida acelerada x2
+        ffmpeg()
+          .input(filePath)
+          .audioFilters('atempo=3') // Ajusta la velocidad de reproducción cambiando este valor
+          .output(outputFilename)
+          .outputOptions('-y')
+          .on('end', async () => {
+            console.log('Proceso de ajuste de velocidad finalizado.');
+            const acceleratedMessage = fs.createReadStream(outputFilename);
+            if (actualChannel === undefined) {
+              throw new Error('El canal a enviar el resultado no existe');
+            }
+            actualChannel.send({
+              files: [
+                {
+                  attachment: acceleratedMessage,
+                  name: 'N ' + Math.round(Math.random() * 1000000000) + '.mp3'
+                }
+              ]
+            });
+          })
+          .on('error', (err: any) => {
+            console.error(err);
+          })
+          .run();
+      });
+
+      let responseMessage = 'nada';
+      responseMessage = 'message';
+
+      await interaction.reply(responseMessage ?? 'por favor ingresa un texto valido');
+      logger.info(msg);
+      //interaction.reply();
+
 
       // await saySomething(msg); // nasa-chan voice
 
-      const channel = client.channels.cache.get(process.env.CHANNEL_VOICE_BOTS || '');
+      // const channel = client.channels.cache.get(process.env.CHANNEL_VOICE_BOTS || '');
 
-      if (channel) {
-        //speak((channel as IChannel)); // nasa-chan voice
-        if (!isMeeting) {
-          await meeetingBots();
-          isMeeting = true;
-        }
-      }
+      // if (channel) {
+      //   //speak((channel as IChannel)); // nasa-chan voice
+      //   if (!isMeeting) {
+      //     await meeetingBots();
+      //     isMeeting = true;
+      //   }
+      // }
 
     } catch (error) {
       console.log('Error al invocar a los bots');
@@ -464,7 +518,6 @@ client.on('interactionCreate', async (interaction: Interaction) => {
       if (interaction.user.id !== process.env.SUPER_USER) {
         await interaction.reply('You are not super user');
       }
-      canYouRead();
       await interaction.reply('Ejecutando funcion');
     } catch (error) {
       console.error('Error al testear la funcion de pdf');
