@@ -167,12 +167,12 @@ client.on('interactionCreate', async (interaction: Interaction) => {
     try {
 
       const message = interaction.options.getString('text') || 'mensaje por defecto xD';
-
+console.log('pasa por aqui');
       // Translate from English to Spanish
-      const translate_message = await createTranslation(message);
-
+      // const translate_message = await createTranslation(message);
+console.log('por aqui tambien');
       // Definiendo el speaker | es | es-es | es-us
-      const gtts = new Gtts(translate_message, 'es-us');
+      const gtts = new Gtts(message, 'es-us');
       const MessageToSpeak = await gtts.stream();
 
       // Canal a devolver los datos
