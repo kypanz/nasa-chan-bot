@@ -445,7 +445,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
       const msg = example_book.pages[30]; 
 
       // Definiendo el speaker | es | es-es | es-us
-      const gtts = new Gtts(msg, 'es-us');
+      const gtts = new Gtts(msg, 'en-us');
       const MessageToSpeak = await gtts.stream();
 
       // Canal a devolver los datos
