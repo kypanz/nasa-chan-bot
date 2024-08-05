@@ -19,6 +19,7 @@ import { speak, IChannel, meeetingBots } from './ky-bots/index.js'
 import { saySomething } from './aws/speech.js';
 import { createTranslation } from './utils/google-translation.js';
 import example_book from './utils/books/example.json';
+import { FreelancerScrapperByKyp4nz } from './utils/freelancer/freelancer.js';
 
 
 // Definiendo datos
@@ -167,10 +168,10 @@ client.on('interactionCreate', async (interaction: Interaction) => {
     try {
 
       const message = interaction.options.getString('text') || 'mensaje por defecto xD';
-console.log('pasa por aqui');
+      console.log('pasa por aqui');
       // Translate from English to Spanish
       // const translate_message = await createTranslation(message);
-console.log('por aqui tambien');
+      console.log('por aqui tambien');
       // Definiendo el speaker | es | es-es | es-us
       const gtts = new Gtts(message, 'es-us');
       const MessageToSpeak = await gtts.stream();
@@ -442,7 +443,7 @@ console.log('por aqui tambien');
       // const msg = interaction.options.getString('0x000');
 
       // Parte del libro
-      const msg = example_book.pages[30]; 
+      const msg = example_book.pages[30];
 
       // Definiendo el speaker | es | es-es | es-us
       const gtts = new Gtts(msg, 'en-us');
@@ -519,6 +520,31 @@ console.log('por aqui tambien');
         await interaction.reply('You are not super user');
       }
       await interaction.reply('Ejecutando funcion');
+    } catch (error) {
+      console.error('Error al testear la funcion de pdf');
+      logger.error(error);
+    }
+  }
+
+
+  if (interaction.commandName === 'findjobs') {
+    try {
+      if (interaction.user.id !== process.env.SUPER_USER) {
+        await interaction.reply('You are not super user');
+      }
+      const fBlockchain = new FreelancerScrapperByKyp4nz({
+        client: client,
+        interaction: interaction,
+        search: 'blockchain',
+      });
+      fBlockchain.getInstance();
+      // const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
+      // for (let index = 0; index < result.length; index++) {
+      //   await actualChannel.send({ embeds: [result[index]] });
+      // }
+      // await actualChannel.send('Fnished. :)');
+
+      await interaction.reply('Buscando ...');
     } catch (error) {
       console.error('Error al testear la funcion de pdf');
       logger.error(error);

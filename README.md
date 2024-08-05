@@ -27,6 +27,24 @@ Tested with :
 - ``NEWS_APIKEY `` => to get news in discord, default 3 per call
 - ``username `` => insta user
 - ``password `` => insta password
+- ``FREELANCER_AUTH_V2`` => Here your AUTH_V2 from the network request
+- ``FREELANCER_TRACKING`` => Here your tracking from the network request
 
 # How to run the bot
 - `npm run start`
+
+# Possible Issue
+
+The images on instagram are not upload, if this happend ensure the `instagram-web-api/lib/index.js` has the next structure
+
+```
+// Get CSRFToken from cookie before login
+let value
+await this.request('/', { resolveWithFullResponse: true }).then(res => {
+const pattern = new RegExp(/(csrf_token":")[\w]+/)
+const matches = res.toJSON().body.match(pattern)
+value = matches[0].split(':')[1].slice(1);
+console.log('current token => ', value , '...');
+console.log('current okten without slice => ', matches[0].split(':')[1]);
+})
+```

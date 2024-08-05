@@ -17,14 +17,14 @@ export function startRandomTimeInstagram() {
   try {
 
     const minute = 60 * 1000;
-    const max_minutes = 1;
+    const max_minutes = 10;
     const tiempo = Math.round(Math.random() * (minute * max_minutes));
     console.log(tiempo / 1000 / 60);
 
     setTimeout(async () => {
-      console.log(`Saludos despues de ${tiempo} milisegundos`);
+      console.log(`${tiempo} milisegundos`);
       const titulos = definirTitulos();
-      console.log('los titulo son ahora => ', titulos);
+      console.log('los titulo son => ', titulos);
       const images = await getImages();
       if (titulos && images) {
         await postInInstragram(titulos, images);
@@ -33,7 +33,7 @@ export function startRandomTimeInstagram() {
     }, tiempo);
 
   } catch (error) {
-    console.log('Error on instapost worker');
+    console.error('Error on instapost worker');
     logger.error(error);
     logger.error(imagesProcessed);
   }
@@ -46,18 +46,19 @@ async function getImages() {
 
   try {
 
-    const randomOffset = Math.round(Math.random() * 300);
+    const randomOffset = Math.round(Math.random() * 400);
     const requestBody = {
       queries: [
         {
-          q: "anime",
-          indexUid: "images_v3",
+          q: "cat",
+          indexUid: "images_v6",
           facets: [
             "aspectRatio",
             "baseModel",
             "createdAtUnix",
-            "generationTool",
-            "tags.name",
+            //"generationTool",
+            "tagNames",
+            "type",
             "user.username"
           ],
           attributesToHighlight: [],
@@ -70,14 +71,15 @@ async function getImages() {
       ]
     };
 
-
     const response = await fetch("https://meilisearch-v1-6.civitai.com/multi-search", {
       "headers": {
         "accept": "*/*",
         "accept-language": "es-419,es;q=0.7",
         "authorization": "Bearer 102312c2b83ea0ef9ac32e7858f742721bbfd7319a957272e746f84fd1e974af",
         "content-type": "application/json",
-        "sec-ch-ua": "\"Chromium\";v=\"118\", \"Brave\";v=\"118\", \"Not=A?Brand\";v=\"99\"",
+        "priority": "u=1, i",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "sec-ch-ua": "\"Not/A)Brand\";v=\"8\", \"Chromium\";v=\"126\", \"Brave\";v=\"126\"",
         "sec-ch-ua-mobile": "?0",
         "sec-ch-ua-platform": "\"Linux\"",
         "sec-fetch-dest": "empty",
@@ -94,24 +96,27 @@ async function getImages() {
 
     const images = (await response.json()).results[0].hits;
     imagesProcessed = images;
-
     const result: string[] = [];
 
     for (let index = 0; index < images.length; index++) {
-      //console.log(`The image is => https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/${images[index].url}/width=512/213.jpeg | NFSW : ${images[index].nsfw}`)
-      const isNotMatureContent = 'none';
-      const isSoft = 'soft';
-      const actualTypeImage = (images[index].nsfw).toLowerCase();
-      if (actualTypeImage == isNotMatureContent || actualTypeImage == isSoft) {
-        result.push(`https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/${images[index].url}/width=512/213.jpeg`);
+      const nsfwLevel = (images[index].nsfwLevel[0]);
+      const image_url = `https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/${images[index].url}/width=512/213.jpeg`;
+      if (nsfwLevel == 1) {
+        result.push(image_url);
       }
+      // This goes to a log storage 
+      const out = {
+        image: image_url,
+        level: nsfwLevel
+      }
+      logger.log('image', out);
     }
 
     return result;
 
   } catch (error) {
-    console.log('error on getting images');
-    console.log(error);
+    console.error('error on getting images');
+    console.error(error);
     logger.error(error);
   }
 }
@@ -130,6 +135,7 @@ async function postInInstragram(titulos: string[], images: string[]) {
     if (!isLogged) {
       const response = await client.login({ username: INSTAGRAM_USERNAME, password: INSTAGRAM_PASSWORD }, { _sharedData: false });
       isLogged = true;
+      console.log('Logeado correctamente !');
     }
     const { media } = await client.uploadPhoto({
       photo: image,
@@ -146,6 +152,7 @@ async function postInInstragram(titulos: string[], images: string[]) {
     fs.writeFileSync('./instagram/titulos_posteos.txt', titulos.join('-'));
     console.log('error on upload post, please read the logs for more information ');
     logger.error(error);
+    console.log(error);
   }
 
 }

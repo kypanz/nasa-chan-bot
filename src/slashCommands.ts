@@ -144,6 +144,11 @@ export const commands = [
     name: 'pdf',
     description: 'Just for testing now',
   },
+  {
+    name: 'findjobs',
+    description: 'Kyp4nz Scr4pp3r',
+  },
+
 ];
 
 const rest = new REST({ version: '10' }).setToken(process.env.MY_BOT_TOKEN || '');
