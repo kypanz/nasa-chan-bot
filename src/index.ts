@@ -7,7 +7,19 @@ import logger from './winston/configWinston';
 import Gtts from 'gtts';
 import { join } from './music/musicActions.js';
 import { question } from './openai/openaiActions.js';
-import { Client, GatewayIntentBits, TextChannel, Interaction, GuildMember, EmbedBuilder, ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle, Events } from 'discord.js';
+import {
+  Client,
+  GatewayIntentBits,
+  TextChannel,
+  Interaction,
+  GuildMember,
+  EmbedBuilder,
+  ModalBuilder,
+  ActionRowBuilder,
+  TextInputBuilder,
+  TextInputStyle,
+  Events
+} from 'discord.js';
 import { exec } from 'child_process';
 import fs from 'fs';
 import ffmpeg from 'fluent-ffmpeg';
@@ -15,19 +27,18 @@ import NewsAPI from 'newsapi';
 import axios from 'axios';
 import { commands } from './slashCommands.js';
 import { startRandomTimeInstagram } from './bot-instagram';
-import { speak, IChannel, meeetingBots } from './ky-bots/index.js'
-import { saySomething } from './aws/speech.js';
-import { createTranslation } from './utils/google-translation.js';
 import example_book from './utils/books/example.json';
 import { FreelancerScrapperByKyp4nz } from './utils/freelancer/freelancer.js';
 
 
 // Definiendo datos
 const newsapi = new NewsAPI(process.env.NEWS_APIKEY);
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
+const client = new Client({
+  intents: [GatewayIntentBits.Guilds,
+  GatewayIntentBits.GuildVoiceStates]
+});
 const proxySettings = { ip: '', port: '' }
 let isInstagramBotWorking = false;
-let isMeeting = false;
 
 client.on('ready', () => {
   console.log(`Logged in as ${client?.user?.tag}!`);
@@ -44,11 +55,13 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
   // Default ping command
   if (interaction.commandName === 'help') {
-    const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
+    const actualChannel =
+      client.channels.cache.get(interaction.channelId) as TextChannel;
     actualChannel.send(` \`\`\`fix\n/help\n\`\`\` `);
     actualChannel.send(` \`\`\`fix\nListando comandos\n\`\`\` `);
     commands.forEach(element => {
-      actualChannel.send(` \`\`\`fix\n[ Comando ] /${element.name}  | Descripcion : ${element.description} \n\`\`\` `);
+      actualChannel.send(` \`\`\`fix\n[ Comando ] /${element.name}  
+        | Descripcion : ${element.description} \n\`\`\` `);
     });
     actualChannel.send(` \`\`\`fix\nEsos son todos.\n\`\`\` `);
 
@@ -62,8 +75,10 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         await interaction.reply('You are not super user');
         return;
       }
-      const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
-      const shellCommand: string = interaction.options.getString('command') ?? '';
+      const actualChannel =
+        client.channels.cache.get(interaction.channelId) as TextChannel;
+      const shellCommand: string =
+        interaction.options.getString('command') ?? '';
       exec(shellCommand, async (error, stdout, stderr) => {
         if (error) {
           await interaction.reply('error on command');
@@ -105,9 +120,12 @@ client.on('interactionCreate', async (interaction: Interaction) => {
   if (interaction.commandName === 'play') {
     try {
 
-      const notRightChannel = interaction?.channelId != process.env.MY_CHANNEL_TEXT;
+      const notRightChannel =
+        interaction?.channelId != process.env.MY_CHANNEL_TEXT;
       if (notRightChannel) {
-        await interaction.reply('You only can use this command in the channel configurated !');
+        await interaction.reply(
+          'You only can use this command in the channel configurated !'
+        );
         return;
       }
       const songLink = interaction.options.getString('link');
@@ -116,49 +134,64 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         return;
       }
       const channel = (interaction.member as GuildMember)?.voice.channel;
-      const channelText: TextChannel | undefined = client.channels.cache.get(process.env.MY_CHANNEL_TEXT || '') as TextChannel ?? undefined;
+      const channelText: TextChannel | undefined =
+        client.channels.cache.get(
+          process.env.MY_CHANNEL_TEXT || ''
+        ) as TextChannel ?? undefined;
       if (!channelText) {
         await interaction.reply('Channel not found ...');
       } else {
         await join({ channel, channelText, songLink });
       }
     } catch (error) {
-      console.log('Error on Play music');
+      console.error('Error on Play music');
       logger.error(error);
     }
   }
 
   // Next
   if (interaction.commandName === 'next') {
-    await interaction.reply('i cant do this for now, i gonna have this in the next version !');
+    await interaction.reply(
+      'i cant do this for now, i gonna have this in the next version !'
+    );
   }
 
   // Prev
   if (interaction.commandName === 'prev') {
-    await interaction.reply('i cant do this for now, i gonna have this in the next version !');
+    await interaction.reply(
+      'i cant do this for now, i gonna have this in the next version !'
+    );
   }
 
   // Stop
   if (interaction.commandName === 'stop') {
-    await interaction.reply('i cant do this for now, i gonna have this in the next version !');
+    await interaction.reply(
+      'i cant do this for now, i gonna have this in the next version !'
+    );
   }
 
   // Your Question AI
   if (interaction.commandName === 'question') {
     try {
-      const notRightChannel = interaction?.channelId != process.env.MY_CHANNEL_GENERAL;
+      const notRightChannel =
+        interaction?.channelId != process.env.MY_CHANNEL_GENERAL;
       if (notRightChannel) {
-        await interaction.reply('You only can use this command in the channel text defined !');
+        await interaction.reply(
+          'You only can use this command in the channel text defined !'
+        );
         return;
       }
       await interaction.reply('Pensando ...');
-      const channelText: TextChannel | undefined = client.channels.cache.get(process.env.MY_CHANNEL_GENERAL || '') as TextChannel ?? undefined;
+      const channelText: TextChannel | undefined =
+        client.channels.cache.get(
+          process.env.MY_CHANNEL_GENERAL || ''
+        ) as TextChannel ?? undefined;
       const _question = interaction.options.getString('yourquestion');
       channelText.send(` \`\`\`fix\n Tu pregunta => ${_question} \n\`\`\` `);
       const answer: string = await question({ _question }) ?? '';
       channelText.send(answer);
     } catch (error) {
-      console.log('Error on AI question');
+      console.error('Error on AI question');
       logger.error(error);
     }
   }
@@ -167,20 +200,19 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
     try {
 
-      const message = interaction.options.getString('text') || 'mensaje por defecto xD';
-      console.log('pasa por aqui');
-      // Translate from English to Spanish
-      // const translate_message = await createTranslation(message);
-      console.log('por aqui tambien');
+      const message =
+        interaction.options.getString('text') || 'mensaje por defecto xD';
       // Definiendo el speaker | es | es-es | es-us
       const gtts = new Gtts(message, 'es-us');
       const MessageToSpeak = await gtts.stream();
 
       // Canal a devolver los datos
-      const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
+      const actualChannel =
+        client.channels.cache.get(interaction.channelId) as TextChannel;
 
       // Nombre de archivos
-      const filePath = './texto_hablado.mp3'; // Ruta y nombre de archivo deseado
+      const filePath =
+        './texto_hablado.mp3'; // Ruta y nombre de archivo deseado
       const outputFilename = './acelerado.mp3';
 
       // Guardado en mp3
@@ -191,11 +223,10 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         // Salida acelerada x2
         ffmpeg()
           .input(filePath)
-          .audioFilters('atempo=3') // Ajusta la velocidad de reproducción cambiando este valor
+          .audioFilters('atempo=3')
           .output(outputFilename)
           .outputOptions('-y')
           .on('end', async () => {
-            console.log('Proceso de ajuste de velocidad finalizado.');
             const acceleratedMessage = fs.createReadStream(outputFilename);
             if (actualChannel === undefined) {
               throw new Error('El canal a enviar el resultado no existe');
@@ -218,7 +249,9 @@ client.on('interactionCreate', async (interaction: Interaction) => {
       let responseMessage = message;
       responseMessage = 'message';
 
-      await interaction.reply(responseMessage ?? 'por favor ingresa un texto valido');
+      await interaction.reply(
+        responseMessage ?? 'por favor ingresa un texto valido'
+      );
       logger.info(message);
 
     } catch (error) {
@@ -239,7 +272,8 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         page: 1
       });
       const result = await embedGenerator(response.articles);
-      const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
+      const actualChannel =
+        client.channels.cache.get(interaction.channelId) as TextChannel;
       for (let index = 0; index < result.length; index++) {
         await actualChannel.send({ embeds: [result[index]] });
       }
@@ -253,26 +287,32 @@ client.on('interactionCreate', async (interaction: Interaction) => {
       logger.info(toSave);
     } catch (error) {
       logger.error(error);
-      console.log('error en la solicitud de noticias');
-      console.log(error);
+      console.error('error en la solicitud de noticias');
     }
   }
 
   if (interaction.commandName === 'get-proxy-list') {
     try {
 
-      const response = await axios.get('https://proxylist.geonode.com/api/proxy-list?limit=10&page=1&sort_by=lastChecked&sort_type=desc&protocols=socks4');
-      const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
+      const host = 'https://proxylist.geonode.com/api/proxy-list';
+      const args1 = '?limit=10&page=1&sort_by=lastChecked';
+      const response = await axios.get(
+        host + args1 + '&sort_type=desc&protocols=socks4'
+      );
+      const actualChannel =
+        client.channels.cache.get(interaction.channelId) as TextChannel;
       const proxies = response.data.data;
       actualChannel.send(` \`\`\`fix\nObteniendo resultados ...\n\`\`\` `);
       proxies.forEach((proxy: any) => {
-        actualChannel.send(` \`\`\`fix\n${proxy.ip}:${proxy.port} | ISP : ${proxy.isp} | ${proxy.country}\n\`\`\` `);
+        actualChannel.send(
+          ` \`\`\`fix\n${proxy.ip}:${proxy.port} 
+          | ISP : ${proxy.isp} | ${proxy.country}\n\`\`\` `);
       });
       actualChannel.send(` \`\`\`fix\nHappy Hacking ;) ...\n\`\`\` `);
 
     } catch (error) {
       logger.error(error);
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -283,7 +323,8 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         .setLabel('IP/Domain')
         .setCustomId('input-ip')
         .setStyle(TextInputStyle.Short)
-      const arrow = new ActionRowBuilder<TextInputBuilder>().addComponents(content)
+      const arrow =
+        new ActionRowBuilder<TextInputBuilder>().addComponents(content)
       const modal = new ModalBuilder()
         .setTitle('Whois')
         .setCustomId('modal-whois')
@@ -293,7 +334,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
     } catch (error) {
       logger.error(error);
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -304,7 +345,8 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         .setLabel('Proxy IP and Port, example : 0.0.0.0:1234')
         .setCustomId('input-proxy')
         .setStyle(TextInputStyle.Short)
-      const arrow = new ActionRowBuilder<TextInputBuilder>().addComponents(content)
+      const arrow =
+        new ActionRowBuilder<TextInputBuilder>().addComponents(content)
       const modal = new ModalBuilder()
         .setTitle('Proxy Settings')
         .setCustomId('modal-proxy')
@@ -314,7 +356,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
     } catch (error) {
       logger.error(error);
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -322,14 +364,19 @@ client.on('interactionCreate', async (interaction: Interaction) => {
     try {
 
       if (proxySettings.ip === '') {
-        interaction.reply(` \`\`\`fix\n[ Proxy configurado ] => Ninguno\n\`\`\` `)
+        interaction.reply(
+          ` \`\`\`fix\n[ Proxy configurado ] => Ninguno\n\`\`\` `
+        )
       } else {
-        interaction.reply(` \`\`\`fix\n[ Proxy configurado ] => ${proxySettings.ip}:${proxySettings.port}\n\`\`\` `)
+        interaction.reply(
+          ` \`\`\`fix\n[ Proxy configurado ] => 
+          ${proxySettings.ip}:${proxySettings.port}\n\`\`\` `
+        )
       }
 
     } catch (error) {
       logger.error(error);
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -340,7 +387,8 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         .setLabel('Target IP')
         .setCustomId('input-target-ip')
         .setStyle(TextInputStyle.Short)
-      const arrow = new ActionRowBuilder<TextInputBuilder>().addComponents(content)
+      const arrow =
+        new ActionRowBuilder<TextInputBuilder>().addComponents(content)
       const modal = new ModalBuilder()
         .setTitle('Scanning Mode')
         .setCustomId('modal-scan')
@@ -350,7 +398,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
     } catch (error) {
       logger.error(error);
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -361,7 +409,8 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         .setLabel('Target IP')
         .setCustomId('input-target-ip')
         .setStyle(TextInputStyle.Short)
-      const arrow = new ActionRowBuilder<TextInputBuilder>().addComponents(content)
+      const arrow =
+        new ActionRowBuilder<TextInputBuilder>().addComponents(content)
       const modal = new ModalBuilder()
         .setTitle('Wig Mode | ALERT NO PROXY MODE FOR WIG')
         .setCustomId('modal-wig')
@@ -371,7 +420,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
     } catch (error) {
       logger.error(error);
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -387,7 +436,8 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         .setLabel('Messages amount to clear')
         .setCustomId('input-clean-amount')
         .setStyle(TextInputStyle.Short)
-      const arrow = new ActionRowBuilder<TextInputBuilder>().addComponents(content)
+      const arrow =
+        new ActionRowBuilder<TextInputBuilder>().addComponents(content)
       const modal = new ModalBuilder()
         .setTitle('Clean Messages')
         .setCustomId('modal-clean')
@@ -396,7 +446,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
 
     } catch (error) {
       logger.error(error);
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -411,10 +461,13 @@ client.on('interactionCreate', async (interaction: Interaction) => {
       }
 
       const titlePosts = interaction.options.getString('title-posts');
-      const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
+      const actualChannel =
+        client.channels.cache.get(interaction.channelId || '') as TextChannel;
 
       // logica para crear los titulos en un archivo
-      await fs.writeFileSync('./instagram/titulos_posteos.txt', titlePosts || '');
+      await fs.writeFileSync(
+        './instagram/titulos_posteos.txt', titlePosts || ''
+      );
 
       if (!isInstagramBotWorking) {
         // logica para enviar posteo a instagram
@@ -425,8 +478,8 @@ client.on('interactionCreate', async (interaction: Interaction) => {
       await interaction.reply('esperando respuesta ...');
       actualChannel.send('Se comenzaron los posteos en instagram :)');
     } catch (error) {
-      console.log('Error on Play music');
       logger.error(error);
+      console.error('Error on Play music');
     }
 
   }
@@ -450,10 +503,11 @@ client.on('interactionCreate', async (interaction: Interaction) => {
       const MessageToSpeak = await gtts.stream();
 
       // Canal a devolver los datos
-      const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
+      const actualChannel =
+        client.channels.cache.get(interaction.channelId) as TextChannel;
 
       // Nombre de archivos
-      const filePath = './texto_hablado.mp3'; // Ruta y nombre de archivo deseado
+      const filePath = './texto_hablado.mp3';
       const outputFilename = './acelerado.mp3';
 
       // Guardado en mp3
@@ -464,11 +518,10 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         // Salida acelerada x2
         ffmpeg()
           .input(filePath)
-          .audioFilters('atempo=3') // Ajusta la velocidad de reproducción cambiando este valor
+          .audioFilters('atempo=3')
           .output(outputFilename)
           .outputOptions('-y')
           .on('end', async () => {
-            console.log('Proceso de ajuste de velocidad finalizado.');
             const acceleratedMessage = fs.createReadStream(outputFilename);
             if (actualChannel === undefined) {
               throw new Error('El canal a enviar el resultado no existe');
@@ -491,26 +544,14 @@ client.on('interactionCreate', async (interaction: Interaction) => {
       let responseMessage = 'nada';
       responseMessage = 'message';
 
-      await interaction.reply(responseMessage ?? 'por favor ingresa un texto valido');
+      await interaction.reply(
+        responseMessage ?? 'por favor ingresa un texto valido'
+      );
       logger.info(msg);
-      //interaction.reply();
-
-
-      // await saySomething(msg); // nasa-chan voice
-
-      // const channel = client.channels.cache.get(process.env.CHANNEL_VOICE_BOTS || '');
-
-      // if (channel) {
-      //   //speak((channel as IChannel)); // nasa-chan voice
-      //   if (!isMeeting) {
-      //     await meeetingBots();
-      //     isMeeting = true;
-      //   }
-      // }
 
     } catch (error) {
-      console.log('Error al invocar a los bots');
       logger.error(error);
+      console.error('Error al invocar a los bots');
     }
   }
 
@@ -538,12 +579,6 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         search: 'blockchain',
       });
       fBlockchain.getInstance();
-      // const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
-      // for (let index = 0; index < result.length; index++) {
-      //   await actualChannel.send({ embeds: [result[index]] });
-      // }
-      // await actualChannel.send('Fnished. :)');
-
       await interaction.reply('Buscando ...');
     } catch (error) {
       console.error('Error al testear la funcion de pdf');
@@ -559,7 +594,8 @@ client.on(Events.InteractionCreate, async interaction => {
 
   if (!interaction.isModalSubmit()) return;
   if (interaction.customId === 'modal-whois') {
-    const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
+    const actualChannel =
+      client.channels.cache.get(interaction.channelId || '') as TextChannel;
     const ip = interaction.fields.getTextInputValue('input-ip');
     await interaction.reply({ content: `Solicitud recibida !.` });
     actualChannel.send(` \`\`\`fix\nIp/Domain : ${ip}\n\`\`\` `);
@@ -568,7 +604,8 @@ client.on(Events.InteractionCreate, async interaction => {
   }
 
   if (interaction.customId === 'modal-proxy') {
-    const proxy = interaction.fields.getTextInputValue('input-proxy').split(':');
+    const proxy =
+      interaction.fields.getTextInputValue('input-proxy').split(':');
     const ip = proxy[0];
     const port = proxy[1];
     proxySettings.ip = ip;
@@ -577,34 +614,49 @@ client.on(Events.InteractionCreate, async interaction => {
   }
 
   if (interaction.customId === 'modal-scan') {
-    const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
+    const actualChannel =
+      client.channels.cache.get(interaction.channelId || '') as TextChannel;
     const targetIp = interaction.fields.getTextInputValue('input-target-ip');
     await interaction.reply({ content: `Solicitud recibida !.` });
-    actualChannel.send(` \`\`\`fix\n[ Target ] Ip/Domain : ${targetIp}\n\`\`\` `);
-    const command = `nmap --proxy socks4://${proxySettings.ip}:${proxySettings.port} -sV -T3 -vv ${targetIp}`;
+    actualChannel.send(
+      ` \`\`\`fix\n[ Target ] Ip/Domain : ${targetIp}\n\`\`\` `
+    );
+    const command =
+      `nmap --proxy socks4://${proxySettings.ip}:
+      ${proxySettings.port} -sV -T3 -vv ${targetIp}`;
     await runCommand(interaction, command);
   }
 
   if (interaction.customId === 'modal-wig') {
-    const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
+    const actualChannel =
+      client.channels.cache.get(interaction.channelId || '') as TextChannel;
     const targetIp = interaction.fields.getTextInputValue('input-target-ip');
     await interaction.reply({ content: `Solicitud recibida !.` });
-    actualChannel.send(` \`\`\`fix\n[ Target ] Ip/Domain : ${targetIp}\n\`\`\` `);
+    actualChannel.send(
+      ` \`\`\`fix\n[ Target ] Ip/Domain : ${targetIp}\n\`\`\` `
+    );
     const command = `echo "Y" | wig ${targetIp}`;
     await runCommand(interaction, command);
   }
 
   if (interaction.customId === 'modal-clean') {
 
-    const actualChannel = client.channels.cache.get(interaction.channelId || '') as TextChannel;
-    const amountToDelete = parseInt(interaction.fields.getTextInputValue('input-clean-amount'));
-    const messages = await actualChannel.messages.fetch({ limit: amountToDelete }); // ocupar => before | para poder iterar despues de 100
+    const actualChannel = client.channels.cache.get(
+      interaction.channelId || ''
+    ) as TextChannel;
+    const amountToDelete = parseInt(
+      interaction.fields.getTextInputValue('input-clean-amount')
+    );
+    const messages = await actualChannel.messages.fetch({
+      limit: amountToDelete
+    }); // ocupar => before | para poder iterar despues de 100
     const deletions = messages.map(message => message.delete());
-    await interaction.reply({ content: ` \`\`\`fix\nDeleting ${amountToDelete} messages ...\n\`\`\` ` });
+    await interaction.reply({
+      content: ` \`\`\`fix\nDeleting 
+      ${amountToDelete} messages ...\n\`\`\` `
+    });
     await Promise.all(deletions);
     actualChannel.send(` \`\`\`fix\nFinished.\n\`\`\` `);
-    //const resultDelete = await actualChannel.bulkDelete(parseInt(amountToDelete), true);
-
   }
 
 });
@@ -613,18 +665,22 @@ client.login(process.env.MY_BOT_TOKEN);
 
 // Genera el embed
 const embedGenerator = async (data: any) => {
-  console.log('longitud : ', data.length);
   const arr_temp = [];
   for (let index = 0; index < 3; index++) {
     let img = data[index].urlToImage;
-    const nasa_chan_img = 'https://cdn.discordapp.com/app-icons/831884165108334644/06ae1da8d97a3936c02a47a1138a129a.png';
+    const host_img = 'https://cdn.discordapp.com/app-icons';
+    const arg_img = '/831884165108334644/06ae1da8d97a3936c02a47a1138a129a.png';
+    const nasa_chan_img = host_img + arg_img;
     if (img == null) img = 'https://i.imgur.com/AfFp7pu.png';
     const author = data[index].author;
     const exampleEmbed = new EmbedBuilder()
       .setColor(0x05F000)
       .setTitle(`Nº ${index} | ${data[index].title}`)
       .setURL(`${data[index].url}`)
-      .setAuthor({ name: `${(author == null) ? 'Anonymous' : author}`, iconURL: nasa_chan_img, url: `${data[index].url}` })
+      .setAuthor({
+        name: `${(author == null) ? 'Anonymous' : author}`,
+        iconURL: nasa_chan_img, url: `${data[index].url}`
+      })
       .setDescription(`${data[index].description}`)
       .setThumbnail(`${img}`)
       .setTimestamp()
@@ -642,16 +698,17 @@ async function runCommand(interaction: any, command: string) {
       await interaction.reply('You are not super user');
       return;
     }
-    const actualChannel = client.channels.cache.get(interaction.channelId) as TextChannel;
-    //const shellCommand: string = interaction.options.getString('command') ?? '';
+    const actualChannel = client.channels.cache.get(
+      interaction.channelId
+    ) as TextChannel;
     exec(command, async (error, stdout, stderr) => {
       if (error) {
         await interaction.reply('error on command');
         return;
       }
       if (stderr) {
-        console.log(stderr);
-        console.log(stderr.length);
+        console.error(stderr);
+        console.error(stderr.length);
       }
 
       const chunks: string[] = [];
@@ -670,7 +727,6 @@ async function runCommand(interaction: any, command: string) {
       }
 
       for (const chunk of chunks) {
-        console.log('devolviendo => ', chunk);
         setTimeout(() => {
           actualChannel.send(` \`\`\`fix\n${chunk} \n\`\`\` `);
         }, 3000);
@@ -678,8 +734,6 @@ async function runCommand(interaction: any, command: string) {
     });
 
   } catch (error) {
-
     throw new Error('Error al solicitar el comando');
-
   }
 }
