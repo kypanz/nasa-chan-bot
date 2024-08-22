@@ -1,6 +1,4 @@
-/**========================================================================
- *                    DESCRIPTION FOR SLASH COMMANDS
- *========================================================================**/
+/* eslint-disable no-console */
 
 import * as dotenv from 'dotenv';
 dotenv.config();
@@ -22,7 +20,7 @@ export const commands = [
     options: [
       {
         name: 'link',
-        description: 'Paste your youtube link here to download and play your song :)',
+        description: 'youtube link, to download and play',
         type: 3,
         required: true
       }
@@ -114,7 +112,7 @@ export const commands = [
   },
   {
     name: 'clear',
-    description: 'este comando elimina los mensajes del servidor, para dejarlo mas limpio',
+    description: 'este comando elimina los mensajes del servidor',
   },
   {
     name: 'instapost',
@@ -122,7 +120,7 @@ export const commands = [
     options: [
       {
         name: 'title-posts',
-        description: 'se toma el texto y los separa por guiones para agregar los titulos a los posteos',
+        description: 'los titulos son separados por guiones',
         type: 3,
         required: true
       }
@@ -151,14 +149,19 @@ export const commands = [
 
 ];
 
-const rest = new REST({ version: '10' }).setToken(process.env.MY_BOT_TOKEN || '');
+const rest = new REST({
+  version: '10'
+}).setToken(process.env.MY_BOT_TOKEN || '');
 
 (async () => {
   try {
     console.log('Started refreshing application (/) commands.');
-
-    await rest.put(Routes.applicationCommands(process.env.MY_CLIENT_ID || ''), { body: commands });
-
+    await rest.put(
+      Routes.applicationCommands(process.env.MY_CLIENT_ID || ''),
+      {
+        body: commands
+      }
+    );
     console.log('Successfully reloaded application (/) commands.');
   } catch (error) {
     console.error(error);
