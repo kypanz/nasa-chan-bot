@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import fs from 'fs';
 import dotenv from 'dotenv';
 import Instagram from 'instagram-web-api';
