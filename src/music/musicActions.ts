@@ -1,72 +1,86 @@
 import {
-    createAudioPlayer,
-    createAudioResource,
-    joinVoiceChannel,
-    NoSubscriberBehavior,
+  createAudioPlayer,
+  createAudioResource,
+  joinVoiceChannel,
+  NoSubscriberBehavior,
 } from '@discordjs/voice';
 import ytdl from 'ytdl-core';
 import logger from '../winston/configWinston';
 import { Readable } from 'stream';
 
-export const join = async ({ channel, channelText, songLink: link }: { channel: any, channelText: any, songLink: string }) => {
+interface IJoin {
+  channel: any,
+  channelText: any,
+  songLink: string
+}
 
-    try {
+export const join = async ({
+  channel,
+  channelText,
+  songLink: link
+}: IJoin) => {
 
-        if (!ytdl.validateURL(link)) throw "Wrong URL";
+  try {
 
-        // Preparing Song
-        const conection = joinVoiceChannel({
-            channelId: channel.id,
-            guildId: channel.guild.id,
-            adapterCreator: channel.guild.voiceAdapterCreator,
-        });
+    if (!ytdl.validateURL(link)) throw "Wrong URL";
 
-        const player = createAudioPlayer({
-            behaviors: {
-                noSubscriber: NoSubscriberBehavior.Play,
-            },
-        });
+    // Preparing Song
+    const conection = joinVoiceChannel({
+      channelId: channel.id,
+      guildId: channel.guild.id,
+      adapterCreator: channel.guild.voiceAdapterCreator,
+    });
 
-        // Info music
-        const info = await ytdl.getInfo(link);
+    const player = createAudioPlayer({
+      behaviors: {
+        noSubscriber: NoSubscriberBehavior.Play,
+      },
+    });
 
-        // Playing song
-        const song = await ytdl(link, { filter: 'audio', quality: 'highestaudio' });
+    // Info music
+    const info = await ytdl.getInfo(link);
 
-        // Chunks music
-        const buffer: Buffer[] = [];
+    // Playing song
+    const song = await ytdl(
+      link,
+      { filter: 'audio', quality: 'highestaudio' }
+    );
 
-        song.on('data', (data) => {
-            buffer.push(data);
-        })
+    // Chunks music
+    const buffer: Buffer[] = [];
 
-        song.on('error', (error) => {
-            console.log('paso un error => ', error);
-            logger.error(error);
-        })
+    song.on('data', (data) => {
+      buffer.push(data);
+    })
 
-        song.on('end', () => {
-            const fullBuffer = Buffer.concat(buffer);
-            const bufferStream = new Readable();
-            bufferStream.push(fullBuffer);
-            bufferStream.push(null);
-            player.play(createAudioResource(song));
-            player.play(createAudioResource(bufferStream));
-            conection.subscribe(player);
-            console.log('reproduciendo !');
-        });
+    song.on('error', (error) => {
+      console.error('paso un error => ', error);
+      logger.error(error);
+    })
 
-        // Messages
-        channelText.send(` \`\`\`fix\n Now => ${info.videoDetails.title} \n\`\`\` `);
+    song.on('end', () => {
+      const fullBuffer = Buffer.concat(buffer);
+      const bufferStream = new Readable();
+      bufferStream.push(fullBuffer);
+      bufferStream.push(null);
+      player.play(createAudioResource(song));
+      player.play(createAudioResource(bufferStream));
+      conection.subscribe(player);
+    });
 
-        logger.info(`Playing music ${info.videoDetails.title}`);
+    // Messages
+    const msg_out = ` \`\`\`fix\n Now => ${info.videoDetails.title} \n\`\`\` `
+    channelText.send(`${msg_out}`);
 
-    } catch (error) {
+    logger.info(`Playing music ${info.videoDetails.title}`);
 
-        channelText.send(` \`\`\`diff\n-Error please try another link or again in few seconds \n\`\`\` `);
-        console.log(error);
-        logger.info(error);
+  } catch (error) {
 
-    }
+    const msg_out = `Error please try another link or again in few seconds`;
+    channelText.send(` \`\`\`diff\n-${msg_out} \n\`\`\` `);
+    console.error(error);
+    logger.info(error);
+
+  }
 
 }
