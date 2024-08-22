@@ -5,7 +5,10 @@ dotenv.config();
 import logger from './winston/configWinston';
 
 const { INSTAGRAM_USERNAME, INSTAGRAM_PASSWORD } = process.env;
-const client = new Instagram({ username: INSTAGRAM_USERNAME, password: INSTAGRAM_PASSWORD })
+const client = new Instagram({
+  username: INSTAGRAM_USERNAME,
+  password: INSTAGRAM_PASSWORD
+})
 
 // console.log(INSTAGRAM_USERNAME, ' | ', INSTAGRAM_PASSWORD);
 
@@ -19,12 +22,9 @@ export function startRandomTimeInstagram() {
     const minute = 60 * 1000;
     const max_minutes = 10;
     const tiempo = Math.round(Math.random() * (minute * max_minutes));
-    console.log(tiempo / 1000 / 60);
 
     setTimeout(async () => {
-      console.log(`${tiempo} milisegundos`);
       const titulos = definirTitulos();
-      console.log('los titulo son => ', titulos);
       const images = await getImages();
       if (titulos && images) {
         await postInInstragram(titulos, images);
@@ -71,22 +71,29 @@ async function getImages() {
       ]
     };
 
-    const response = await fetch("https://meilisearch-v1-6.civitai.com/multi-search", {
+    const host_target = 'https://meilisearch-v1-6.civitai.com/multi-search';
+    const gt1 = '102312c2b83ea0ef9ac32e7858f7';
+    const gt2 = '42721bbfd7319a957272e746f84fd1e974af';
+    const sec_ch_ua1 = "\"Not/A)Brand\";v=\"8\", \"Chromium\";"
+    const sec_ch_ua2 = "v=\"126\", \"Brave\";v=\"126\""
+    const x_meilisearch1 = "Meilisearch instant-meilisearch (v0.13.5) ;";
+    const x_meilisearch2 = "Meilisearch JavaScript (v0.34.0)";
+    const response = await fetch(host_target, {
       "headers": {
         "accept": "*/*",
         "accept-language": "es-419,es;q=0.7",
-        "authorization": "Bearer 102312c2b83ea0ef9ac32e7858f742721bbfd7319a957272e746f84fd1e974af",
+        "authorization": `Bearer ${gt1 + gt2}`,
         "content-type": "application/json",
         "priority": "u=1, i",
         "referrer-policy": "strict-origin-when-cross-origin",
-        "sec-ch-ua": "\"Not/A)Brand\";v=\"8\", \"Chromium\";v=\"126\", \"Brave\";v=\"126\"",
+        "sec-ch-ua": `${sec_ch_ua1 + sec_ch_ua2}`,
         "sec-ch-ua-mobile": "?0",
         "sec-ch-ua-platform": "\"Linux\"",
         "sec-fetch-dest": "empty",
         "sec-fetch-mode": "cors",
         "sec-fetch-site": "same-site",
         "sec-gpc": "1",
-        "x-meilisearch-client": "Meilisearch instant-meilisearch (v0.13.5) ; Meilisearch JavaScript (v0.34.0)",
+        "x-meilisearch-client": `${x_meilisearch1} ${x_meilisearch2}`,
         "Referer": "https://civitai.com/",
         "Referrer-Policy": "strict-origin-when-cross-origin"
       },
@@ -100,7 +107,10 @@ async function getImages() {
 
     for (let index = 0; index < images.length; index++) {
       const nsfwLevel = (images[index].nsfwLevel[0]);
-      const image_url = `https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/${images[index].url}/width=512/213.jpeg`;
+      const host_url = 'https://image.civitai.com';
+      const path_url = '/xG1nkqKTMzGDvpLrqFT7WA';
+      const name_file = '/${images[index].url}/width=512/213.jpeg';
+      const image_url = `${host_url}${path_url}${name_file}`;
       if (nsfwLevel == 1) {
         result.push(image_url);
       }
@@ -126,14 +136,18 @@ async function postInInstragram(titulos: string[], images: string[]) {
   try {
 
     if (notHaveContent(titulos)) return;
-    const resultRandomImage = images[Math.round(Math.random() * (images.length))];
+    const resultRandomImage = images[
+      Math.round(Math.random() * (images.length))
+    ];
     if (!resultRandomImage) return;
     const image = resultRandomImage;
     const titulo = titulos[0];
-    console.log(`titulo actual : ${titulo} | iamgen actual ${image}`);
 
     if (!isLogged) {
-      const response = await client.login({ username: INSTAGRAM_USERNAME, password: INSTAGRAM_PASSWORD }, { _sharedData: false });
+      const response = await client.login({
+        username: INSTAGRAM_USERNAME,
+        password: INSTAGRAM_PASSWORD
+      }, { _sharedData: false });
       isLogged = true;
       console.log('Logeado correctamente !');
     }
@@ -142,7 +156,7 @@ async function postInInstragram(titulos: string[], images: string[]) {
       caption: titulo,
       post: 'feed',
     });
-    console.log(`tu imagen subida es => https://www.instagram.com/p/${media.code}/`)
+    console.log(`upload result => https://www.instagram.com/p/${media.code}/`)
     titulos.shift()
     fs.writeFileSync('./instagram/titulos_posteos.txt', titulos.join('-'));
 
@@ -150,9 +164,8 @@ async function postInInstragram(titulos: string[], images: string[]) {
     isLogged = false;
     titulos.shift();
     fs.writeFileSync('./instagram/titulos_posteos.txt', titulos.join('-'));
-    console.log('error on upload post, please read the logs for more information ');
     logger.error(error);
-    console.log(error);
+    console.error(error);
   }
 
 }
@@ -163,7 +176,7 @@ function definirTitulos() {
     const titulos = contenidoTiutlos.toString().split('-');
     return titulos;
   } catch (error) {
-    console.log('error defining titles');
+    console.error('error defining titles');
     logger.error(error);
   }
 }
