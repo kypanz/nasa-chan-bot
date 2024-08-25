@@ -1,11 +1,17 @@
 # Modules
 node_modules
 
+# Others
+build
+logs
+texto_hablado.mp3
+acelerado.mp3
+ky-bots.json
+nasa-speak.mp3
+cache
+
 # Package
 package-lock.json
 
 # Env
 .env
-
-# Songs
-music

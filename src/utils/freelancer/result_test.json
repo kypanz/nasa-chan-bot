@@ -1,0 +1,1896 @@
+{
+    "status": "success",
+    "result": {
+        "projects": [
+            {
+                "id": 38228800,
+                "owner_id": 77120855,
+                "title": "Smart Contract Creation for AI on the Blockchain",
+                "status": "active",
+                "seo_url": "website-design/Smart-Contract-Creation-for-the",
+                "currency": {
+                    "id": 4,
+                    "code": "GBP",
+                    "sign": "£",
+                    "name": "British Pounds",
+                    "exchange_rate": 1.26595,
+                    "country": "UK",
+                    "is_external": false,
+                    "is_escrowcom_supported": false
+                },
+                "description": "I require top-notch talent experienced in AI and Blockchain development who will help in establishing a smart contract platform using solidity. \r\n\r\nKey Responsibilities:\r\n- End-to-end AI development \r\n- Creation of Ethereum-style blockchain structure \r\n- Integration of both AI and blockchain technologies for a seamless operation \r\n\r\nIdeal Skillset:\r\n- Proven experience in AI programming\r\n- Extensive development experience with Solidity\r\n- Prior work on blockchain and AI integrations \r\n- Understanding of blockchain's application in smart contract platforms \r\n\r\nThe primary outcome of this project is the creation of an effective smart contract platform, training AI on a blockchain. I'm searching for a committed and proactive individual with a deep understanding of these technologies.",
+                "jobs": [
+                    {
+                        "id": 3,
+                        "name": "PHP",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "php",
+                        "local": false
+                    },
+                    {
+                        "id": 989,
+                        "name": "Blockchain",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "blockchain",
+                        "local": false
+                    },
+                    {
+                        "id": 1189,
+                        "name": "Tensorflow",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "tensorflow",
+                        "local": false
+                    },
+                    {
+                        "id": 2060,
+                        "name": "Solidity",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "solidity",
+                        "local": false
+                    },
+                    {
+                        "id": 2061,
+                        "name": "Smart Contracts",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "smart_contracts",
+                        "local": false
+                    },
+                    {
+                        "id": 2375,
+                        "name": "DApps",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "dapss",
+                        "local": false
+                    }
+                ],
+                "submitdate": 1718511240,
+                "preview_description": "I require top-notch talent experienced in AI and Blockchain development who will help in establishin",
+                "deleted": false,
+                "nonpublic": false,
+                "hidebids": false,
+                "type": "fixed",
+                "bidperiod": 7,
+                "budget": {
+                    "minimum": 3000,
+                    "maximum": 5000
+                },
+                "featured": false,
+                "urgent": false,
+                "assisted": true,
+                "active_prepaid_milestone": {},
+                "bid_stats": {
+                    "bid_count": 17,
+                    "bid_avg": 4105.823529411765
+                },
+                "time_submitted": 1718511240,
+                "time_updated": 1718511240,
+                "upgrades": {
+                    "featured": false,
+                    "sealed": false,
+                    "nonpublic": false,
+                    "fulltime": false,
+                    "urgent": false,
+                    "qualified": false,
+                    "NDA": false,
+                    "assisted": true,
+                    "active_prepaid_milestone": {},
+                    "ip_contract": false,
+                    "non_compete": false,
+                    "project_management": false,
+                    "pf_only": false,
+                    "recruiter": true,
+                    "listed": true,
+                    "premium": false,
+                    "enterprise": false
+                },
+                "language": "en",
+                "hireme": false,
+                "frontend_project_status": "open",
+                "location": {
+                    "country": {}
+                },
+                "true_location": {
+                    "country": {}
+                },
+                "local": false,
+                "negotiated": false,
+                "time_free_bids_expire": 1718565170,
+                "pool_ids": [
+                    1
+                ],
+                "enterprise_ids": [],
+                "is_escrow_project": false,
+                "is_seller_kyc_required": false,
+                "is_buyer_kyc_required": false,
+                "enterprises": [],
+                "project_reject_reason": {},
+                "group_ids": []
+            },
+            {
+                "id": 38225506,
+                "owner_id": 77098956,
+                "title": "1inch Platform-Inspired Website with 1inch APIs",
+                "status": "active",
+                "seo_url": "engineering/inch-Platform-Inspired-Website-with",
+                "currency": {
+                    "id": 3,
+                    "code": "AUD",
+                    "sign": "$",
+                    "name": "Australian Dollar",
+                    "exchange_rate": 0.6609,
+                    "country": "AU",
+                    "is_external": false,
+                    "is_escrowcom_supported": true
+                },
+                "description": "I'm looking for a skilled developer to create a website inspired by the 1inch platform, using the 1inch APIs for full functionality. The website should replicate the user experience of 1inch, allowing users to trade cryptocurrencies, swap tokens at optimal rates, and leverage the liquidity for their trades. \r\n\r\nKey Requirements:\r\n- Full replication of 1inch platform features using 1inch APIs\r\n- Primary focus on integrating the DEX aggregator API\r\n- Ensuring the website allows for smooth and efficient asset swaps\r\n\r\nIdeal Skills and Experience:\r\n- Proficiency in web development and API integration\r\n- Previous experience with cryptocurrency trading platforms\r\n- Understanding of DEX aggregator APIs or similar technology\r\n- Ability to create a user-friendly, responsive website interface\r\n- Strong understanding of blockchain technology and smart contracts\r\n\r\nA successful candidate will need to closely follow the 1inch platform's design and functionality while ensuring that the integration of the DEX aggregator API supports efficient and cost-effective trading for our users.",
+                "jobs": [
+                    {
+                        "id": 1031,
+                        "name": "Web Development",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "web_development",
+                        "local": false
+                    },
+                    {
+                        "id": 2060,
+                        "name": "Solidity",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "solidity",
+                        "local": false
+                    },
+                    {
+                        "id": 2658,
+                        "name": "Cryptocurrency",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "cryptocurrency",
+                        "local": false
+                    },
+                    {
+                        "id": 2839,
+                        "name": "Website Development",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "website_development",
+                        "local": false
+                    }
+                ],
+                "submitdate": 1718402040,
+                "preview_description": "I'm looking for a skilled developer to create a website inspired by the 1inch platform, using the 1i",
+                "deleted": false,
+                "nonpublic": false,
+                "hidebids": false,
+                "type": "fixed",
+                "bidperiod": 7,
+                "budget": {
+                    "minimum": 10000,
+                    "maximum": 20000
+                },
+                "featured": false,
+                "urgent": false,
+                "assisted": true,
+                "active_prepaid_milestone": {},
+                "bid_stats": {
+                    "bid_count": 55,
+                    "bid_avg": 15054.036363636364
+                },
+                "time_submitted": 1718402040,
+                "time_updated": 1718402040,
+                "upgrades": {
+                    "featured": false,
+                    "sealed": false,
+                    "nonpublic": false,
+                    "fulltime": false,
+                    "urgent": false,
+                    "qualified": false,
+                    "NDA": false,
+                    "assisted": true,
+                    "active_prepaid_milestone": {},
+                    "ip_contract": false,
+                    "non_compete": false,
+                    "project_management": false,
+                    "pf_only": false,
+                    "recruiter": true,
+                    "listed": true,
+                    "premium": false,
+                    "enterprise": false
+                },
+                "language": "en",
+                "hireme": false,
+                "frontend_project_status": "open",
+                "location": {
+                    "country": {}
+                },
+                "true_location": {
+                    "country": {}
+                },
+                "local": false,
+                "negotiated": false,
+                "time_free_bids_expire": 1718398241,
+                "pool_ids": [
+                    1
+                ],
+                "enterprise_ids": [],
+                "is_escrow_project": false,
+                "is_seller_kyc_required": false,
+                "is_buyer_kyc_required": false,
+                "enterprises": [],
+                "project_reject_reason": {},
+                "group_ids": []
+            },
+            {
+                "id": 38221857,
+                "owner_id": 71136919,
+                "title": "Cross-platform Payment App with Cryptocurrencies",
+                "status": "active",
+                "seo_url": "android/Cross-platform-Payment-App-with",
+                "currency": {
+                    "id": 1,
+                    "code": "USD",
+                    "sign": "$",
+                    "name": "US Dollar",
+                    "exchange_rate": 1,
+                    "country": "US",
+                    "is_external": false,
+                    "is_escrowcom_supported": true
+                },
+                "description": "I'm looking for an experienced developer who can help me create a payment app that is usable on both Android and iOS. The idea behind the app is to facilitate person-to-person transactions, with a particular emphasis on two stable cryptocurrencies. \n\nKey features that I require for this app include:\n- The ability for users to send and receive money\n- Integration of a system that allows for QR code scanning to make payments\n- A transaction history section that users can easily access and review\n\nIn terms of design, I have a preference for a modern and minimalist style. This app should be aesthetically pleasing while also being intuitive and user-friendly.\n\nThe ideal candidate for this project should have a good understanding of blockchain technology and experience with developing secure, user-friendly payment apps. A strong knowledge of both Android and iOS platforms is essential, as is the ability to create a cross-platform app that functions seamlessly on both.",
+                "jobs": [
+                    {
+                        "id": 3,
+                        "name": "PHP",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "php",
+                        "local": false
+                    },
+                    {
+                        "id": 44,
+                        "name": "Mobile App Development",
+                        "category": {
+                            "id": 9,
+                            "name": "Mobile Phones & Computing"
+                        },
+                        "seo_url": "mobile_app_development",
+                        "local": false
+                    },
+                    {
+                        "id": 58,
+                        "name": "iPhone",
+                        "category": {
+                            "id": 9,
+                            "name": "Mobile Phones & Computing"
+                        },
+                        "seo_url": "iphone_app_development",
+                        "local": false
+                    },
+                    {
+                        "id": 59,
+                        "name": "Android",
+                        "category": {
+                            "id": 9,
+                            "name": "Mobile Phones & Computing"
+                        },
+                        "seo_url": "android",
+                        "local": false
+                    },
+                    {
+                        "id": 143,
+                        "name": "Objective C",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "objective_c",
+                        "local": false
+                    }
+                ],
+                "submitdate": 1718316971,
+                "preview_description": "I'm looking for an experienced developer who can help me create a payment app that is usable on both",
+                "deleted": false,
+                "nonpublic": false,
+                "hidebids": false,
+                "type": "fixed",
+                "bidperiod": 7,
+                "budget": {
+                    "minimum": 20000,
+                    "maximum": 50000
+                },
+                "featured": false,
+                "urgent": false,
+                "assisted": true,
+                "active_prepaid_milestone": {},
+                "bid_stats": {
+                    "bid_count": 91,
+                    "bid_avg": 34859.26373626374
+                },
+                "time_submitted": 1718316971,
+                "time_updated": 1718316971,
+                "upgrades": {
+                    "featured": false,
+                    "sealed": false,
+                    "nonpublic": false,
+                    "fulltime": false,
+                    "urgent": false,
+                    "qualified": false,
+                    "NDA": false,
+                    "assisted": true,
+                    "active_prepaid_milestone": {},
+                    "ip_contract": false,
+                    "non_compete": false,
+                    "project_management": false,
+                    "pf_only": true,
+                    "recruiter": true,
+                    "listed": true,
+                    "premium": false,
+                    "enterprise": false
+                },
+                "language": "en",
+                "hireme": false,
+                "frontend_project_status": "open",
+                "location": {
+                    "country": {}
+                },
+                "true_location": {
+                    "country": {}
+                },
+                "local": false,
+                "negotiated": false,
+                "time_free_bids_expire": 1718313371,
+                "pool_ids": [
+                    1
+                ],
+                "enterprise_ids": [],
+                "is_escrow_project": false,
+                "is_seller_kyc_required": false,
+                "is_buyer_kyc_required": false,
+                "enterprises": [],
+                "project_reject_reason": {},
+                "group_ids": []
+            },
+            {
+                "id": 38211962,
+                "owner_id": 7185457,
+                "title": "Meme Coin Creation on Ethereum and Base",
+                "status": "active",
+                "seo_url": "smart-contracts/Meme-Coin-Creation-Ethereum-Base",
+                "currency": {
+                    "id": 1,
+                    "code": "USD",
+                    "sign": "$",
+                    "name": "US Dollar",
+                    "exchange_rate": 1,
+                    "country": "US",
+                    "is_external": false,
+                    "is_escrowcom_supported": true
+                },
+                "description": "About the Project:\n\nWe are looking for a skilled and innovative freelance developer to create a meme coin from scratch. This project aims to develop a fun and engaging cryptocurrency that leverages the viral nature of memes. The ideal candidate will have a strong background in blockchain technology, smart contract development, and a good understanding of cryptocurrency trends and market dynamics.\nResponsibilities:\n\n    Concept Development: Collaborate with our team to define the concept, features, and unique aspects of the meme coin.\n    Blockchain Selection: Recommend the most suitable blockchain platform (e.g., Ethereum, Binance Smart Chain) for the meme coin.\n    Smart Contract Development: Write, test, and deploy smart contracts required for the meme coin, ensuring security and efficiency.\n    Tokenomics: Develop a robust tokenomics model, including total supply, distribution, transaction fees, and staking mechanisms.\n    Integration: Integrate the coin with popular wallets, exchanges, and platforms.\n    Testing and QA: Conduct thorough testing to ensure the functionality, security, and reliability of the coin.\n    Launch Support: Provide support during the initial launch phase, including troubleshooting and potential adjustments based on early user feedback.\n    Documentation: Create comprehensive documentation for the coin, including whitepapers, technical guides, and user manuals.\n\nRequirements:\n\n    Technical Skills:\n        Proven experience in blockchain development and smart contract programming.\n        Proficiency with Solidity, Python, or other relevant programming languages.\n        Experience with Ethereum, Binance Smart Chain, or other blockchain platforms.\n        Familiarity with decentralized finance (DeFi) protocols and concepts.\n        Strong understanding of security best practices in blockchain development.\n\n    Project Management:\n        Ability to manage the project timeline and deliverables efficiently.\n        Excellent problem-solving skills and attention to detail.\n\n    Communication:\n        Strong written and verbal communication skills.\n        Ability to work collaboratively with a remote team.\n\n    Additional Skills (Preferred but not required):\n        Experience with creating or managing meme coins or other niche cryptocurrencies.\n        Knowledge of community building and social media marketing related to cryptocurrencies.\n        Familiarity with token listing processes on major exchanges.\n\nPlease submit your resume, portfolio, and a brief cover letter outlining your relevant experience and why you are interested in this project. Additionally, include any examples of previous work on similar projects or links to your GitHub repository.",
+                "jobs": [
+                    {
+                        "id": 989,
+                        "name": "Blockchain",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "blockchain",
+                        "local": false
+                    },
+                    {
+                        "id": 992,
+                        "name": "Ethereum",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "ethereum",
+                        "local": false
+                    },
+                    {
+                        "id": 2061,
+                        "name": "Smart Contracts",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "smart_contracts",
+                        "local": false
+                    }
+                ],
+                "submitdate": 1718104843,
+                "preview_description": "About the Project:\n\nWe are looking for a skilled and innovative freelance developer to create a meme",
+                "deleted": false,
+                "nonpublic": false,
+                "hidebids": false,
+                "type": "fixed",
+                "bidperiod": 7,
+                "budget": {
+                    "minimum": 3000,
+                    "maximum": 5000
+                },
+                "featured": false,
+                "urgent": false,
+                "assisted": true,
+                "active_prepaid_milestone": {},
+                "bid_stats": {
+                    "bid_count": 38,
+                    "bid_avg": 4455.473684210527
+                },
+                "time_submitted": 1718104843,
+                "time_updated": 1718104843,
+                "upgrades": {
+                    "featured": false,
+                    "sealed": false,
+                    "nonpublic": false,
+                    "fulltime": false,
+                    "urgent": false,
+                    "qualified": false,
+                    "NDA": false,
+                    "assisted": true,
+                    "active_prepaid_milestone": {},
+                    "ip_contract": false,
+                    "non_compete": false,
+                    "project_management": false,
+                    "pf_only": false,
+                    "recruiter": true,
+                    "listed": true,
+                    "premium": false,
+                    "enterprise": false
+                },
+                "language": "en",
+                "hireme": false,
+                "frontend_project_status": "open",
+                "location": {
+                    "country": {}
+                },
+                "true_location": {
+                    "country": {}
+                },
+                "local": false,
+                "negotiated": false,
+                "time_free_bids_expire": 1718105143,
+                "pool_ids": [
+                    1
+                ],
+                "enterprise_ids": [],
+                "is_escrow_project": false,
+                "is_seller_kyc_required": false,
+                "is_buyer_kyc_required": false,
+                "enterprises": [],
+                "project_reject_reason": {},
+                "group_ids": []
+            },
+            {
+                "id": 38208749,
+                "owner_id": 76996703,
+                "title": "Blockchain-Based HR & Payroll Software",
+                "status": "active",
+                "seo_url": "php/Blockchain-Based-Payroll-Software",
+                "currency": {
+                    "id": 1,
+                    "code": "USD",
+                    "sign": "$",
+                    "name": "US Dollar",
+                    "exchange_rate": 1,
+                    "country": "US",
+                    "is_external": false,
+                    "is_escrowcom_supported": true
+                },
+                "description": "I'm in need of an experienced developer with a deep understanding of blockchain technology, who can design and build a robust Human Resources Management Software for my company. \n\nKey Features:\n\n- Employee data management: This software should be capable of storing all employee details securely. \n- Attendance tracking: A system should be included that tracks and calculates employee attendances.\n- Performance evaluation: An assessment module for employee performance is crucial. \n\nPlease note that this software will be used to manage more than 100 employees, hence it should be scalable to handle such capacity. Moreover, the chosen freelancer should possess the ability to integrate blockchain technology in order to make the software highly secure and dependable. Experience in HRM software development and blockchain-based projects is paramount.",
+                "jobs": [
+                    {
+                        "id": 3,
+                        "name": "PHP",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "php",
+                        "local": false
+                    },
+                    {
+                        "id": 7,
+                        "name": "Java",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "java",
+                        "local": false
+                    },
+                    {
+                        "id": 106,
+                        "name": "C# Programming",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "c_sharp_programming",
+                        "local": false
+                    },
+                    {
+                        "id": 116,
+                        "name": "Software Architecture",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "software_architecture",
+                        "local": false
+                    },
+                    {
+                        "id": 989,
+                        "name": "Blockchain",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "blockchain",
+                        "local": false
+                    }
+                ],
+                "submitdate": 1718036620,
+                "preview_description": "I'm in need of an experienced developer with a deep understanding of blockchain technology, who can ",
+                "deleted": false,
+                "nonpublic": false,
+                "hidebids": false,
+                "type": "fixed",
+                "bidperiod": 7,
+                "budget": {
+                    "minimum": 900,
+                    "maximum": 8000
+                },
+                "featured": false,
+                "urgent": false,
+                "assisted": true,
+                "active_prepaid_milestone": {},
+                "bid_stats": {
+                    "bid_count": 107,
+                    "bid_avg": 5051.056074766355
+                },
+                "time_submitted": 1718036620,
+                "time_updated": 1718036620,
+                "upgrades": {
+                    "featured": false,
+                    "sealed": false,
+                    "nonpublic": false,
+                    "fulltime": false,
+                    "urgent": false,
+                    "qualified": false,
+                    "NDA": false,
+                    "assisted": true,
+                    "active_prepaid_milestone": {},
+                    "ip_contract": false,
+                    "non_compete": false,
+                    "project_management": false,
+                    "pf_only": false,
+                    "recruiter": true,
+                    "listed": true,
+                    "premium": false,
+                    "enterprise": false
+                },
+                "language": "en",
+                "hireme": false,
+                "frontend_project_status": "open",
+                "location": {
+                    "country": {}
+                },
+                "true_location": {
+                    "country": {}
+                },
+                "local": false,
+                "negotiated": false,
+                "time_free_bids_expire": 1718032836,
+                "pool_ids": [
+                    1
+                ],
+                "enterprise_ids": [],
+                "is_escrow_project": false,
+                "is_seller_kyc_required": false,
+                "is_buyer_kyc_required": false,
+                "enterprises": [],
+                "project_reject_reason": {},
+                "group_ids": []
+            },
+            {
+                "id": 38208625,
+                "owner_id": 68944856,
+                "title": "Web Development - React for Front-end, Java for Backend.",
+                "status": "active",
+                "seo_url": "java/Web-Development-React-for-Front",
+                "currency": {
+                    "id": 1,
+                    "code": "USD",
+                    "sign": "$",
+                    "name": "US Dollar",
+                    "exchange_rate": 1,
+                    "country": "US",
+                    "is_external": false,
+                    "is_escrowcom_supported": true
+                },
+                "description": "I'm seeking a seasoned full-stack developer to create a crypto-game platform. The front-end should be developed using ReactJS, while the back-end should be in Java, with a bit of Solidity knowledge. \n\nKey features:\n- User registration and login system\n- Search functionality for users to find and join games\n- Payment processing in cryptocurrency\n\nThis project does not require Unity skills. The ideal candidate should have experience in developing web applications with ReactJS and Java, and an understanding of blockchain technology and Solidity is a plus. Proficiency in handling cryptocurrency transactions and ensuring the security of the platform is crucial. \n\nPlease note, the ability to efficiently integrate front-end and back-end functionalities and develop a user-friendly interface is essential.",
+                "jobs": [
+                    {
+                        "id": 7,
+                        "name": "Java",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "java",
+                        "local": false
+                    },
+                    {
+                        "id": 759,
+                        "name": "React.js",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "react_js",
+                        "local": false
+                    },
+                    {
+                        "id": 1093,
+                        "name": "Frontend Development",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "frontend_development",
+                        "local": false
+                    },
+                    {
+                        "id": 2060,
+                        "name": "Solidity",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "solidity",
+                        "local": false
+                    },
+                    {
+                        "id": 2658,
+                        "name": "Cryptocurrency",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "cryptocurrency",
+                        "local": false
+                    }
+                ],
+                "submitdate": 1718034038,
+                "preview_description": "I'm seeking a seasoned full-stack developer to create a crypto-game platform. The front-end should b",
+                "deleted": false,
+                "nonpublic": false,
+                "hidebids": false,
+                "type": "fixed",
+                "bidperiod": 7,
+                "budget": {
+                    "minimum": 1500,
+                    "maximum": 3000
+                },
+                "featured": false,
+                "urgent": false,
+                "assisted": false,
+                "active_prepaid_milestone": {},
+                "bid_stats": {
+                    "bid_count": 109,
+                    "bid_avg": 2387.0366972477063
+                },
+                "time_submitted": 1718034038,
+                "time_updated": 1718034038,
+                "upgrades": {
+                    "featured": false,
+                    "sealed": false,
+                    "nonpublic": false,
+                    "fulltime": false,
+                    "urgent": false,
+                    "qualified": false,
+                    "NDA": false,
+                    "assisted": false,
+                    "active_prepaid_milestone": {},
+                    "ip_contract": false,
+                    "non_compete": false,
+                    "project_management": false,
+                    "pf_only": false,
+                    "recruiter": false,
+                    "listed": true,
+                    "premium": false,
+                    "enterprise": false
+                },
+                "language": "en",
+                "hireme": false,
+                "frontend_project_status": "open",
+                "location": {
+                    "country": {}
+                },
+                "true_location": {
+                    "country": {}
+                },
+                "local": false,
+                "negotiated": false,
+                "time_free_bids_expire": 1718030438,
+                "pool_ids": [
+                    1
+                ],
+                "enterprise_ids": [],
+                "is_escrow_project": false,
+                "is_seller_kyc_required": false,
+                "is_buyer_kyc_required": false,
+                "enterprises": [],
+                "project_reject_reason": {},
+                "group_ids": []
+            },
+            {
+                "id": 38205021,
+                "owner_id": 39506778,
+                "title": "Build Investment Crypto Token on Solana",
+                "status": "active",
+                "seo_url": "php/Build-Investment-Crypto-Token-Solana",
+                "currency": {
+                    "id": 8,
+                    "code": "EUR",
+                    "sign": "€",
+                    "name": "Euro",
+                    "exchange_rate": 1.07175,
+                    "country": "EU",
+                    "is_external": false,
+                    "is_escrowcom_supported": true
+                },
+                "description": "Seeking Professional to Create a New Crypto Token on the Solana Blockchain**\r\n\r\n**Key Requirements:**\r\n- Designed primarily for investment purposes.\r\n- Supports various functionalities, including staking, governance, and rewards.\r\n\r\n**Ideal Skills and Experience:**\r\n- Experience in building crypto tokens.\r\n- Proficiency in the Solana blockchain.\r\n- Understanding of investment-focused token design.\r\n- Capability to implement staking, governance, and rewards features.\r\n\r\nYour task will be to create a fully functional and secure token that can be used for investment activities, while also supporting staking, governance, and rewards. The ideal candidate will have experience in these areas, with a strong grasp of blockchain technology and the specific protocols of the Solana ecosystem.",
+                "jobs": [
+                    {
+                        "id": 3,
+                        "name": "PHP",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "php",
+                        "local": false
+                    },
+                    {
+                        "id": 6,
+                        "name": "C Programming",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "c_programming",
+                        "local": false
+                    },
+                    {
+                        "id": 101,
+                        "name": "UML Design",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "uml_design",
+                        "local": false
+                    },
+                    {
+                        "id": 116,
+                        "name": "Software Architecture",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "software_architecture",
+                        "local": false
+                    },
+                    {
+                        "id": 989,
+                        "name": "Blockchain",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "blockchain",
+                        "local": false
+                    },
+                    {
+                        "id": 2409,
+                        "name": "Solana",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "solana",
+                        "local": false
+                    }
+                ],
+                "submitdate": 1717954560,
+                "preview_description": "Seeking Professional to Create a New Crypto Token on the Solana Blockchain**\r\n\r\n**Key Requirements:*",
+                "deleted": false,
+                "nonpublic": false,
+                "hidebids": false,
+                "type": "fixed",
+                "bidperiod": 7,
+                "budget": {
+                    "minimum": 1500,
+                    "maximum": 3000
+                },
+                "featured": false,
+                "urgent": false,
+                "assisted": true,
+                "active_prepaid_milestone": {},
+                "bid_stats": {
+                    "bid_count": 74,
+                    "bid_avg": 2379.7297297297296
+                },
+                "time_submitted": 1717954560,
+                "time_updated": 1717954560,
+                "upgrades": {
+                    "featured": false,
+                    "sealed": false,
+                    "nonpublic": false,
+                    "fulltime": false,
+                    "urgent": false,
+                    "qualified": false,
+                    "NDA": false,
+                    "assisted": true,
+                    "active_prepaid_milestone": {},
+                    "ip_contract": false,
+                    "non_compete": false,
+                    "project_management": false,
+                    "pf_only": false,
+                    "recruiter": true,
+                    "listed": true,
+                    "premium": false,
+                    "enterprise": false
+                },
+                "language": "en",
+                "hireme": false,
+                "frontend_project_status": "open",
+                "location": {
+                    "country": {}
+                },
+                "true_location": {
+                    "country": {}
+                },
+                "local": false,
+                "negotiated": false,
+                "time_free_bids_expire": 1717950977,
+                "pool_ids": [
+                    1
+                ],
+                "enterprise_ids": [],
+                "is_escrow_project": false,
+                "is_seller_kyc_required": false,
+                "is_buyer_kyc_required": false,
+                "enterprises": [],
+                "project_reject_reason": {},
+                "group_ids": []
+            },
+            {
+                "id": 38133666,
+                "owner_id": 74519156,
+                "title": "  Dextool/ Dexscreener Clone",
+                "status": "active",
+                "seo_url": "blockchain/Dextool-Dexscreener-Clone",
+                "currency": {
+                    "id": 11,
+                    "code": "INR",
+                    "sign": "₹",
+                    "name": "Indian Rupee",
+                    "exchange_rate": 0.011969,
+                    "country": "IN",
+                    "is_external": false,
+                    "is_escrowcom_supported": false
+                },
+                "description": "I'm looking for a skilled developer to create a Defi similar to  Dextool/Dexscreener. The project will require a comprehensive understanding of cryptocurrency markets, and the ability to create a robust tracking and information system. \n\nIdeal skills and experience for this project include:\n- Proficiency with real-time data integration\n- Extensive experience with cryptocurrency-related projects\n- Strong analytical and problem-solving skills\n- Familiarity with blockchain technologies\n- The ability to design and develop user-friendly interfaces\n\n\nI need a clone of Dexscreener for the BASE chain.\n\na. We need to pull data from various AMMs like UniSwap, base swap, Alien Base, PCS\n\nb. Display those data in our design which is pretty much similar to Dexscreener\n\nc. Dex supports many Blockchain, we will just support Base chain for now\n\n\nSend me your relevant work",
+                "jobs": [
+                    {
+                        "id": 500,
+                        "name": "Node.js",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "nodejs",
+                        "local": false
+                    },
+                    {
+                        "id": 989,
+                        "name": "Blockchain",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "blockchain",
+                        "local": false
+                    },
+                    {
+                        "id": 992,
+                        "name": "Ethereum",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "ethereum",
+                        "local": false
+                    },
+                    {
+                        "id": 2377,
+                        "name": "Web3.js",
+                        "category": {
+                            "id": 1,
+                            "name": "Websites, IT & Software"
+                        },
+                        "seo_url": "web3js",
+                        "local": false
+                    }
+                ],
+                "submitdate": 1716301830,
+                "preview_description": "I'm looking for a skilled developer to create a Defi similar to  Dextool/Dexscreener. The project wi",
+                "deleted": false,
+                "nonpublic": false,
+                "hidebids": false,
+                "type": "fixed",
+                "bidperiod": 28,
+                "budget": {
+                    "minimum": 250000,
+                    "maximum": 500000
+                },
+                "featured": false,
+                "urgent": false,
+                "assisted": true,
+                "active_prepaid_milestone": {},
+                "bid_stats": {
+                    "bid_count": 20,
+                    "bid_avg": 407503.25
+                },
+                "time_submitted": 1716301830,
+                "time_updated": 1716301830,
+                "upgrades": {
+                    "featured": false,
+                    "sealed": false,
+                    "nonpublic": false,
+                    "fulltime": false,
+                    "urgent": false,
+                    "qualified": false,
+                    "NDA": false,
+                    "assisted": true,
+                    "active_prepaid_milestone": {},
+                    "ip_contract": false,
+                    "non_compete": false,
+                    "project_management": false,
+                    "pf_only": false,
+                    "recruiter": true,
+                    "listed": true,
+                    "premium": false,
+                    "enterprise": false
+                },
+                "language": "en",
+                "hireme": false,
+                "frontend_project_status": "open",
+                "location": {
+                    "country": {}
+                },
+                "true_location": {
+                    "country": {}
+                },
+                "local": false,
+                "negotiated": false,
+                "time_free_bids_expire": 1716298230,
+                "pool_ids": [
+                    1
+                ],
+                "enterprise_ids": [],
+                "is_escrow_project": false,
+                "is_seller_kyc_required": false,
+                "is_buyer_kyc_required": false,
+                "enterprises": [],
+                "project_reject_reason": {},
+                "group_ids": []
+            }
+        ],
+        "users": {
+            "7185457": {
+                "id": 7185457,
+                "username": "aurimasmorkunas",
+                "closed": false,
+                "registration_date": 1363771000,
+                "limited_account": false,
+                "display_name": "aurimasmorkunas",
+                "location": {
+                    "country": {
+                        "name": "Lithuania",
+                        "flag_url": "/img/flags/png/lt.png",
+                        "code": "lt",
+                        "highres_flag_url": "/img/flags/highres_png/lithuania.png",
+                        "flag_url_cdn": "//cdn2.f-cdn.com/img/flags/png/lt.png",
+                        "highres_flag_url_cdn": "//cdn2.f-cdn.com/img/flags/highres_png/lithuania.png"
+                    },
+                    "city": "Vilnius"
+                },
+                "role": "employer",
+                "chosen_role": "both",
+                "employer_reputation": {
+                    "entire_history": {
+                        "overall": 4.999999999999999,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 4.999999999999999,
+                            "communication": 4.999999999999999,
+                            "payment_prom": 4.999999999999999,
+                            "professionalism": 4.999999999999999,
+                            "work_for_again": 4.999999999999999
+                        },
+                        "all": 42,
+                        "reviews": 40,
+                        "complete": 42,
+                        "incomplete": 0,
+                        "completion_rate": 1,
+                        "user_id": 7185457
+                    },
+                    "last3months": {
+                        "overall": 5,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 5,
+                            "communication": 5,
+                            "payment_prom": 5,
+                            "professionalism": 5,
+                            "work_for_again": 5
+                        },
+                        "all": 1,
+                        "reviews": 1,
+                        "complete": 1,
+                        "incomplete": 0,
+                        "completion_rate": 1,
+                        "user_id": 7185457
+                    },
+                    "last12months": {
+                        "overall": 5,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 5,
+                            "communication": 5,
+                            "payment_prom": 5,
+                            "professionalism": 5,
+                            "work_for_again": 5
+                        },
+                        "all": 9,
+                        "reviews": 9,
+                        "complete": 9,
+                        "incomplete": 0,
+                        "completion_rate": 1,
+                        "user_id": 7185457
+                    },
+                    "user_id": 7185457,
+                    "role": "employer",
+                    "earnings_score": 5.0086
+                },
+                "status": {
+                    "payment_verified": true,
+                    "email_verified": true,
+                    "deposit_made": true,
+                    "profile_complete": false,
+                    "phone_verified": true,
+                    "identity_verified": false,
+                    "facebook_connected": true,
+                    "freelancer_verified_user": false,
+                    "linkedin_connected": true,
+                    "custom_charge_verified": false
+                },
+                "primary_currency": {
+                    "id": 1,
+                    "code": "USD",
+                    "sign": "$",
+                    "name": "US Dollar",
+                    "exchange_rate": 1,
+                    "country": "US"
+                },
+                "primary_language": "en",
+                "public_name": "Gintare M.",
+                "company": "MB Vienaragiai",
+                "pool_ids": [],
+                "enterprise_ids": [],
+                "escrowcom_interaction_required": false,
+                "enterprises": [],
+                "timezone": {
+                    "id": 289,
+                    "country": "LT",
+                    "timezone": "Europe/Vilnius",
+                    "offset": 3
+                },
+                "oauth_password_credentials_allowed": false,
+                "registration_completed": true,
+                "is_profile_visible": true
+            },
+            "39506778": {
+                "id": 39506778,
+                "username": "Suitcast",
+                "closed": false,
+                "registration_date": 1568140960,
+                "limited_account": false,
+                "display_name": "Suitcast",
+                "location": {
+                    "country": {
+                        "name": "Belgium",
+                        "flag_url": "/img/flags/png/be.png",
+                        "code": "be",
+                        "highres_flag_url": "/img/flags/highres_png/belgium.png",
+                        "flag_url_cdn": "//cdn5.f-cdn.com/img/flags/png/be.png",
+                        "highres_flag_url_cdn": "//cdn5.f-cdn.com/img/flags/highres_png/belgium.png"
+                    },
+                    "city": "Ham"
+                },
+                "role": "employer",
+                "chosen_role": "employer",
+                "employer_reputation": {
+                    "entire_history": {
+                        "overall": 5,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 5,
+                            "communication": 5,
+                            "payment_prom": 5,
+                            "professionalism": 5,
+                            "work_for_again": 5
+                        },
+                        "all": 3,
+                        "reviews": 2,
+                        "complete": 3,
+                        "incomplete": 0,
+                        "completion_rate": 1,
+                        "user_id": 39506778
+                    },
+                    "last3months": {
+                        "overall": 0,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 0,
+                            "communication": 0,
+                            "payment_prom": 0,
+                            "professionalism": 0,
+                            "work_for_again": 0
+                        },
+                        "all": 0,
+                        "reviews": 0,
+                        "complete": 0,
+                        "incomplete": 0,
+                        "completion_rate": 0,
+                        "user_id": 39506778
+                    },
+                    "last12months": {
+                        "overall": 0,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 0,
+                            "communication": 0,
+                            "payment_prom": 0,
+                            "professionalism": 0,
+                            "work_for_again": 0
+                        },
+                        "all": 0,
+                        "reviews": 0,
+                        "complete": 0,
+                        "incomplete": 0,
+                        "completion_rate": 0,
+                        "user_id": 39506778
+                    },
+                    "user_id": 39506778,
+                    "role": "employer",
+                    "earnings_score": 3.4441
+                },
+                "status": {
+                    "payment_verified": true,
+                    "email_verified": true,
+                    "deposit_made": true,
+                    "profile_complete": false,
+                    "phone_verified": true,
+                    "identity_verified": false,
+                    "facebook_connected": false,
+                    "freelancer_verified_user": false,
+                    "linkedin_connected": false,
+                    "custom_charge_verified": false
+                },
+                "primary_currency": {
+                    "id": 8,
+                    "code": "EUR",
+                    "sign": "€",
+                    "name": "Euro",
+                    "exchange_rate": 1.07175,
+                    "country": "EU"
+                },
+                "primary_language": "nl",
+                "public_name": "Angelo C.",
+                "company": "",
+                "pool_ids": [],
+                "enterprise_ids": [],
+                "escrowcom_interaction_required": false,
+                "enterprises": [],
+                "timezone": {
+                    "id": 247,
+                    "country": "BE",
+                    "timezone": "Europe/Brussels",
+                    "offset": 2
+                },
+                "oauth_password_credentials_allowed": false,
+                "registration_completed": true,
+                "is_profile_visible": true
+            },
+            "68944856": {
+                "id": 68944856,
+                "username": "elitemobilexx",
+                "closed": false,
+                "registration_date": 1681450651,
+                "limited_account": false,
+                "display_name": "elitemobilexx",
+                "location": {
+                    "country": {
+                        "name": "United States",
+                        "flag_url": "/img/flags/png/us.png",
+                        "code": "us",
+                        "highres_flag_url": "/img/flags/highres_png/united-states.png",
+                        "flag_url_cdn": "//cdn6.f-cdn.com/img/flags/png/us.png",
+                        "highres_flag_url_cdn": "//cdn3.f-cdn.com/img/flags/highres_png/united-states.png"
+                    },
+                    "city": "Manhattan"
+                },
+                "role": "freelancer",
+                "chosen_role": "freelancer",
+                "employer_reputation": {
+                    "entire_history": {
+                        "overall": 5,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 5,
+                            "communication": 5,
+                            "payment_prom": 5,
+                            "professionalism": 5,
+                            "work_for_again": 5
+                        },
+                        "all": 2,
+                        "reviews": 2,
+                        "complete": 2,
+                        "incomplete": 0,
+                        "completion_rate": 1,
+                        "user_id": 68944856
+                    },
+                    "last3months": {
+                        "overall": 5,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 5,
+                            "communication": 5,
+                            "payment_prom": 5,
+                            "professionalism": 5,
+                            "work_for_again": 5
+                        },
+                        "all": 2,
+                        "reviews": 2,
+                        "complete": 2,
+                        "incomplete": 0,
+                        "completion_rate": 1,
+                        "user_id": 68944856
+                    },
+                    "last12months": {
+                        "overall": 5,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 5,
+                            "communication": 5,
+                            "payment_prom": 5,
+                            "professionalism": 5,
+                            "work_for_again": 5
+                        },
+                        "all": 2,
+                        "reviews": 2,
+                        "complete": 2,
+                        "incomplete": 0,
+                        "completion_rate": 1,
+                        "user_id": 68944856
+                    },
+                    "user_id": 68944856,
+                    "role": "employer",
+                    "earnings_score": 4.3756
+                },
+                "status": {
+                    "payment_verified": true,
+                    "email_verified": true,
+                    "deposit_made": true,
+                    "profile_complete": true,
+                    "phone_verified": true,
+                    "identity_verified": false,
+                    "facebook_connected": false,
+                    "freelancer_verified_user": false,
+                    "linkedin_connected": false,
+                    "custom_charge_verified": true
+                },
+                "primary_currency": {
+                    "id": 1,
+                    "code": "USD",
+                    "sign": "$",
+                    "name": "US Dollar",
+                    "exchange_rate": 1,
+                    "country": "US"
+                },
+                "primary_language": "en",
+                "public_name": "Agne U.",
+                "pool_ids": [],
+                "enterprise_ids": [],
+                "escrowcom_interaction_required": false,
+                "enterprises": [],
+                "timezone": {
+                    "id": 120,
+                    "country": "US",
+                    "timezone": "America/New_York",
+                    "offset": 20
+                },
+                "oauth_password_credentials_allowed": false,
+                "registration_completed": true,
+                "is_profile_visible": true
+            },
+            "71136919": {
+                "id": 71136919,
+                "username": "bmoreno42",
+                "closed": false,
+                "registration_date": 1690830715,
+                "limited_account": false,
+                "display_name": "bmoreno42",
+                "location": {
+                    "country": {
+                        "name": "United States",
+                        "flag_url": "/img/flags/png/us.png",
+                        "code": "us",
+                        "highres_flag_url": "/img/flags/highres_png/united-states.png",
+                        "flag_url_cdn": "//cdn6.f-cdn.com/img/flags/png/us.png",
+                        "highres_flag_url_cdn": "//cdn3.f-cdn.com/img/flags/highres_png/united-states.png"
+                    },
+                    "city": "Century city"
+                },
+                "role": "employer",
+                "chosen_role": "employer",
+                "employer_reputation": {
+                    "entire_history": {
+                        "overall": 5,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 5,
+                            "communication": 5,
+                            "payment_prom": 5,
+                            "professionalism": 5,
+                            "work_for_again": 5
+                        },
+                        "all": 1,
+                        "reviews": 1,
+                        "complete": 1,
+                        "incomplete": 0,
+                        "completion_rate": 1,
+                        "user_id": 71136919
+                    },
+                    "last3months": {
+                        "overall": 5,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 5,
+                            "communication": 5,
+                            "payment_prom": 5,
+                            "professionalism": 5,
+                            "work_for_again": 5
+                        },
+                        "all": 1,
+                        "reviews": 1,
+                        "complete": 1,
+                        "incomplete": 0,
+                        "completion_rate": 1,
+                        "user_id": 71136919
+                    },
+                    "last12months": {
+                        "overall": 5,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 5,
+                            "communication": 5,
+                            "payment_prom": 5,
+                            "professionalism": 5,
+                            "work_for_again": 5
+                        },
+                        "all": 1,
+                        "reviews": 1,
+                        "complete": 1,
+                        "incomplete": 0,
+                        "completion_rate": 1,
+                        "user_id": 71136919
+                    },
+                    "user_id": 71136919,
+                    "role": "employer",
+                    "earnings_score": 3.3979
+                },
+                "status": {
+                    "payment_verified": true,
+                    "email_verified": true,
+                    "deposit_made": true,
+                    "profile_complete": false,
+                    "phone_verified": true,
+                    "identity_verified": false,
+                    "facebook_connected": false,
+                    "freelancer_verified_user": false,
+                    "linkedin_connected": false,
+                    "custom_charge_verified": false
+                },
+                "primary_currency": {
+                    "id": 1,
+                    "code": "USD",
+                    "sign": "$",
+                    "name": "US Dollar",
+                    "exchange_rate": 1,
+                    "country": "US"
+                },
+                "primary_language": "en",
+                "public_name": "Baltazar M.",
+                "pool_ids": [],
+                "enterprise_ids": [],
+                "escrowcom_account_linked": true,
+                "escrowcom_interaction_required": true,
+                "enterprises": [],
+                "timezone": {
+                    "id": 105,
+                    "country": "US",
+                    "timezone": "America/Los_Angeles",
+                    "offset": 17
+                },
+                "oauth_password_credentials_allowed": false,
+                "registration_completed": true,
+                "is_profile_visible": true
+            },
+            "74519156": {
+                "id": 74519156,
+                "username": "devseekers",
+                "closed": false,
+                "registration_date": 1707478708,
+                "limited_account": false,
+                "display_name": "devseekers",
+                "location": {
+                    "country": {
+                        "name": "India",
+                        "flag_url": "/img/flags/png/in.png",
+                        "code": "in",
+                        "highres_flag_url": "/img/flags/highres_png/india.png",
+                        "flag_url_cdn": "//cdn2.f-cdn.com/img/flags/png/in.png",
+                        "highres_flag_url_cdn": "//cdn3.f-cdn.com/img/flags/highres_png/india.png"
+                    },
+                    "city": "Delhi"
+                },
+                "role": "employer",
+                "chosen_role": "employer",
+                "employer_reputation": {
+                    "entire_history": {
+                        "overall": 5,
+                        "positive": 0.4705882352941177,
+                        "category_ratings": {
+                            "clarity_spec": 5,
+                            "communication": 5,
+                            "payment_prom": 5,
+                            "professionalism": 5,
+                            "work_for_again": 5
+                        },
+                        "all": 4,
+                        "reviews": 4,
+                        "complete": 4,
+                        "incomplete": 0,
+                        "completion_rate": 1,
+                        "user_id": 74519156
+                    },
+                    "last3months": {
+                        "overall": 5,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 5,
+                            "communication": 5,
+                            "payment_prom": 5,
+                            "professionalism": 5,
+                            "work_for_again": 5
+                        },
+                        "all": 3,
+                        "reviews": 3,
+                        "complete": 3,
+                        "incomplete": 0,
+                        "completion_rate": 1,
+                        "user_id": 74519156
+                    },
+                    "last12months": {
+                        "overall": 5,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 5,
+                            "communication": 5,
+                            "payment_prom": 5,
+                            "professionalism": 5,
+                            "work_for_again": 5
+                        },
+                        "all": 3,
+                        "reviews": 3,
+                        "complete": 3,
+                        "incomplete": 0,
+                        "completion_rate": 1,
+                        "user_id": 74519156
+                    },
+                    "user_id": 74519156,
+                    "role": "employer",
+                    "earnings_score": 4.2164
+                },
+                "status": {
+                    "payment_verified": true,
+                    "email_verified": true,
+                    "deposit_made": true,
+                    "profile_complete": false,
+                    "phone_verified": true,
+                    "identity_verified": false,
+                    "facebook_connected": false,
+                    "freelancer_verified_user": false,
+                    "linkedin_connected": false,
+                    "custom_charge_verified": false
+                },
+                "primary_currency": {
+                    "id": 11,
+                    "code": "INR",
+                    "sign": "₹",
+                    "name": "Indian Rupee",
+                    "exchange_rate": 0.011969,
+                    "country": "IN"
+                },
+                "primary_language": "en",
+                "public_name": "Iftakhar A.",
+                "pool_ids": [],
+                "enterprise_ids": [],
+                "escrowcom_interaction_required": false,
+                "enterprises": [],
+                "timezone": {
+                    "id": 403,
+                    "country": "IN",
+                    "timezone": "Asia/Kolkata",
+                    "offset": 5.5
+                },
+                "oauth_password_credentials_allowed": false,
+                "registration_completed": true,
+                "is_profile_visible": true
+            },
+            "76996703": {
+                "id": 76996703,
+                "username": "MyHRDoc",
+                "closed": false,
+                "registration_date": 1718036434,
+                "limited_account": false,
+                "display_name": "MyHRDoc",
+                "location": {
+                    "country": {
+                        "name": "United States",
+                        "flag_url": "/img/flags/png/us.png",
+                        "code": "us",
+                        "highres_flag_url": "/img/flags/highres_png/united-states.png",
+                        "flag_url_cdn": "//cdn6.f-cdn.com/img/flags/png/us.png",
+                        "highres_flag_url_cdn": "//cdn3.f-cdn.com/img/flags/highres_png/united-states.png"
+                    },
+                    "city": "Austin"
+                },
+                "role": "employer",
+                "chosen_role": "employer",
+                "employer_reputation": {
+                    "entire_history": {
+                        "overall": 0,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 0,
+                            "communication": 0,
+                            "payment_prom": 0,
+                            "professionalism": 0,
+                            "work_for_again": 0
+                        },
+                        "user_id": 76996703
+                    },
+                    "last3months": {
+                        "overall": 0,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 0,
+                            "communication": 0,
+                            "payment_prom": 0,
+                            "professionalism": 0,
+                            "work_for_again": 0
+                        },
+                        "user_id": 76996703
+                    },
+                    "last12months": {
+                        "overall": 0,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 0,
+                            "communication": 0,
+                            "payment_prom": 0,
+                            "professionalism": 0,
+                            "work_for_again": 0
+                        },
+                        "user_id": 76996703
+                    },
+                    "user_id": 76996703,
+                    "role": "employer",
+                    "earnings_score": 0
+                },
+                "status": {
+                    "payment_verified": false,
+                    "email_verified": true,
+                    "deposit_made": false,
+                    "profile_complete": false,
+                    "phone_verified": true,
+                    "identity_verified": false,
+                    "facebook_connected": false,
+                    "freelancer_verified_user": false,
+                    "linkedin_connected": false,
+                    "custom_charge_verified": false
+                },
+                "primary_currency": {
+                    "id": 1,
+                    "code": "USD",
+                    "sign": "$",
+                    "name": "US Dollar",
+                    "exchange_rate": 1,
+                    "country": "US"
+                },
+                "primary_language": "en",
+                "public_name": "Megan D.",
+                "pool_ids": [],
+                "enterprise_ids": [],
+                "escrowcom_interaction_required": false,
+                "enterprises": [],
+                "timezone": {
+                    "id": 81,
+                    "country": "US",
+                    "timezone": "America/Chicago",
+                    "offset": 19
+                },
+                "oauth_password_credentials_allowed": false,
+                "registration_completed": true,
+                "is_profile_visible": true
+            },
+            "77098956": {
+                "id": 77098956,
+                "username": "Juan80Vel",
+                "closed": false,
+                "registration_date": 1718401450,
+                "limited_account": false,
+                "display_name": "Juan80Vel",
+                "location": {
+                    "country": {
+                        "name": "Australia",
+                        "flag_url": "/img/flags/png/au.png",
+                        "code": "au",
+                        "highres_flag_url": "/img/flags/highres_png/australia.png",
+                        "flag_url_cdn": "//cdn5.f-cdn.com/img/flags/png/au.png",
+                        "highres_flag_url_cdn": "//cdn5.f-cdn.com/img/flags/highres_png/australia.png"
+                    },
+                    "city": "Sydney"
+                },
+                "role": "employer",
+                "chosen_role": "employer",
+                "employer_reputation": {
+                    "entire_history": {
+                        "overall": 0,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 0,
+                            "communication": 0,
+                            "payment_prom": 0,
+                            "professionalism": 0,
+                            "work_for_again": 0
+                        },
+                        "user_id": 77098956
+                    },
+                    "last3months": {
+                        "overall": 0,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 0,
+                            "communication": 0,
+                            "payment_prom": 0,
+                            "professionalism": 0,
+                            "work_for_again": 0
+                        },
+                        "user_id": 77098956
+                    },
+                    "last12months": {
+                        "overall": 0,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 0,
+                            "communication": 0,
+                            "payment_prom": 0,
+                            "professionalism": 0,
+                            "work_for_again": 0
+                        },
+                        "user_id": 77098956
+                    },
+                    "user_id": 77098956,
+                    "role": "employer",
+                    "earnings_score": 0
+                },
+                "status": {
+                    "payment_verified": true,
+                    "email_verified": true,
+                    "deposit_made": false,
+                    "profile_complete": false,
+                    "phone_verified": true,
+                    "identity_verified": false,
+                    "facebook_connected": false,
+                    "freelancer_verified_user": false,
+                    "linkedin_connected": false,
+                    "custom_charge_verified": false
+                },
+                "primary_currency": {
+                    "id": 3,
+                    "code": "AUD",
+                    "sign": "$",
+                    "name": "Australian Dollar",
+                    "exchange_rate": 0.6609,
+                    "country": "AU"
+                },
+                "primary_language": "en",
+                "public_name": "Juan M.",
+                "pool_ids": [],
+                "enterprise_ids": [],
+                "escrowcom_interaction_required": false,
+                "enterprises": [],
+                "timezone": {
+                    "id": 422,
+                    "country": "AU",
+                    "timezone": "Australia/Sydney",
+                    "offset": 10
+                },
+                "oauth_password_credentials_allowed": false,
+                "registration_completed": true,
+                "is_profile_visible": true
+            },
+            "77120855": {
+                "id": 77120855,
+                "username": "martyn6",
+                "closed": false,
+                "registration_date": 1718511169,
+                "limited_account": false,
+                "display_name": "martyn6",
+                "location": {
+                    "country": {
+                        "name": "United Kingdom",
+                        "flag_url": "/img/flags/png/gb.png",
+                        "code": "gb",
+                        "highres_flag_url": "/img/flags/highres_png/united-kingdom.png",
+                        "flag_url_cdn": "//cdn3.f-cdn.com/img/flags/png/gb.png",
+                        "highres_flag_url_cdn": "//cdn5.f-cdn.com/img/flags/highres_png/united-kingdom.png"
+                    },
+                    "city": "Basingstoke"
+                },
+                "role": "employer",
+                "chosen_role": "employer",
+                "employer_reputation": {
+                    "entire_history": {
+                        "overall": 0,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 0,
+                            "communication": 0,
+                            "payment_prom": 0,
+                            "professionalism": 0,
+                            "work_for_again": 0
+                        },
+                        "user_id": 77120855
+                    },
+                    "last3months": {
+                        "overall": 0,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 0,
+                            "communication": 0,
+                            "payment_prom": 0,
+                            "professionalism": 0,
+                            "work_for_again": 0
+                        },
+                        "user_id": 77120855
+                    },
+                    "last12months": {
+                        "overall": 0,
+                        "positive": 0,
+                        "category_ratings": {
+                            "clarity_spec": 0,
+                            "communication": 0,
+                            "payment_prom": 0,
+                            "professionalism": 0,
+                            "work_for_again": 0
+                        },
+                        "user_id": 77120855
+                    },
+                    "user_id": 77120855,
+                    "role": "employer",
+                    "earnings_score": 0
+                },
+                "status": {
+                    "payment_verified": false,
+                    "email_verified": true,
+                    "deposit_made": false,
+                    "profile_complete": false,
+                    "phone_verified": true,
+                    "identity_verified": false,
+                    "facebook_connected": false,
+                    "freelancer_verified_user": false,
+                    "linkedin_connected": false,
+                    "custom_charge_verified": false
+                },
+                "primary_currency": {
+                    "id": 4,
+                    "code": "GBP",
+                    "sign": "£",
+                    "name": "British Pounds",
+                    "exchange_rate": 1.26595,
+                    "country": "UK"
+                },
+                "primary_language": "en",
+                "public_name": "martyn6",
+                "pool_ids": [],
+                "enterprise_ids": [],
+                "escrowcom_interaction_required": false,
+                "enterprises": [],
+                "timezone": {},
+                "oauth_password_credentials_allowed": false,
+                "registration_completed": true,
+                "is_profile_visible": true
+            }
+        },
+        "total_count": 8
+    },
+    "request_id": "2aa1c86672d2fb767684e7f19076af1a"
+}
