@@ -146,7 +146,30 @@ export const commands = [
     name: 'findjobs',
     description: 'Kyp4nz Scr4pp3r',
   },
-
+  {
+    name: 'generate-images',
+    description: 'generate image based on the prompt',
+    options: [
+      {
+        name: 'prompt',
+        description: 'context of type image generated',
+        type: 3,
+        required: true,
+      }
+    ]
+  },
+  {
+    name: 'generate-videos',
+    description: 'generate random video with random song based on the images generated',
+    options: [
+      {
+        name: 'amount',
+        description: 'amount of videos to generate',
+        type: 3,
+        required: true,
+      }
+    ]
+  }
 ];
 
 const rest = new REST({

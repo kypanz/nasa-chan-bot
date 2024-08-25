@@ -29,6 +29,7 @@ import { commands } from './slashCommands.js';
 import { startRandomTimeInstagram } from './bot-instagram';
 import example_book from './utils/books/example.json';
 import { FreelancerScrapperByKyp4nz } from './utils/freelancer/freelancer.js';
+import { generateVideo, pickImages } from './utils/video-generator/videoGenerator.js';
 
 
 // Definiendo datos
@@ -582,6 +583,43 @@ client.on('interactionCreate', async (interaction: Interaction) => {
       await interaction.reply('Buscando ...');
     } catch (error) {
       console.error('Error al testear la funcion de pdf');
+      logger.error(error);
+    }
+  }
+
+  if (interaction.commandName === 'generate-images') {
+    try {
+      if (interaction.user.id !== process.env.SUPER_USER) {
+        await interaction.reply('You are not super user');
+      }
+      const actualChannel =
+        client.channels.cache.get(interaction.channelId || '') as TextChannel;
+      const prompt = interaction.options.getString('prompt');
+      await interaction.reply({ content: `Solicitud recibida !. : ${prompt}` });
+      // logic here to handle the image generation
+      actualChannel.send('imagen generada.');
+    } catch (error) {
+      console.error('Error on generate-images command');
+      logger.error(error);
+    }
+  }
+
+  if (interaction.commandName === 'generate-videos') {
+    try {
+      if (interaction.user.id !== process.env.SUPER_USER) {
+        await interaction.reply('You are not super user');
+      }
+      const actualChannel =
+        client.channels.cache.get(interaction.channelId || '') as TextChannel;
+      const amount = interaction.options.getString('amount');
+      if (!amount) {
+        throw new Error('Please speficy amount');
+      }
+      await interaction.reply({ content: `Solicitud recibida, generando videos ...` });
+      await generateVideo({ amount: parseInt(amount) || 1 });
+      actualChannel.send('Videos generados.');
+    } catch (error) {
+      console.error('Error on generate-images command');
       logger.error(error);
     }
   }

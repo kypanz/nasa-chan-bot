@@ -44,6 +44,7 @@
     "openai": "^3.1.0",
     "pdfreader": "^3.0.2",
     "tough-cookie-filestore2": "^1.0.0",
+    "videoshow": "^0.1.12",
     "winston": "^3.8.2",
     "youtube-audio-stream": "^0.3.61",
     "youtube-dl-exec": "^2.1.11",
