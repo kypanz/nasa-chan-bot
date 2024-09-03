@@ -2,6 +2,7 @@
 images
 videos
 audios
+src/ky-bots/twitch/accounts.json
 
 # Modules
 node_modules

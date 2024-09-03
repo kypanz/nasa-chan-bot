@@ -48,3 +48,14 @@ console.log('current token => ', value , '...');
 console.log('current okten without slice => ', matches[0].split(':')[1]);
 })
 ```
+
+
+## Twitch bot
+
+Create a file called `accounts.json` in the twitch folder and add the next structure
+```
+[{
+  "token" : "",
+  "username" : ""
+}]
+```
