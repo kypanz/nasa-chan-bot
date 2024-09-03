@@ -30,6 +30,10 @@ import { startRandomTimeInstagram } from './bot-instagram';
 import example_book from './utils/books/example.json';
 import { FreelancerScrapperByKyp4nz } from './utils/freelancer/freelancer.js';
 import { generateVideo, pickImages } from './utils/video-generator/videoGenerator.js';
+import { TwitchBot } from './ky-bots/twitch/index.js';
+
+// Para los bots 
+import bots_accounts from './ky-bots/twitch/accounts.json';
 
 
 // Definiendo datos
@@ -622,6 +626,32 @@ client.on('interactionCreate', async (interaction: Interaction) => {
       console.error('Error on generate-images command');
       logger.error(error);
     }
+  }
+
+  if (interaction.commandName === 'twitch-bots-start') {
+    try {
+      if (interaction.user.id !== process.env.SUPER_USER) {
+        await interaction.reply('You are not super user');
+      }
+      const actualChannel =
+        client.channels.cache.get(interaction.channelId || '') as TextChannel;
+      const channel_name = interaction.options.getString('channel_name');
+      if (!channel_name) {
+        throw new Error('Please speficy the channel_name target for twitch bots');
+      }
+      await interaction.reply({ content: `Solicitud recibida, conectando los bots ...` });
+      const bot1 = new TwitchBot({
+        token: bots_accounts[0].token,
+        username: bots_accounts[0].username
+      });
+      bot1.setTargetChannel({ channel_name: channel_name });
+      bot1.connect();
+      actualChannel.send('bots conectados !.');
+    } catch (error) {
+      console.error('Error on generate-images command');
+      logger.error(error);
+    }
+
   }
 
 });

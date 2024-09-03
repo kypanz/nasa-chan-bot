@@ -169,6 +169,17 @@ export const commands = [
         required: true,
       }
     ]
+  }, {
+    name: 'twitch-bots-start',
+    description: 'connect X amount of bots to a target twitch channel',
+    options: [
+      {
+        name: 'channel_name',
+        description: 'name of the target channel to connect the bots',
+        type: 3,
+        required: true
+      }
+    ]
   }
 ];
 
