@@ -180,6 +180,9 @@ export const commands = [
         required: true
       }
     ]
+  }, {
+    name: 'twitch-bots-stop',
+    description: 'this disconnect all the bots',
   }
 ];
 

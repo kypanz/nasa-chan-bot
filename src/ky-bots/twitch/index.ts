@@ -11,6 +11,7 @@ interface ITargetChannel {
 
 export class TwitchBot {
 
+  WS: WebSocket | null = null;
   OAUTH_TOKEN: string = "";
   USERNAME: string = "";
   CHANNEL_NAME: string = "";
@@ -32,6 +33,7 @@ export class TwitchBot {
       const CHANNEL_NAME = this.CHANNEL_NAME;
 
       const ws = new WebSocket('wss://irc-ws.chat.twitch.tv/');
+      this.WS = ws;
 
       ws.on('open', function open() {
         console.log('Communication established.');
@@ -66,8 +68,13 @@ export class TwitchBot {
     } catch (error) {
       console.error(error);
     }
-
   }
+
+  disconnect() {
+    if (!this.WS) return;
+    this.WS.close();
+  }
+
 }
 
 

@@ -34,7 +34,7 @@ import { TwitchBot } from './ky-bots/twitch/index.js';
 
 // Para los bots 
 import bots_accounts from './ky-bots/twitch/accounts.json';
-
+const twitch_bots: any[] = [];
 
 // Definiendo datos
 const newsapi = new NewsAPI(process.env.NEWS_APIKEY);
@@ -646,12 +646,32 @@ client.on('interactionCreate', async (interaction: Interaction) => {
       });
       bot1.setTargetChannel({ channel_name: channel_name });
       bot1.connect();
+      twitch_bots.push(bot1);
       actualChannel.send('bots conectados !.');
     } catch (error) {
       console.error('Error on generate-images command');
       logger.error(error);
     }
+  }
 
+  if (interaction.commandName === 'twitch-bots-stop') {
+    try {
+      if (interaction.user.id !== process.env.SUPER_USER) {
+        await interaction.reply('You are not super user');
+      }
+      const actualChannel =
+        client.channels.cache.get(interaction.channelId || '') as TextChannel;
+      await interaction.reply({ content: `Solicitud recibida, desconectando los bots ...` });
+      twitch_bots.forEach((bot: TwitchBot) => {
+        if (bot) {
+          bot.disconnect();
+        }
+      });
+      actualChannel.send('bots conectados !.');
+    } catch (error) {
+      console.error('Error on generate-images command');
+      logger.error(error);
+    }
   }
 
 });
