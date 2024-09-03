@@ -3,7 +3,6 @@ import WebSocket from 'ws';
 interface ITwitchBot {
   token: string;
   username: string;
-  channel_name: string;
 }
 
 interface ITargetChannel {
