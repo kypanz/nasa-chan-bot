@@ -110,7 +110,7 @@ async function getImages() {
       const nsfwLevel = (images[index].nsfwLevel[0]);
       const host_url = 'https://image.civitai.com';
       const path_url = '/xG1nkqKTMzGDvpLrqFT7WA';
-      const name_file = '/${images[index].url}/width=512/213.jpeg';
+      const name_file = `/${images[index].url}/width=512/213.jpeg`;
       const image_url = `${host_url}${path_url}${name_file}`;
       if (nsfwLevel == 1) {
         result.push(image_url);

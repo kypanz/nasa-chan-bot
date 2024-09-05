@@ -640,13 +640,19 @@ client.on('interactionCreate', async (interaction: Interaction) => {
         throw new Error('Please speficy the channel_name target for twitch bots');
       }
       await interaction.reply({ content: `Solicitud recibida, conectando los bots ...` });
-      const bot1 = new TwitchBot({
-        token: bots_accounts[0].token,
-        username: bots_accounts[0].username
-      });
-      bot1.setTargetChannel({ channel_name: channel_name });
-      bot1.connect();
-      twitch_bots.push(bot1);
+
+
+      for (let index = 0; index < bots_accounts.length; index++) {
+        // Connecting ... 
+        const bot = new TwitchBot({
+          token: bots_accounts[index].token,
+          username: bots_accounts[index].username
+        });
+        bot.setTargetChannel({ channel_name: channel_name });
+        bot.connect();
+        twitch_bots.push(bot);
+      }
+
       actualChannel.send('bots conectados !.');
     } catch (error) {
       console.error('Error on generate-images command');
@@ -667,7 +673,7 @@ client.on('interactionCreate', async (interaction: Interaction) => {
           bot.disconnect();
         }
       });
-      actualChannel.send('bots conectados !.');
+      actualChannel.send('bots desconectados !.');
     } catch (error) {
       console.error('Error on generate-images command');
       logger.error(error);
