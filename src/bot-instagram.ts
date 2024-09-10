@@ -5,11 +5,6 @@ import Instagram from 'instagram-web-api';
 dotenv.config();
 import logger from './winston/configWinston';
 
-
-interface ICiviFile {
-  type: string;
-}
-
 const { INSTAGRAM_USERNAME, INSTAGRAM_PASSWORD } = process.env;
 const client = new Instagram({
   username: INSTAGRAM_USERNAME,
@@ -24,24 +19,16 @@ export function startRandomTimeInstagram() {
   try {
 
     const minute = 60 * 1000;
-    const max_minutes = 1;
+    const max_minutes = 5;
     const tiempo = Math.round(Math.random() * (minute * max_minutes));
 
     setTimeout(async () => {
       const titulos = definirTitulos();
       const images = await getImages();
-      logger.log('image', images);
-      if (images) {
-        images.forEach((el) => {
-          console.log('item => ', el);
-          //console.log(`current file type : ${el.type}`);
-        });
+      if (titulos && images) {
+        await postInInstragram(titulos, images);
       }
-
-      //if (titulos && images) {
-      //  await postInInstragram(titulos, images);
-      //}
-      //startRandomTimeInstagram();
+      startRandomTimeInstagram();
     }, tiempo);
 
   } catch (error) {
@@ -125,13 +112,13 @@ async function getImages() {
       const image_url = `${host_url}${path_url}${name_file}`;
       if (nsfwLevel == 1 && images[index].type == 'image') {
         result.push(image_url);
+        // This goes to a log storage 
+        const out = {
+          image: image_url,
+          level: nsfwLevel
+        }
+        logger.log('image', out);
       }
-      // This goes to a log storage 
-      const out = {
-        image: image_url,
-        level: nsfwLevel
-      }
-      logger.log('image', out);
     }
     return result;
 
@@ -198,15 +185,3 @@ function notHaveContent(titles: string[]) {
   if (titles[0] == '' || titles.length == 0) return true;
 }
 
-
-// NOT REMOVE THIS CODE, THIS IS AN EXAMPLE OF WHAT MODIFY IN THE MODULE
-/*
-        // Get CSRFToken from cookie before login
-    let value
-    await this.request('/', { resolveWithFullRes
-    ponse: true }).then(res => {
-      const pattern = new RegExp(/(csrf_token\"\:\")[\w]+/)
-      const matches = res.body.match(pattern)
-      value = matches[0].split(":")[1].slice(1);
-    })
-*/
