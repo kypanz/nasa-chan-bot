@@ -5,13 +5,16 @@ import Instagram from 'instagram-web-api';
 dotenv.config();
 import logger from './winston/configWinston';
 
+
+interface ICiviFile {
+  type: string;
+}
+
 const { INSTAGRAM_USERNAME, INSTAGRAM_PASSWORD } = process.env;
 const client = new Instagram({
   username: INSTAGRAM_USERNAME,
   password: INSTAGRAM_PASSWORD
 })
-
-// console.log(INSTAGRAM_USERNAME, ' | ', INSTAGRAM_PASSWORD);
 
 let isLogged = false;
 let imagesProcessed: object;
@@ -21,16 +24,24 @@ export function startRandomTimeInstagram() {
   try {
 
     const minute = 60 * 1000;
-    const max_minutes = 10;
+    const max_minutes = 1;
     const tiempo = Math.round(Math.random() * (minute * max_minutes));
 
     setTimeout(async () => {
       const titulos = definirTitulos();
       const images = await getImages();
-      if (titulos && images) {
-        await postInInstragram(titulos, images);
+      logger.log('image', images);
+      if (images) {
+        images.forEach((el) => {
+          console.log('item => ', el);
+          //console.log(`current file type : ${el.type}`);
+        });
       }
-      startRandomTimeInstagram();
+
+      //if (titulos && images) {
+      //  await postInInstragram(titulos, images);
+      //}
+      //startRandomTimeInstagram();
     }, tiempo);
 
   } catch (error) {
@@ -107,12 +118,12 @@ async function getImages() {
     const result: string[] = [];
 
     for (let index = 0; index < images.length; index++) {
-      const nsfwLevel = (images[index].nsfwLevel[0]);
+      const nsfwLevel = (images[index].nsfwLevel);
       const host_url = 'https://image.civitai.com';
       const path_url = '/xG1nkqKTMzGDvpLrqFT7WA';
       const name_file = `/${images[index].url}/width=512/213.jpeg`;
       const image_url = `${host_url}${path_url}${name_file}`;
-      if (nsfwLevel == 1) {
+      if (nsfwLevel == 1 && images[index].type == 'image') {
         result.push(image_url);
       }
       // This goes to a log storage 
@@ -122,7 +133,6 @@ async function getImages() {
       }
       logger.log('image', out);
     }
-
     return result;
 
   } catch (error) {
@@ -152,12 +162,14 @@ async function postInInstragram(titulos: string[], images: string[]) {
       isLogged = true;
       console.log('Logeado correctamente !');
     }
+    console.log('intentando subir imagen => ', image);
     const { media } = await client.uploadPhoto({
       photo: image,
       caption: titulo,
       post: 'feed',
     });
     console.log(`upload result => https://www.instagram.com/p/${media.code}/`)
+    logger.log('image', 'https://www.instagram.com/p/${media.code}/');
     titulos.shift()
     fs.writeFileSync('./instagram/titulos_posteos.txt', titulos.join('-'));
 
